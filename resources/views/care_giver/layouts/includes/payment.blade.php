@@ -19,8 +19,9 @@
      ]
     },
     callback: function(response){ 
-      alert('success. transaction ref is ' + response.reference);
-      window.location.href = response.reference;
+      // alert('success. transaction ref is ' + response);
+      console.log(response);
+      // window.location.href = response.reference;
 
     },
     onClose: function(){

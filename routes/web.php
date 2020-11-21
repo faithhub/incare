@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about']);
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact']);
 Route::get('/courses', [App\Http\Controllers\HomeController::class, 'courses']);
+Route::get('/jobs', [App\Http\Controllers\HomeController::class, 'jobs']);
 
 //employers
 Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], function () {
@@ -63,6 +64,8 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
     Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'change']);
     Route::match(['get', 'post'], '/search-job', [App\Http\Controllers\CareGiver\JobsController::class, 'search_job']);
     Route::get('/view-job/{id}', [App\Http\Controllers\CareGiver\JobsController::class, 'view_job']);
+    Route::post('/apply-job', [App\Http\Controllers\CareGiver\JobsController::class, 'apply_job']);
+    Route::get('/make-payment', [App\Http\Controllers\CareGiver\PlanController::class, 'payment']);
 });
 
 //Admin

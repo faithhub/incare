@@ -20,4 +20,10 @@ class PlanController extends Controller
         $data['plans'] = Plan::all();
         return view('care_giver.plans.index', $data);
     }
+
+    public function payment()
+    {
+        $data['title'] = 'Make Payment';
+        return view('care_giver.plans.payment', $data);
+    }
 }

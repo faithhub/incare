@@ -5,8 +5,10 @@ namespace App\Http\Controllers\CareGiver;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
+use App\Models\JobApply;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +19,7 @@ class JobsController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('care-giver');
+        $this->apply_job = new JobApply();
     }
 
     public function new_job(Request $request)
@@ -31,10 +34,31 @@ class JobsController extends Controller
         return view('care_giver.jobs.new_job', $data);
     }
 
+    public function apply_job(Request $request)
+    {
+        try {
+            $job = Job::find($request->id);
+            $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $request->id])->count();
+            // dd($check->count());
+            if ($check == 0) {
+                $this->apply_job->create($request);
+                Session::flash('success', 'Applied Successfully');
+                return redirect('care-giver/applied-jobs');
+            }else{
+                Session::flash('warning', 'Job already being applied for');
+                return back();
+            }           
+        } catch (\Throwable $th) {
+            Session::flash('error', 'Try again!');
+            return back();
+        }
+    }
+
     public function view_job($id)
     {
         if ($id) {
             $data['job'] = $job = Job::where(['id' => $id])->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
+            $data['check'] = $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->count();
             if ($job->count() > 0) {
                 $data['title'] = 'View Job Details';
                 return view('care_giver.jobs.view_job', $data);
@@ -49,6 +73,7 @@ class JobsController extends Controller
 
     public function search_job(Request $request)
     {
+        $data['title'] = 'Job Search Result';
         $data['categories'] = Category::all();
         $data['sub_categories'] = SubCategory::all();
         if ($request) {

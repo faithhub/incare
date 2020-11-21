@@ -18,57 +18,13 @@
                                         <a href="{{ url('home') }}">Home</a>
                                     </li>
                                     <li>
-                                        <a href="#">Employers <i class="la la-angle-down"></i></a>
-                                        <ul class="dropdown-menu-item">
-                                            <li><a href="employer-listing.html">Employer Listing</a></li>
-                                            <li><a href="employer-details.html">Employer Details</a></li>
-                                            <li><a href="employer-dashboard.html">Employer Dashboard</a></li>
-                                            <li><a href="employer-dashboard-edit-profile.html">Edit Profile</a></li>
-                                            <li><a href="employer-dashboard-post-job.html">Post a Job</a></li>
-                                        </ul>
+                                        <a href="{{ url('about') }}">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#">Candidates <i class="la la-angle-down"></i></a>
-                                        <ul class="dropdown-menu-item">
-                                            <li><a href="candidate-listing.html">Candidate Listing</a></li>
-                                            <li><a href="candidate-details.html">Candidate Details</a></li>
-                                            <li><a href="candidate-dashboard.html">Candidate Dashboard</a></li>
-                                            <li><a href="candidate-dashboard-edit-profile.html">Edit Profile</a></li>
-                                            <li><a href="candidate-add-resume.html">Add a Resume</a></li>
-                                        </ul>
+                                        <a href="{{ url('contact') }}">Contact Us</a>
                                     </li>
                                     <li>
-                                        <a href="#">Pages <i class="la la-angle-down"></i></a>
-                                        <ul class="dropdown-menu-item">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="invoice.html">Invoice</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                            <li><a href="how-it-works.html">How It Works</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="payment-complete.html">Payment Complete</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="page-404.html">404 Page</a></li>
-                                            <li><a href="terms-and-condition.html">Terms And Condition</a></li>
-                                            <li><a href="recover.html">Recover Password</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Blog <i class="la la-angle-down"></i></a>
-                                        <ul class="dropdown-menu-item">
-                                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                                            <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
-                                            <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
-                                            <li><a href="blog-single.html">Blog Detail</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Jobs <i class="la la-angle-down"></i></a>
-                                        <ul class="dropdown-menu-item">
-                                            <li><a href="job-listing.html">Job Listing</a></li>
-                                            <li><a href="job-grid-view.html">Job Grid View</a></li>
-                                            <li><a href="job-details.html">Job Details </a></li>
-                                        </ul>
+                                        <a href="{{ url('jobs') }}">Jobs</a>
                                     </li>
                                 </ul>
                             </nav>

@@ -37,4 +37,8 @@ class HomeController extends Controller
     {
         return view('web.courses');
     }
+    public function jobs()
+    {
+        return view('web.jobs');
+    }
 }

@@ -60,7 +60,16 @@
                                             <button type="button" class="theme-btn mr-1"><i class="la la-heart-o font-size-16"></i> Save</button>
                                         </li> --}}
                                         <li>
-                                            <a href="" class="btn border-0 p-3 btn-success">Apply Now</a>
+                                            @if ($check > 0)
+                                                <button type="button" disabled class="btn border-0 p-3 btn-success">Applied</button>
+                                            @else
+                                                <form method="POST" action="{{ url('care-giver/apply-job') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$job[0]['id']}}">
+                                                    <button  type="submit" class="btn border-0 p-3 btn-success">Apply Now</button>
+                                                </form> 
+                                            @endif
+                                            
                                         </li>
                                     </ul>
                                 </div><!-- end bread-action -->
@@ -72,27 +81,7 @@
                                     <h2 class="widget-title">Description:</h2>
                                     <div class="title-shape"></div>
                                     <p class="mt-3 mb-3">
-                                        Repeatedly dreamed alas opossum but dramatically despite expeditiously that jeepers
-                                        loosely yikes that as or eel underneath kept and slept compactly far purred sure abidingly up
-                                        above fitting to strident wiped set waywardly far the and pangolin horse approving paid chuckled
-                                        cassowary oh above a much opposite far much hypnotically more therefore wasp less that hey apart
-                                        well like while superbly orca and far hence one.Far much that one rank beheld bluebird after
-                                        outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally
-                                        wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and
-                                        much as goodness some froze the sullen much connected bat wonderfully on
-                                        instantaneously eel valiantly petted this along across
-                                        highhandedly much dog out the much alas evasively neutral lazy reset
-                                    </p>
-                                    <p class="mb-3">
-                                        Repeatedly dreamed alas opossum but dramatically despite expeditiously that
-                                        jeepers loosely yikes that as or eel underneath kept and slept compactly far purred
-                                        sure abidingly up above fitting to strident wiped set waywardly far the and
-                                    </p>
-                                    <p>
-                                        Totam rem aperiam the eaque ipsa quae abillo
-                                        was inventore veritatis keret quasi aperiam architecto
-                                        beatae vitae dicta sunt explicabo.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        {{$job[0]['job_description']}}
                                     </p>
                                 </div><!-- end job-description -->
                             </div><!-- end single-job-wrap -->
