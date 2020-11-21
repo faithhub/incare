@@ -32,7 +32,8 @@ class CreateUsersTable extends Migration
             $table->enum('status', ['Active', 'Blocked'])->default('Active');
             $table->enum('plan', ['0', '1'])->default('0');
             $table->string('trail_count');
-            $table->string('trail_end_date');
+            $table->string('plan_start_date')->nullable();
+            $table->string('plan_end_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

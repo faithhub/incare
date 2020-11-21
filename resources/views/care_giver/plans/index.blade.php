@@ -52,10 +52,15 @@
 
                                 <div class="btn-box text-center">
                                     <div class="bread-action pt-0">
-                                        <ul class="info-list">                                            
+                                        <ul class="info-list">
+                                            @if ($plan->id == Auth::user()->plan_id)
+                                            <button type="button" class="btn btn-success text-white" disabled>Subcribed</button>                                                
+                                            @else                        
                                             <form >
-                                                <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$plan->plan_amount}})">Subscribe</button>
+                                                <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$plan->plan_amount}},{{$plan->id}})">Subscribe</button>
                                             </form>
+                                                
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

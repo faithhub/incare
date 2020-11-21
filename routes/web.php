@@ -65,7 +65,7 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
     Route::match(['get', 'post'], '/search-job', [App\Http\Controllers\CareGiver\JobsController::class, 'search_job']);
     Route::get('/view-job/{id}', [App\Http\Controllers\CareGiver\JobsController::class, 'view_job']);
     Route::post('/apply-job', [App\Http\Controllers\CareGiver\JobsController::class, 'apply_job']);
-    Route::get('/make-payment', [App\Http\Controllers\CareGiver\PlanController::class, 'payment']);
+    Route::post('/make-payment', [App\Http\Controllers\CareGiver\PlanController::class, 'payment']);
 });
 
 //Admin

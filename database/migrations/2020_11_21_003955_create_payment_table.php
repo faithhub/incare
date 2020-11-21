@@ -18,8 +18,11 @@ class CreatePaymentTable extends Migration
             $table->string('plan_id');
             $table->string('user_id');
             $table->float('amount', 10, 2);
-            $table->string('currency');
-            $table->string('payment_status');
+            $table->string('status');
+            $table->string('reference');
+            $table->string('message');
+            $table->string('transaction');
+            $table->string('trxref');
             $table->timestamps();
         });
     }

@@ -92,7 +92,7 @@
                         <table class="table" id="myTable" width="100%">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
                                     <th>Application</th>
@@ -169,7 +169,7 @@
                         <table class="table" id="myTable" width="100%">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
                                     <th>Application</th>

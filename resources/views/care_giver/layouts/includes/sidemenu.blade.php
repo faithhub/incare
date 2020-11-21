@@ -24,16 +24,7 @@
                             <li><a href="{{ url('care-giver/change-password') }}">Change Password</a></li>
                         </ul>
                     </li>
-                    {{-- <li class="{{ request()->is('care-giver/manage-jobs*') || request()->is('care-giver/manage-care-givers*') || request()->is('care-giver/post-new-job*')  ? 'page-active' : '' }}">
-                        <a href="#"><i class="la la-briefcase icon-element"></i> Jobs <span class="la la-caret-down btn-toggle"></span></a>
-                        <ul class="dropdown-menu-item">
-                            <li><a class="{{ request()->is('care-giver/manage-jobs*')  ? 'page-active' : '' }}" href="{{ url('care-giver/manage-jobs') }}">Manage Jobs</a></li>
-                            <li><a href="{{ url('care-giver/manage-care-givers') }}">Manage Care Givers   </a></li>
-                            <li><a href="{{ url('care-giver/post-new-job') }}">Post New Job</a></li>
-                        </ul>
-                    </li> --}}
                     <li><a href="{{ url('logout') }}"><i class="la la-power-off icon-element"></i> Logout</a></li>
-                    <li><a href="{{ url('logout') }}"><i class="la la-trash icon-element"></i> Delete Account</a></li>
                 </ul>
             </div><!-- end side-menu-wrap -->
         </div>
