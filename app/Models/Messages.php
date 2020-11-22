@@ -11,8 +11,8 @@ class Messages extends Model
   protected $table = 'messages';
   protected $fillable = [
     'message',
-    'sender_id',
-    'receiver_id',
+    'care_giver_id',
+    'employer_id',
   ];
 
   public function create($data)
