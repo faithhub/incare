@@ -10,7 +10,7 @@
           <div class="mess__item justify-content-between align-items-center">
             <div class="d-flex">
               <div class="avatar">
-                <img src="{{ asset('uploads/profile_picture/'.$user->avatar) }}" alt="{{$user->first_name}}">
+                <img src="{{ asset('uploads/profile_pictures/'.$user->avatar) }}" alt="{{$user->first_name}}">
               </div>
               <div class="content">
                 <h4 class="widget-title font-size-15 mb-0">{{$user->first_name}} {{$user->last_name}}</h4>
