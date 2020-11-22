@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\employer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Messages;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,9 @@ class MessageController extends Controller
     return view('employer.message.message', $data);
   }
 
-  // public function sendMessage(Request $request) {
-  //   if ($request->id) {
-  //     $check = Messages::where('care_giver_id',)
-  //   }
-  // }
+  public function sendMessage(Request $request) {
+    if ($request->id) {
+      // $check = Messages::where('care_giver_id',)
+    }
+  }
 }

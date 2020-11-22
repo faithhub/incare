@@ -15,9 +15,9 @@
                     <li class="{{ request()->is('admin/users*')  ? 'page-active' : '' }}"><a href="{{ url('admin/users') }}"><i class="la la-user icon-element"></i> Users <span class="badge badge-info radius-rounded p-1">3</span></a></li>
                     <li class="{{ request()->is('admin/plans*') || request()->is('admin/new-plan*') || request()->is('admin/edit-plan*')  ? 'page-active' : '' }}"><a href="{{ url('admin/plans') }}"><i class="la la-file-text-o icon-element"></i> Plans</a></li>
                     <li class="{{ request()->is('admin/transactions*')  ? 'page-active' : '' }}"><a href="{{ url('admin/transactions') }}"><i class="la la-line-chart icon-element"></i> Transactions</a></li>
-                    <li class="{{ request()->is('admin/job-alert*')  ? 'page-active' : '' }}"><a href="{{ url('admin/job-alert') }}"><i class="la la-bell-o icon-element"></i> Jobs Alert</a></li>
+                    {{-- <li class="{{ request()->is('admin/job-alert*')  ? 'page-active' : '' }}"><a href="{{ url('admin/job-alert') }}"><i class="la la-bell-o icon-element"></i> Jobs Alert</a></li> --}}
                     
-                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/all-job*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
+                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-briefcase icon-element"></i> Job Categories <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">
                             <li><a href="{{ url('admin/job-categories') }}"> Categories</a></li>
@@ -37,8 +37,8 @@
                     <li class="{{ request()->is('admin/manage-jobs*') || request()->is('admin/all-job*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-briefcase icon-element"></i> Job Ads <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">
-                            <li><a href="{{ url('admin/manage-jobs') }}"> All Jobs</a></li>
-                            <li><a href="{{ url('admin/manage-jobs') }}"> Manage Jobs</a></li>
+                            <li><a href="{{ url('admin/all-job') }}"> All Jobs</a></li>
+                            {{-- <li><a href="{{ url('admin/manage-jobs') }}"> Manage Jobs</a></li> --}}
                         </ul>
                     </li>
                     <li><a href="{{ url('logout') }}"><i class="la la-power-off icon-element"></i> Logout</a></li>
