@@ -1,23 +1,6 @@
 @extends('care_giver.layouts.app')
 @section('care_giver')
-
 <div class="row">
-  <div class="col-lg-12">
-    <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
-      <div class="section-heading">
-        <h2 class="sec__title">Messages</h2>
-      </div>
-      <!-- end section-heading -->
-      <ul class="list-items d-flex align-items-center">
-        <li class="active__list-item"><a href="index.html">Home</a></li>
-        <li class="active__list-item"><a href="index.html">Dashboard</a></li>
-        <li>Messages</li>
-      </ul>
-    </div><!-- end breadcrumb-content -->
-  </div><!-- end col-lg-12 -->
-</div><!-- end row -->
-
-<div class="row mt-2">
   <div class="col">
     <div class="dashboard-message-wrapper d-flex">
       <div class="message-sidebar">
