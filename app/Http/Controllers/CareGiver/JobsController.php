@@ -188,7 +188,20 @@ class JobsController extends Controller
     public function applied_job()
     {
         $data['title'] = 'Applied Jobs';
-        // $data['jobs'] = JobApply::where
+        $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->with('job:id,avatar,job_title,created_at,date_end')->get();
+        //dd($j);
         return view('care_giver.jobs.applied_jobs', $data);
+    }
+
+    public function delete_job(Request $request)
+    {
+        try {
+            JobApply::find($request->id)->delete();
+            $request->session()->flash('success', 'Deleted Successfully');
+            return back();
+        } catch (\Throwable $th) {
+            $request->session()->flash('error', $th->getMessage());
+            return back();
+        }
     }
 }

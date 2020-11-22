@@ -22,4 +22,8 @@ class JobApply extends Model
         $save->status          = 'Pending';
         $save->save();
     }
+    public function job()
+    {
+        return $this->belongsTo(Job::class, 'job_id');
+    }
 }

@@ -30,7 +30,7 @@
                                     <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
-                                    <th>Application</th>
+                                    <th>Applied On</th>
                                     <th>Posted On</th>
                                     <th>Application Close On</th>
                                     <th>Action</th>
@@ -39,28 +39,58 @@
                             <tbody>
                             @foreach ($jobs as $job)                            
                                 <tr>
-                                    <td>                                        
-                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 150px; height: auto;">
+                                    <td>      
+                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->job->avatar) }}" style="width: 150px; height: auto;">
                                     </td>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1" style="font-size: 28px"><a href="job-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
-                                            <p>
-                                                <span>Category: <b style="color: black">{{$job->cat->name}}</b></span>
+                                            <h2 class="widget-title pb-1" style="font-size: 28px"><a href="job-details.html" class="color-text-2">{{$job->job->job_title}}</a></h2>
+                                            {{-- <p>
+                                                <span>Category: <b style="color: black">{{$job->name}}</b></span>
                                             </p>
                                             <p>
-                                                <span>Sub Category: <b style="color: black">{{$job->sub->name}}</b></span>
-                                            </p>
+                                                <span>Sub Category: <b style="color: black">{{$job->name}}</b></span>
+                                            </p> --}}
                                         </div><!-- end manage-candidate-wrap -->
                                     </td>
-                                    <td><span class="badge badge-success p-1">Active</span></td>
-                                    <td>2 Application(s)</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                                     <td>
-                                        <a href="{{ url('care-giver/view-job', $job->id) }}" class="btn theme-btn">View</a>
+                                        @if ($job->status == 'Approved')
+                                            <span class="badge badge-success p-1">{{$job->status}}</span>                                            
+                                        @else
+                                        <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
+                                        @endif
+                                    </td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->job->created_at))}}</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->job->date_end))}}</td>
+                                    
+                                    <td class="text-center">
+                                        <div class="manage-candidate-wrap">
+                                            <div class="bread-action pt-0">
+                                                <ul class="info-list">
+                                                    <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
+                                
+                                <!-- Modal Delete -->
+                                <div class="modal fade" id="delete{{$job->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body mt-2 mb-2 text-center">
+                                            <h2 style="color: black">Are you sure you want to delete?</h2>
+                                        <form method="POST" action="{{ url('care-giver/delete-job') }}">
+                                            @csrf                                                        
+                                            <input type="hidden" name="id" value="{{ $job->id }}">
+                                            <button type="submit" class="btn btn-success m-2">Yes</button> 
+                                            <button type="button" class="btn btn-dark m-2" data-dismiss="modal" aria-label="Close">No</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             @endforeach
                             </tbody>
                         </table>
