@@ -32,7 +32,7 @@
                         </ul>
                     </li>
                     <li><a href="{{ url('logout') }}"><i class="la la-power-off icon-element"></i> Logout</a></li>
-                    <li><a href="{{ url('logout') }}"><i class="la la-trash icon-element"></i> Delete Account</a></li>
+                    {{-- <li><a href="{{ url('logout') }}"><i class="la la-trash icon-element"></i> Delete Account</a></li> --}}
                 </ul>
             </div><!-- end side-menu-wrap -->
         </div>
