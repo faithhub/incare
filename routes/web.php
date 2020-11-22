@@ -51,6 +51,7 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
   Route::get('/transactions', [App\Http\Controllers\employer\TransactionController::class, 'index']);
   Route::get('/messages', [App\Http\Controllers\employer\MessageController::class, 'index']);
   Route::get('/message/{id}', [App\Http\Controllers\employer\MessageController::class, 'message']);
+  Route::post('/message', [App\Http\Controllers\employer\MessageController::class, 'sendMessage']);
 });
 
 //Care Giver

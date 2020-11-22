@@ -54,9 +54,11 @@
         </div><!-- conversation-wrap -->
         <div class="message-reply-input">
           <div class="contact-form-action">
-            <form method="post">
+            <form method="post" action="{{url('employer/message')}}">
+              @csrf
               <div class="input-box d-flex align-items-center">
                 <div class="form-group flex-grow-1 mb-0">
+                  <input type="text" name="care_giver_id" value="{{$user->id}}" hidden />
                   <textarea class="message-control form-control mr-2" name="message" placeholder="Type a message" data-emojiable="true"></textarea>
                   <button type="submit" class="theme-btn submit-btn border-0">
                     <span class="la la-paper-plane"></span>

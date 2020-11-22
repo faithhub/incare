@@ -18,9 +18,9 @@ class Messages extends Model
   public function create($data)
   {
     $save             = new self();
-    $save->message    = $data->message;
-    $save->care_giver_id  = $data->care_giver_id;
-    $save->employer_id = $data->employer_id;
+    $save->message    = $data['message'];
+    $save->care_giver_id  = $data['care_giver_id'];
+    $save->employer_id = $data['employer_id'];
     $save->save();
   }
 }
