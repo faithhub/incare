@@ -20,6 +20,7 @@ class Payment extends Model
         'transaction',
         'trxref',
     ];
+
     public function create($data)
     {
         $save            = new self();
@@ -28,13 +29,19 @@ class Payment extends Model
         $save->amount    = $data->amount;
         $save->status    = $data->status;
         $save->reference = $data->reference;
-        $save->message    = $data->message;
+        $save->message   = $data->message;
         $save->transaction    = $data->transaction;
         $save->trxref    = $data->trxref;
         $save->save();
     }
+
     public function plan()
     {
         return $this->belongsTo(Plan::class, 'plan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
