@@ -26,9 +26,9 @@ class MessageController extends Controller
     return view('employer.message.message', $data);
   }
 
-  // public function sendNewMessage(Request $request) {
+  // public function sendMessage(Request $request) {
   //   if ($request->id) {
-  //     $check = Messages::where('receiver_id',)
+  //     $check = Messages::where('care_giver_id',)
   //   }
   // }
 }

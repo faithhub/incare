@@ -19,8 +19,8 @@ class Messages extends Model
   {
     $save             = new self();
     $save->message    = $data->message;
-    $save->sender_id  = $data->care_giver_id;
-    $save->receiver_id = $data->employer_id;
+    $save->care_giver_id  = $data->care_giver_id;
+    $save->employer_id = $data->employer_id;
     $save->save();
   }
 }
