@@ -4,42 +4,16 @@
   <div class="col">
     <div class="dashboard-message-wrapper d-flex">
       <div class="message-sidebar">
-        <div class="message-search">
-          <div class="contact-form-action">
-            <form action="#">
-              <div class="form-group mb-0">
-                <input class="form-control" type="text" placeholder="Search...">
-                <button type="submit" class="submit-btn "><i class="la la-search"></i></button>
-              </div>
-            </form>
-          </div>
-        </div><!-- message-search -->
-        <div class="message-inbox-item">
-          <div class="mess__body">
-            <a href="#" class=" d-block message-inbox">
-              <div class="mess__item">
-                <div class="avatar dot-status">
-                  <img src="{{ asset('web/images/small-team1.jpg') }}" alt="Michelle Moreno">
-                </div>
-                <div class="content">
-                  <h4 class="widget-title">Harvey Specter</h4>
-                  <p class="text">Oh yeah, did Michael Jordan tell you that?</p>
-                  <span class="time color-text-3 font-size-12">2 days ago</span>
-                </div>
-              </div>
-            </a>
-          </div><!-- end mess__body -->
-        </div><!-- end message-inbox-item -->
       </div><!-- message-sidebar -->
-      <div class="message-content flex-grow-1">
+      <div class="message-content flex-grow-1 col-12">
         <div class="message-header">
           <div class="mess__item justify-content-between align-items-center">
             <div class="d-flex">
               <div class="avatar">
-                <img src="{{ asset('web/images/small-team1.jpg') }}" alt="Michelle Moreno">
+                <img src="{{ asset('uploads/profile_picture/'.$user->avatar) }}" alt="{{$user->first_name}}">
               </div>
               <div class="content">
-                <h4 class="widget-title font-size-15 mb-0">Harvey Specter</h4>
+                <h4 class="widget-title font-size-15 mb-0">{{$user->first_name}} {{$user->last_name}}</h4>
                 <span class="time color-text font-size-14">Online</span>
               </div>
             </div>

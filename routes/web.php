@@ -50,13 +50,14 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
   Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'change']);
   Route::get('/transactions', [App\Http\Controllers\employer\TransactionController::class, 'index']);
   Route::get('/messages', [App\Http\Controllers\employer\MessageController::class, 'index']);
-  Route::get('/messages/{id}', [App\Http\Controllers\employer\MessageController::class, 'index']);
+  Route::get('/message/{id}', [App\Http\Controllers\employer\MessageController::class, 'message']);
 });
 
 //Care Giver
 Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']], function () {
   Route::get('/', [App\Http\Controllers\CareGiver\DashboardController::class, 'index'])->name('care-giver');
   Route::get('/messages', [App\Http\Controllers\CareGiver\MessageController::class, 'index']);
+  Route::get('/message/{id}', [App\Http\Controllers\CareGiver\MessageController::class, 'message']);
   Route::get('/transactions', [App\Http\Controllers\CareGiver\TransactionController::class, 'index']);
   Route::get('/new-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'new_job']);
   Route::get('/plans', [App\Http\Controllers\CareGiver\PlanController::class, 'index']);

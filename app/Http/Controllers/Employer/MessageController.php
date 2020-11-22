@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\employer;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -16,6 +17,13 @@ class MessageController extends Controller
   {
     $data['title'] = 'Messages';
     return view('employer.message.index', $data);
+  }
+
+  public function message($id)
+  {
+    $data['user'] = $user = User::find($id);
+    $data['title'] = 'Message with' . $user->first_name . ' ' . $user->last_name;
+    return view('employer.message.message', $data);
   }
 
   // public function sendNewMessage(Request $request) {
