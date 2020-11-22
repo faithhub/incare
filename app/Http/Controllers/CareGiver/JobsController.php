@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Job;
 use App\Models\JobApply;
 use App\Models\SubCategory;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stevebauman\Location\Facades\Location;
@@ -25,9 +27,6 @@ class JobsController extends Controller
     public function new_job(Request $request)
     {
         $data['title'] = 'New Jobs';
-        // $request->ip();
-        // $data = Location::get('129.205.113.238');
-        // dd($data);
         $data['categories'] = Category::all();
         $data['sub_categories'] = SubCategory::all();
         $data['jobs'] = $jobs = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
@@ -37,19 +36,89 @@ class JobsController extends Controller
     public function apply_job(Request $request)
     {
         try {
-            $job = Job::find($request->id);
-            $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $request->id])->count();
-            // dd($check->count());
-            if ($check == 0) {
-                $this->apply_job->create($request);
-                Session::flash('success', 'Applied Successfully');
-                return redirect('care-giver/applied-jobs');
+            if (Auth::user()->plan == 0) {
+                if (Auth::user()->plan_end_date > new Carbon()) {
+                    if (Auth::user()->trail_count < 3) {
+                        try {
+                            $job = Job::find($request->id);
+                            $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $request->id])->count();
+                            if ($check == 0) {
+                                $this->apply_job->create($request);
+                                $user = User::find(Auth::user()->id);
+                                $user->trail_count = $user->trail_count + 1;
+                                $user->save();
+                                Session::flash('success', 'Applied Successfully');
+                                return redirect('care-giver/applied-jobs');
+                            } else {
+                                Session::flash('warning', 'Job already being applied for');
+                                return back();
+                            }
+                        } catch (\Throwable $th) {
+                            Session::flash('error', $th->getMessage());
+                            return back();
+                        }
+                    }else{
+                        Session::flash('warning', 'Maximum Job Application limit reach for Trial Plan for this month, please Subcribe to enjoy full package');
+                        return back();
+                    }
+                }elseif (Auth::user()->plan_end_date < new Carbon()){
+                    try {
+                        $job = Job::find($request->id);
+                        $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $request->id])->count();
+                        if ($check == 0) {
+                            $this->apply_job->create($request);
+                            $user = User::find(Auth::user()->id);
+                            $user->plan_start_date = Carbon::now();
+                            $user->plan_end_date = Carbon::now()->addMonth(1);
+                            $user->trail_count = 1;
+                            $user->save();
+                            Session::flash('success', 'Applied Successfully');
+                            return redirect('care-giver/applied-jobs');
+                        } else {
+                            Session::flash('warning', 'Job already being applied for');
+                            return back();
+                        }
+                    } catch (\Throwable $th) {
+                        Session::flash('error', $th->getMessage());
+                        return back();
+                    }                
+                }else{
+                    Session::flash('warning', 'Try Again Please');
+                    return back();
+                }
+            } elseif (Auth::user()->plan == 1) {
+                if (Auth::user()->plan_end_date < Carbon::now()) {
+                    $job = Job::find($request->id);
+                    $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $request->id])->count();
+                    if ($check == 0) {
+                        $this->apply_job->create($request);
+                        Session::flash('success', 'Applied Successfully');
+                        return redirect('care-giver/applied-jobs');
+                    }else{
+                        Session::flash('warning', 'Job already being applied for');
+                        return back();
+                    }     
+                }elseif (Auth::user()->plan_end_date > Carbon::now()){
+                    $user = User::find(Auth::user()->id);
+                    $user->plan_id = 0;
+                    $user->plan  = '0';
+                    $user->plan_start_date = Carbon::now();
+                    $user->plan_end_date = Carbon::now()->addMonth(1);
+                    $user->trail_count = 1;
+                    $user->save();
+                    $this->apply_job->create($request);
+                    Session::flash('success', 'Applied Successfully, Now on Trail Plan, your plan has expired');
+                    return redirect('care-giver/applied-jobs');
+                }else{
+                    Session::flash('warning', 'Try Again!!!');
+                    return back();                    
+                }
             }else{
-                Session::flash('warning', 'Job already being applied for');
                 return back();
-            }           
+            }
+                  
         } catch (\Throwable $th) {
-            Session::flash('error', 'Try again!');
+            Session::flash('error', $th->getMessage());
             return back();
         }
     }
@@ -119,6 +188,7 @@ class JobsController extends Controller
     public function applied_job()
     {
         $data['title'] = 'Applied Jobs';
+        // $data['jobs'] = JobApply::where
         return view('care_giver.jobs.applied_jobs', $data);
     }
 }

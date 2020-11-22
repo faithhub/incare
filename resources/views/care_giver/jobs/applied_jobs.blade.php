@@ -22,106 +22,46 @@
                 <div class="title-shape margin-top-10px"></div>
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
-                <div class="manage-job-wrap">
+                <div class="manage-job-wrap">                    
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="myTable" width="100%">
                             <thead>
-                            <tr>
-                                <th>Alert Details</th>
-                                <th>Email Frequency</th>
-                                <th class="text-center">Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Job Picture</th>
+                                    <th>Job Title</th>
+                                    <th>Status</th>
+                                    <th>Application</th>
+                                    <th>Posted On</th>
+                                    <th>Application Close On</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
+                            @foreach ($jobs as $job)                            
                                 <tr>
+                                    <td>                                        
+                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 150px; height: auto;">
+                                    </td>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1 font-size-17">Director</h2>
-                                            <p class="font-size-14">
-                                                <span class="font-weight-medium">Search Keywords:</span>
-                                                2, 60, Toronto ON Canada
+                                            <h2 class="widget-title pb-1" style="font-size: 28px"><a href="job-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
+                                            <p>
+                                                <span>Category: <b style="color: black">{{$job->cat->name}}</b></span>
+                                            </p>
+                                            <p>
+                                                <span>Sub Category: <b style="color: black">{{$job->sub->name}}</b></span>
                                             </p>
                                         </div><!-- end manage-candidate-wrap -->
                                     </td>
-                                    <td>Never</td>
-                                    <td class="text-center">
-                                        <div class="manage-candidate-wrap">
-                                            <div class="bread-action pt-0">
-                                                <ul class="info-list">
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
+                                    <td><span class="badge badge-success p-1">Active</span></td>
+                                    <td>2 Application(s)</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                                     <td>
-                                        <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1 font-size-17">rtalbedge</h2>
-                                            <p class="font-size-14">
-                                                <span class="font-weight-medium">Search Keywords:</span>
-                                                 United States
-                                            </p>
-                                        </div><!-- end manage-candidate-wrap -->
-                                    </td>
-                                    <td>Never</td>
-                                    <td class="text-center">
-                                        <div class="manage-candidate-wrap">
-                                            <div class="bread-action pt-0">
-                                                <ul class="info-list">
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <a href="{{ url('care-giver/view-job', $job->id) }}" class="btn theme-btn">View</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1 font-size-17">Engineer</h2>
-                                            <p class="font-size-14">
-                                                <span class="font-weight-medium">Search Keywords:</span>
-                                                engineer, United Kingdom
-                                            </p>
-                                        </div><!-- end manage-candidate-wrap -->
-                                    </td>
-                                    <td>Never</td>
-                                    <td class="text-center">
-                                        <div class="manage-candidate-wrap">
-                                            <div class="bread-action pt-0">
-                                                <ul class="info-list">
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1 font-size-17">Database Alert</h2>
-                                            <p class="font-size-14">
-                                                <span class="font-weight-medium">Search Keywords:</span>
-                                                database
-                                            </p>
-                                        </div><!-- end manage-candidate-wrap -->
-                                    </td>
-                                    <td>Never</td>
-                                    <td class="text-center">
-                                        <div class="manage-candidate-wrap">
-                                            <div class="bread-action pt-0">
-                                                <ul class="info-list">
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

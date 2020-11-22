@@ -18,7 +18,8 @@ class TransactionController extends Controller
     public function index()
     {
         $data['title'] = 'My Transactions';
-        $data['trans'] = Payment::where('user_id', Auth::user()->id)->with('plan:id,plan_name,plan_type')->get();
+        $data['trans'] = $p = Payment::where('user_id', Auth::user()->id)->with('plan:id,plan_name,plan_type')->get();
+        //dd($p);
         return view('care_giver.transaction.index', $data);
     }
 }
