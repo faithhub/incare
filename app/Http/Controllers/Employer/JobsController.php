@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Job;
 use App\Models\JobApply;
 use App\Models\SubCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,6 +34,8 @@ class JobsController extends Controller
     public function manage_care_giver()
     {
         $data['title'] = 'Manage Care Givers';
+        $data['users'] = $u = User::where('type', '2')->get();
+        //dd($u);
         return view('employer.jobs.manage_care_giver', $data);
     }
 
@@ -248,6 +251,7 @@ class JobsController extends Controller
     public function applied_jobs()
     {
         $data['title'] = 'Applied Jobs';
+        // $data['jobs'] = JobApply::all();
         return view('employer.jobs.applied_jobs', $data);
     }
 }

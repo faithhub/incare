@@ -187,7 +187,7 @@
                     <div class="manage-candidate-wrap">
                       <div class="bread-action pt-0">
                         <ul class="info-list">
-                          <li class="d-inline-block"><a href="{{ url('employer/messages', $apply->user->id) }}"><i class="la la-envelope" data-toggle="tooltip" data-placement="top" title="Message"></i></a></li>
+                          <li class="d-inline-block"><a href="{{ url('employer/message', $apply->user->id) }}"><i class="la la-envelope" data-toggle="tooltip" data-placement="top" title="Message"></i></a></li>
                           <li class="d-inline-block"><a href="{{ url('employer/approve-job', $apply->id) }}"><i class="la la-cloud-download" data-toggle="tooltip" data-placement="top" title="Approve"></i></a></li>
                           <li class="d-inline-block"><a href="{{ url('employer/deny-job', $apply->id) }}"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Deny"></i></a></li>
                         </ul>
