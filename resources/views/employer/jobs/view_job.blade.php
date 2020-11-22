@@ -24,7 +24,7 @@
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
                 <div class="manage-job-wrap">
-                    <div class="manage-job-header mt-3 mb-5">
+                    {{-- <div class="manage-job-header mt-3 mb-5">
                         <div class="manage-job-count">
                             <span class="font-weight-medium color-text-2 mr-1">12</span>
                             <span class="font-weight-medium">job(s) Posted</span>
@@ -37,7 +37,7 @@
                             <span class="font-weight-medium color-text-2 mr-1">6</span>
                             <span class="font-weight-medium">Active Job(s)</span>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row mb-5">
                         <div class="col-lg-12 mb-2">
                             <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
@@ -129,45 +129,55 @@
                         <table class="table" id="myTable" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Application</th>
-                                    <th>Create date</th>
-                                    <th>Application Close date</th>
+                                    <th>Care Giver Name</th>
+                                    <th>Applied On</th>
                                     <th>Status</th>
+                                    {{-- <th>Message</th> --}}
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            {{-- @foreach ($job as $job)                                
+                            @foreach ($applies as $apply)                                
                                 <tr>
                                     <td>
-                                        <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
-                                            <p>
-                                                <span>Category - {{$job->cat->name}}</span>
-                                            </p>
-                                            <p>
-                                                <span>Sub Category - {{$job->sub->name}}</span>
-                                            </p>
-                                        </div><!-- end manage-candidate-wrap -->
+                                        <div class="bread-details d-flex">
+                                            <div class="bread-img flex-shrink-0">
+                                                <a href="candidate-details.html" class="d-block">
+                                                    <img src="{{ asset('uploads/profile_pictures/'.$apply->user->avatar) }}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="manage-candidate-content">
+                                                <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$apply->user->first_name}}   {{$apply->user->last_name}}</a></h2>
+                                                <p class="font-size-15">
+                                                    <span class="mr-2"><i class="la la-envelope-o mr-1"></i><a href="{{$apply->user->email}}" class="color-text-3">{{$apply->user->email}}</a></span>
+                                                    <span class="mr-2"><i class="la la-phone mr-1"></i>{{$apply->user->mobile}}</span>
+                                                </p>
+                                                <p class="mt-1 font-size-15">
+                                                    <span class="mr-2"><i class="la la-map mr-1"></i>{{$apply->user->address}}</span>
+                                                </p>
+                                            </div><!-- end manage-candidate-content -->
+                                        </div>
                                     </td>
-                                    <td>2 Application(s)</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
-                                    <td><span class="badge badge-success p-1">Active</span></td>
+                                    <td>{{  date('D, M j, Y', strtotime($apply->created_at))}}</td>
+                                    <td>
+                                        @if ($apply->status == "Approved")
+                                        <span class="badge badge-success p-1">{{$apply->status}}</span></td>                                            
+                                        @else
+                                        <span class="badge badge-warning p-1">{{$apply->status}}</span></td>                                            
+                                        @endif
                                     <td class="text-center">
                                         <div class="manage-candidate-wrap">
                                             <div class="bread-action pt-0">
                                                 <ul class="info-list">
-                                                    <li class="d-inline-block"><a href="#" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="Active"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-edit" data-toggle="tooltip" data-placement="top" title="Edit"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
+                                                    <li class="d-inline-block"><a href="{{ url('employer/message-user', $apply->user->id) }}" ><i class="la la-envelope" data-toggle="tooltip" data-placement="top" title="Message"></i></a></li>
+                                                    <li class="d-inline-block"><a href="{{ url('employer/approve-job', $apply->id) }}"><i class="la la-cloud-download" data-toggle="tooltip" data-placement="top" title="Approve"></i></a></li>
+                                                    <li class="d-inline-block"><a href="{{ url('employer/deny-job', $apply->id) }}"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Deny"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

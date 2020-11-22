@@ -24,28 +24,14 @@
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
                 <div class="manage-job-wrap">
-                    <div class="manage-job-header mt-3 mb-5">
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">12</span>
-                            <span class="font-weight-medium">job(s) Posted</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">8</span>
-                            <span class="font-weight-medium">Application(s)</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">6</span>
-                            <span class="font-weight-medium">Active Job(s)</span>
-                        </div>
-                    </div>
                     <div class="table-responsive">
                         <table class="table" id="myTable" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Application</th>
-                                    <th>Create date</th>
-                                    <th>Application Close date</th>
+                                    <th>Job Details</th>
+                                    <th>Amount/Hour</th>
+                                    <th>Create On</th>
+                                    <th>Application Close On</th>
                                     <th>Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -54,17 +40,22 @@
                             @foreach ($jobs as $job)                                
                                 <tr>
                                     <td>
-                                        <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
-                                            <p>
-                                                <span>Category - {{$job->cat->name}}</span>
-                                            </p>
-                                            <p>
-                                                <span>Sub Category - {{$job->sub->name}}</span>
-                                            </p>
-                                        </div><!-- end manage-candidate-wrap -->
+                                        <div class="bread-details d-flex">
+                                            <div class="bread-img flex-shrink-0">
+                                                <a href="candidate-details.html" class="d-block">
+                                                    <img src="{{ asset('uploads/jobs/'.$job->avatar) }}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="manage-candidate-content">
+                                                <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
+                                                <p class="font-size-15">
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Category - {{$job->cat->name}}</span><br>
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span>
+                                                </p>
+                                            </div><!-- end manage-candidate-content -->
+                                        </div>
                                     </td>
-                                    <td>2 Application(s)</td>
+                                    <td>#{{$job->amount}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                                     <td><span class="badge badge-success p-1">Active</span></td>

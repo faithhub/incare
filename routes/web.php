@@ -42,6 +42,8 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
     Route::get('/view-job/{id}', [App\Http\Controllers\employer\JobsController::class, 'view_job']);
     Route::get('/edit-job/{id}', [App\Http\Controllers\employer\JobsController::class, 'edit_job']);
     Route::get('/applied-jobs', [App\Http\Controllers\employer\JobsController::class, 'applied_jobs']);
+    Route::get('/approve-job/{id}', [App\Http\Controllers\employer\JobsController::class, 'approve_job']);
+    Route::get('/deny-job/{id}', [App\Http\Controllers\employer\JobsController::class, 'deny_job']);
     Route::get('/profile', [App\Http\Controllers\employer\SettingsController::class, 'profile']);
     Route::post('/profile', [App\Http\Controllers\employer\SettingsController::class, 'update_profile']);
     Route::get('/change-password', [App\Http\Controllers\employer\SettingsController::class, 'change_password']);

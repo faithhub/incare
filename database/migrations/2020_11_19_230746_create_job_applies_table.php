@@ -17,7 +17,7 @@ class CreateJobAppliesTable extends Migration
             $table->id();
             $table->string('care_giver_id');
             $table->string('job_id');
-            $table->enum('status', ['Pending', 'Approved'])->default('Pending');
+            $table->enum('status', ['Pending', 'Approved', 'Denied'])->default('Pending');
             $table->timestamps();
         });
     }

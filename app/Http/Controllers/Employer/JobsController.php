@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Plan;
 use App\Models\Job;
+use App\Models\JobApply;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,11 +54,17 @@ class JobsController extends Controller
     {
         if ($request->id) {
             try {
-                $job = Job::where(['id' => $request->id, 'employer_id' => Auth::user()->id])->delete();
-                Session::flash('success', 'Deleted Successfully');
-                return back();
+                $check = JobApply::where('job_id', $request->id)->count();
+                if ($check < 1) {
+                    $job = Job::where(['id' => $request->id, 'employer_id' => Auth::user()->id])->delete();
+                    Session::flash('success', 'Deleted Successfully');
+                    return back();
+                } else {
+                    Session::flash('error', 'Job can not be deleted, Job has been applied for already');
+                    return back();
+                }
             } catch (\Throwable $th) {
-                $request->session()->flash('warning', 'Something went wrong 2');
+                $request->session()->flash('warning', $th->getMessage());
                 return back();
             }
         } else {
@@ -71,6 +78,7 @@ class JobsController extends Controller
         if ($id) {
             $data['job'] = $job = Job::where(['id' => $id, 'employer_id' => Auth::user()->id])->with('cat:id,name')->with('sub:id,name')->get();
             if ($job->count() > 0) {
+                $data['applies'] = JobApply::where('job_id', $job[0]['id'])->with('user:id,first_name,last_name,avatar,email,mobile,address')->get();
                 $data['title'] = 'View Job Details';
                 return view('employer.jobs.view_job', $data);
             } else {
@@ -92,9 +100,36 @@ class JobsController extends Controller
         return view('employer.jobs.post_job', $data);
     }
 
-    public function new_job(Request $request)
+    public function approve_job($id)
     {
-        
+        try {
+            $job = JobApply::find($id);
+            $job->status = 'Approved';
+            $job->save();
+            Session::flash('success', 'Job Approved Successfully');
+            return back();
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return back();
+        }
+    }
+
+    public function deny_job($id)
+    {
+        try {
+            $job = JobApply::find($id);
+            $job->status = 'Denied';
+            $job->save();
+            Session::flash('success', 'Job Denied Successfully');
+            return back();
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return back();
+        }
+    }
+
+    public function new_job(Request $request)
+    {        
         if ($request->id) {
              //dd($request->all());
             $rules = array(
