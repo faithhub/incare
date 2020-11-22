@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Job;
+use App\Models\JobApply;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -34,7 +36,26 @@ class JobController extends Controller
     public function all_job()
     {
         $data['title'] = 'Jobs Alert';
-        return view('admin.jobs.manage_job', $data);
+        $data['jobs'] = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile')->get();
+        return view('admin.jobs.all_jobs', $data);
+    }
+
+    public function view_job($id)
+    {
+        if ($id) {
+            $data['job'] = $job = Job::where('id', $id)->with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile,address')->get();
+            // dd($job);
+            if ($job->count() > 0) {
+                $data['applies'] = JobApply::where('job_id', $job[0]['id'])->with('user:id,first_name,last_name,avatar,email,mobile,address')->get();
+                $data['title'] = 'View Job Details';
+                return view('admin.jobs.view_job', $data);
+            } else {
+                Session::flash('error', 'No record found for Job');
+                return redirect('admin/all-job');
+            }
+        } else {
+            return redirect('employer/manage-jobs');
+        }
     }
 
     public function add_category(Request $request)

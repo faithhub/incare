@@ -93,6 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::match(['get', 'post'], '/job-sub-categories', [App\Http\Controllers\Admin\JobController::class, 'sub_category']);
   Route::match(['get', 'post'], '/add-job-sub-category', [App\Http\Controllers\Admin\JobController::class, 'add_sub_category']);
   Route::get('/manage-jobs', [App\Http\Controllers\Admin\JobController::class, 'manage_job']);
+  Route::get('/view-job/{id}', [App\Http\Controllers\Admin\JobController::class, 'view_job']);
   Route::get('/profile', [App\Http\Controllers\Admin\SettingsController::class, 'profile']);
   Route::post('/profile', [App\Http\Controllers\Admin\SettingsController::class, 'update_profile']);
   Route::get('/change-password', [App\Http\Controllers\Admin\SettingsController::class, 'change_password']);

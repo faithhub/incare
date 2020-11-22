@@ -30,7 +30,7 @@
                                 <th>User</th>
                                 <th>Type</th>
                                 <th>Date Registered</th>
-                                <th class="text-center">Action</th>
+                                {{-- <th class="text-center">Action</th> --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -56,13 +56,13 @@
                                                         <span class="mr-2"><i class="la la-map-marker mr-1"></i>{{$user->city}}, </span>
                                                         <span class="mr-2">{{$user->address}}</span>
                                                     </p>
-                                                    <p class="mt-2 font-size-15">
+                                                    {{-- <p class="mt-2 font-size-15">
                                                         @if ($user->type == 1)                                                        
                                                         Total Job Posted:
                                                         @elseif ($user->type == 2)
                                                         Total Job Applied:
                                                         @endif
-                                                    </p>
+                                                    </p> --}}
                                                 </div><!-- end manage-candidate-content -->
                                             </div>
                                         </td>
@@ -74,16 +74,16 @@
                                             @endif
                                         </td>
                                         <td>{{  date('D, M j, Y \a\t g:ia', strtotime($user->created_at))}}</td>
-                                        <td class="text-center">
+                                        {{-- <td class="text-center">
                                             <div class="manage-candidate-wrap">
                                                 <div class="bread-action pt-0">
                                                     <ul class="info-list">
                                                         <li class="d-inline-block"><a href="job-details.html"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"></i></a></li>
-                                                        {{-- <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove"></i></a></li> --}}
+                                                        <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

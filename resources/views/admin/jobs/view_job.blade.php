@@ -1,5 +1,5 @@
-@extends('employer.layouts.app')
-@section('user')
+@extends('admin.layouts.app')
+@section('admin')
 <div class="row">
   <div class="col-lg-12">
     <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
@@ -24,23 +24,23 @@
       </div><!-- billing-title-wrap -->
       <div class="billing-content pb-0">
         <div class="manage-job-wrap">
-          {{-- <div class="manage-job-header mt-3 mb-5">
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">12</span>
-                            <span class="font-weight-medium">job(s) Posted</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">8</span>
-                            <span class="font-weight-medium">Application(s)</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">6</span>
-                            <span class="font-weight-medium">Active Job(s)</span>
-                        </div>
-                    </div> --}}
           <div class="row mb-5">
             <div class="col-lg-12 mb-2">
               <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
+                
+                <div class="bread-details d-flex">
+                  <div class="bread-img flex-shrink-0">
+                    <img src="{{ asset('uploads/profile_pictures/'.$job[0]['user']['avatar']) }}" alt="">
+                  </div>
+                  <div class="job-detail-content">
+                    <h2 class="widget-title font-size-30 text-black pb-1">{{$job[0]['user']['first_name']}} {{$job[0]['user']['last_name']}}</h2>
+                    <p class="font-size-16 mt-1 text-black">
+                      <span class="mr-2 mb-2 d-inline-block">{{$job[0]['user']['email']}}</span>
+                      <br>
+                      <span class="mr-2 mb-2 d-inline-block">{{$job[0]['user']['mobile']}}</span>
+                    </p>
+                  </div><!-- end job-detail-content -->
+                </div><!-- end bread-details -->
                 <div class="bread-details d-flex">
                   <div class="bread-img flex-shrink-0">
                     <img src="{{ asset('uploads/jobs/'.$job[0]['avatar']) }}" alt="">
@@ -56,12 +56,6 @@
                 </div><!-- end bread-details -->
                 <div class="bread-action">
                   <ul class="listing-info">
-                    {{-- <li>
-                                            <button type="button" class="theme-btn mr-1"><i class="la la-heart-o font-size-16"></i> Save</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="theme-btn border-0">Apply Now</button>
-                                        </li> --}}
                   </ul>
                 </div><!-- end bread-action -->
               </div><!-- end breadcrumb-content -->
@@ -71,7 +65,7 @@
                 <div class="job-description padding-bottom-35px">
                   <h2 class="widget-title">Description:</h2>
                   <div class="title-shape"></div>
-                  <p class="mt-3 mb-3">                    
+                  <p class="mt-3 mb-3">
                     {{$job[0]['job_description']}}
                   </p>
                 </div><!-- end job-description -->
@@ -129,8 +123,6 @@
                 <tr>
                   <th>Care Giver Name</th>
                   <th>Applied On</th>
-                  <th>Status</th>
-                  {{-- <th>Message</th> --}}
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
@@ -163,17 +155,6 @@
                   @else
                   <span class="badge badge-warning p-1">{{$apply->status}}</span></td>
                   @endif
-                  <td class="text-center">
-                    <div class="manage-candidate-wrap">
-                      <div class="bread-action pt-0">
-                        <ul class="info-list">
-                          <li class="d-inline-block"><a href="{{ url('employer/message', $apply->user->id) }}"><i class="la la-envelope" data-toggle="tooltip" data-placement="top" title="Message"></i></a></li>
-                          <li class="d-inline-block"><a href="{{ url('employer/approve-job', $apply->id) }}"><i class="la la-cloud-download" data-toggle="tooltip" data-placement="top" title="Approve"></i></a></li>
-                          <li class="d-inline-block"><a href="{{ url('employer/deny-job', $apply->id) }}"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Deny"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </td>
                 </tr>
                 @endforeach
               </tbody>
