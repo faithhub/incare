@@ -1,9 +1,9 @@
 @extends('employer.layouts.app')
 @section('user')
 <div class="row">
-  <div class="col-12">
+  <div class="col">
     <div class="dashboard-message-wrapper d-flex">
-      <div class="message-sidebar col-12">
+      <div class="message-sidebar">
         <div class="message-search">
           <div class="contact-form-action">
             <form action="#">
@@ -31,7 +31,7 @@
           </div><!-- end mess__body -->
         </div><!-- end message-inbox-item -->
       </div><!-- message-sidebar -->
-      {{-- <div class="message-content flex-grow-1">
+      <div class="message-content flex-grow-1">
         <div class="message-header">
           <div class="mess__item justify-content-between align-items-center">
             <div class="d-flex">
@@ -92,8 +92,7 @@
             </form>
           </div><!-- end contact-form-action -->
         </div><!-- message-reply-input -->
-      </div> --}}
-      <!-- message-content -->
+      </div><!-- message-content -->
     </div><!-- end dashboard-message-wrapper -->
   </div><!-- end col -->
 </div><!-- end row -->
