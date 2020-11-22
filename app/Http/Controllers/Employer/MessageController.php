@@ -7,14 +7,20 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
 
-    public function index()
-    {
-        $data['title'] = 'Messages';
-        return view('employer.message.index', $data);
-    }
+  public function index()
+  {
+    $data['title'] = 'Messages';
+    return view('employer.message.index', $data);
+  }
+
+  // public function sendNewMessage(Request $request) {
+  //   if ($request->id) {
+  //     $check = Messages::where('receiver_id',)
+  //   }
+  // }
 }
