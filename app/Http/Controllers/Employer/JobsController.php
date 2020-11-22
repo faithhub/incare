@@ -71,196 +71,70 @@ class JobsController extends Controller
                 return back();
             }
         } else {
-          Session::flash('error', 'Job can not be deleted, Job has been applied for already');
-          return back();
+            Session::flash('error', 'Job can not be deleted, Job has been applied for already');
+            return back();
         }
-      } catch (\Throwable $th) {
-        $request->session()->flash('warning', $th->getMessage());
-        return back();
-      }
-    } else {
-      $request->session()->flash('warning', 'Something went wrong');
-      return back();
     }
-  }
 
-  public function view_job($id)
-  {
-    if ($id) {
-      $data['job'] = $job = Job::where(['id' => $id, 'employer_id' => Auth::user()->id])->with('cat:id,name')->with('sub:id,name')->get();
-      if ($job->count() > 0) {
-        $data['applies'] = JobApply::where('job_id', $job[0]['id'])->with('user:id,first_name,last_name,avatar,email,mobile,address')->get();
-        $data['title'] = 'View Job Details';
-        return view('employer.jobs.view_job', $data);
-      } else {
-        Session::flash('error', 'No record found for Job');
-        return redirect('employer/manage-jobs');
-      }
-    } else {
-      return redirect('employer/manage-jobs');
+    public function view_job($id)
+    {
+        if ($id) {
+            $data['job'] = $job = Job::where(['id' => $id, 'employer_id' => Auth::user()->id])->with('cat:id,name')->with('sub:id,name')->get();
+            if ($job->count() > 0) {
+                $data['applies'] = JobApply::where('job_id', $job[0]['id'])->with('user:id,first_name,last_name,avatar,email,mobile,address')->get();
+                $data['title'] = 'View Job Details';
+                return view('employer.jobs.view_job', $data);
+            } else {
+                Session::flash('error', 'No record found for Job');
+                return redirect('employer/manage-jobs');
+            }
+        } else {
+            return redirect('employer/manage-jobs');
+        }
     }
-  }
 
-  public function edit_job($id)
-  {
-    $data['title'] = 'Edit Job';
-    $data['mode'] = 'Edit';
-    $data['job'] = Job::where('id', $id)->with('cat:id,name')->with('sub:id,name')->get();
-    $data['categories'] = Category::all();
-    $data['sub_categories'] = SubCategory::all();
-    return view('employer.jobs.post_job', $data);
-  }
-
-  public function approve_job($id)
-  {
-    try {
-      $job = JobApply::find($id);
-      $job->status = 'Approved';
-      $job->save();
-      Session::flash('success', 'Job Approved Successfully');
-      return back();
-    } catch (\Throwable $th) {
-      Session::flash('error', $th->getMessage());
-      return back();
+    public function edit_job($id)
+    {
+        $data['title'] = 'Edit Job';
+        $data['mode'] = 'Edit';
+        $data['job'] = Job::where('id', $id)->with('cat:id,name')->with('sub:id,name')->get();
+        $data['categories'] = Category::all();
+        $data['sub_categories'] = SubCategory::all();
+        return view('employer.jobs.post_job', $data);
     }
-  }
 
-  public function deny_job($id)
-  {
-    try {
-      $job = JobApply::find($id);
-      $job->status = 'Denied';
-      $job->save();
-      Session::flash('success', 'Job Denied Successfully');
-      return back();
-    } catch (\Throwable $th) {
-      Session::flash('error', $th->getMessage());
-      return back();
-    }
-  }
-
-  public function new_job(Request $request)
-  {
-    if ($request->id) {
-      //dd($request->all());
-      $rules = array(
-        'avatar' => 'image|mimes:jpg,jpeg,png|max:5000',
-        'job_title' => ['required', 'max:255'],
-        'job_category' => ['required', 'max:255'],
-        'amount' => ['required', 'max:255'],
-        'date_end' => ['required', 'max:255'],
-        'job_description' => ['required', 'max:255'],
-        'mobile' => ['required', 'max:255'],
-        'city' => ['required', 'max:255'],
-        'address' => ['required', 'max:255'],
-      );
-
-      $fieldNames = array(
-        'avatar'           => 'Job Picture',
-        'job_title'        => 'Job Title',
-        'job_category'     => 'Job Category',
-        'amount'           => 'Amount',
-        'date_end'         => 'Application End Date',
-        'job_description'  => 'Job Description',
-        'mobile'           => 'Mobile',
-        'city'             => 'City',
-        'address'          => 'Address',
-      );
-
-      $validator = Validator::make($request->all(), $rules);
-      $validator->setAttributeNames($fieldNames);
-      if ($validator->fails()) {
-        Session::flash('warning', 'Please check the form again!');
-        return back()->withErrors($validator)->withInput();
-      } else {
+    public function approve_job($id)
+    {
         try {
-          if ($request->file('avatar')) {
-            $file = $request->file('avatar');
-            $jobs = 'JOBS' . date('dMY') . time() . '.' . $file->getClientOriginalExtension();
-            $jobsDestination = 'uploads/jobs';
-            $file->move($jobsDestination, $jobs);
-          }
-          $job = Job::find($request->id);
-          if ($request->job_sub_category != null) {
-            $job_sub_category = $request->job_sub_category;
-          } else {
-            $job_sub_category = $job->job_sub_category;
-          }
-          $job->avatar = $request->hasFile('avatar') ? $jobs : $job->avatar;
-          $job->job_title = $request->job_title;
-          $job->job_category = $request->job_category;
-          $job->job_sub_category = $job_sub_category;
-          $job->amount = $request->amount;
-          $job->date_end = $request->date_end;
-          $job->job_description = $request->job_description;
-          $job->mobile = $request->mobile;
-          $job->city = $request->city;
-          $job->address = $request->address;
-          $job->save();
-          Session::flash('success', 'Job Updated Successfully');
-          return redirect('employer/manage-jobs');
+            $job = JobApply::find($id);
+            $job->status = 'Approved';
+            $job->save();
+            Session::flash('success', 'Job Approved Successfully');
+            return back();
         } catch (\Throwable $th) {
-          Session::flash('error', 'Please Try again!');
-          return back()->withErrors($validator)->withInput();
+            Session::flash('error', $th->getMessage());
+            return back();
         }
-      }
-    } else {
-      $rules = array(
-        'avatar' => 'required|image|mimes:jpg,jpeg,png|max:5000',
-        'job_title' => ['required', 'max:255'],
-        'job_category' => ['required', 'max:255'],
-        'job_sub_category' => ['required', 'max:255'],
-        'amount' => ['required', 'max:255'],
-        'date_end' => ['required', 'max:255'],
-        'job_description' => ['required', 'max:255'],
-        'mobile' => ['required', 'max:255'],
-        'city' => ['required', 'max:255'],
-        'address' => ['required', 'max:255'],
-        'terms' => ['required', 'max:255'],
-      );
-
-      $fieldNames = array(
-        'avatar'           => 'Job Picture',
-        'job_title'        => 'Job Title',
-        'job_category'     => 'Job Category',
-        'job_sub_category' => 'Job Sub Category',
-        'amount'           => 'Amount',
-        'date_end'         => 'Application End Date',
-        'job_description'  => 'Job Description',
-        'mobile'           => 'Mobile',
-        'city'             => 'City',
-        'address'          => 'Address',
-        'terms'            => 'Terms Condition',
-      );
-
-      $validator = Validator::make($request->all(), $rules);
-      $validator->setAttributeNames($fieldNames);
-      if ($validator->fails()) {
-        Session::flash('warning', 'Please check the form again!');
-        return back()->withErrors($validator)->withInput();
-      } else {
-        try {
-          $file = $request->file('avatar');
-          $jobs = 'JOBS' . date('dMY') . time() . '.' . $file->getClientOriginalExtension();
-          $jobsDestination = 'uploads/jobs';
-          $file->move($jobsDestination, $jobs);
-
-          $this->create_job->create($request, $jobs);
-          Session::flash('success', 'Job Created Successfully');
-          return redirect('employer/manage-jobs');
-        } catch (\Throwable $th) {
-          Session::flash('error', 'Please Try again!');
-          return back()->withErrors($validator)->withInput();
-        }
-      }
     }
-  }
 
-<<<<<<< HEAD
+    public function deny_job($id)
+    {
+        try {
+            $job = JobApply::find($id);
+            $job->status = 'Denied';
+            $job->save();
+            Session::flash('success', 'Job Denied Successfully');
+            return back();
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return back();
+        }
+    }
+
     public function new_job(Request $request)
-    {        
+    {
         if ($request->id) {
-             //dd($request->all());
+            //dd($request->all());
             $rules = array(
                 'avatar' => 'image|mimes:jpg,jpeg,png|max:5000',
                 'job_title' => ['required', 'max:255'],
@@ -298,10 +172,10 @@ class JobsController extends Controller
                         $jobsDestination = 'uploads/jobs';
                         $file->move($jobsDestination, $jobs);
                     }
-                    $job = Job::find($request->id);                    
+                    $job = Job::find($request->id);
                     if ($request->job_sub_category != null) {
                         $job_sub_category = $request->job_sub_category;
-                    }else{
+                    } else {
                         $job_sub_category = $job->job_sub_category;
                     }
                     $job->avatar = $request->hasFile('avatar') ? $jobs : $job->avatar;
@@ -353,24 +227,24 @@ class JobsController extends Controller
 
             $validator = Validator::make($request->all(), $rules);
             $validator->setAttributeNames($fieldNames);
-                if ($validator->fails()) {
-                    Session::flash('warning', 'Please check the form again!');
-                    return back()->withErrors($validator)->withInput();
-                } else {
-                    try {
-                        $file = $request->file('avatar');
-                        $jobs = 'JOBS' . date('dMY') . time() . '.' . $file->getClientOriginalExtension();
-                        $jobsDestination = 'uploads/jobs';
-                        $file->move($jobsDestination, $jobs);
+            if ($validator->fails()) {
+                Session::flash('warning', 'Please check the form again!');
+                return back()->withErrors($validator)->withInput();
+            } else {
+                try {
+                    $file = $request->file('avatar');
+                    $jobs = 'JOBS' . date('dMY') . time() . '.' . $file->getClientOriginalExtension();
+                    $jobsDestination = 'uploads/jobs';
+                    $file->move($jobsDestination, $jobs);
 
-                        $this->create_job->create($request, $jobs);
-                        Session::flash('success', 'Job Created Successfully');
-                        return redirect('employer/manage-jobs');
-                    } catch (\Throwable $th) {
-                        Session::flash('error', 'Please Try again!');
-                        return back()->withErrors($validator)->withInput();
-                    }
+                    $this->create_job->create($request, $jobs);
+                    Session::flash('success', 'Job Created Successfully');
+                    return redirect('employer/manage-jobs');
+                } catch (\Throwable $th) {
+                    Session::flash('error', 'Please Try again!');
+                    return back()->withErrors($validator)->withInput();
                 }
+            }
         }
     }
 
@@ -380,11 +254,4 @@ class JobsController extends Controller
         // $data['jobs'] = JobApply::all();
         return view('employer.jobs.applied_jobs', $data);
     }
-=======
-  public function applied_jobs()
-  {
-    $data['title'] = 'Applied Jobs';
-    return view('employer.jobs.applied_jobs', $data);
-  }
->>>>>>> fcf46d330ac8b9879bec44cb50e18466c4a9f020
 }

@@ -13,7 +13,6 @@ class Messages extends Model
     'message',
     'sender_id',
     'receiver_id',
-    ''
   ];
 
   public function create($data)
