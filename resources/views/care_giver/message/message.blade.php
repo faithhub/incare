@@ -10,7 +10,7 @@
           <div class="mess__item justify-content-between align-items-center">
             <div class="d-flex">
               <div class="avatar">
-                <img src="{{ asset('uploads/profile_pictures/'.$user->avatar) }}" alt="{{$user->first_name}}">
+                <img src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png')}}" alt="{{$user->first_name}}">
               </div>
               <div class="content">
                 <h4 class="widget-title font-size-15 mb-0">{{$user->first_name}} {{$user->last_name}}</h4>
@@ -30,7 +30,7 @@
               <div class="mess__body">
                 <div class="mess__item">
                   <div class="avatar">
-                    <img src="{{ asset('uploads/profile_pictures/'.$message->employer->avatar) }}" alt="{{$message->employer->first_name}}">
+                    <img src="{{ $message->employer->avatar != null ? asset('uploads/profile_pictures/'.$message->employer->avatar) : asset('web/images/avatar.png') }}" alt="{{$message->employer->first_name}}">
                   </div>
                   <div class="content">
                     <p class="text">{{$message->message}}</p>
@@ -48,7 +48,7 @@
                     <span class="time">{{ $message->created_at->diffForHumans() }}<i class="fa fa-check"></i></span>
                   </div>
                   <div class="avatar">
-                    <img src="{{ asset('uploads/profile_pictures/'.Auth::user()->avatar) }}" alt="{{Auth::user()->first_name}}">
+                    <img src="{{ Auth::user()->avatar != null ? asset('uploads/profile_pictures/'.Auth::user()->avatar) : asset('web/images/avatar.png') }}" alt="{{Auth::user()->first_name}}">
                   </div>
                 </div><!-- mess__item -->
               </div><!-- mess__body -->

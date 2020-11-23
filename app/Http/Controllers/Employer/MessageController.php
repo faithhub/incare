@@ -20,6 +20,8 @@ class MessageController extends Controller
   public function index()
   {
     $data['title'] = 'Messages';
+    $data['messages'] = $post = Messages::where('employer_id', Auth::user()->id)->orderBy('created_at')->with('care_giver:id,first_name,last_name,avatar,email,mobile,address')->get()->groupBy('care_giver_id');
+    //dd($post);
     return view('employer.message.index', $data);
   }
 
