@@ -23,4 +23,12 @@ class Messages extends Model
     $save->employer_id = $data['employer_id'];
     $save->save();
   }
+  public function employer()
+    {
+        return $this->belongsTo(User::class, 'employer_id');
+    }
+  public function care_giver()
+    {
+        return $this->belongsTo(User::class, 'care_giver_id');
+    }
 }
