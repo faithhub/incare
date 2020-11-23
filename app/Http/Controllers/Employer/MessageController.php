@@ -38,6 +38,8 @@ class MessageController extends Controller
       $data = array(
         'employer_id' => Auth::user()->id,
         'care_giver_id' => $request->care_giver_id,
+        'receiver_id' => $request->care_giver_id,
+        'sender_id' => Auth::user()->id,
         'message' => $request->message,
       );
 

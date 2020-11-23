@@ -25,7 +25,7 @@
               <span>Today</span>
             </div>
             @foreach($messages as $message)
-            @if($message->employer_id == '$user->id')
+            @if($message->sender_id == $user->id)
             <div class="conversation-item msg-reply">
               <div class="mess__body">
                 <div class="mess__item">
@@ -55,19 +55,6 @@
             </div><!-- conversation-item -->
             @endif
             @endforeach
-            <div class="conversation-item msg-sent">
-              <div class="mess__body">
-                <div class="mess__item">
-                  <div class="content">
-                    <p class="text">Hi Daniel! I'm actually on vacation 🏖️ until Sunday so I can't check it now 😎</p>
-                    <span class="time">12:4 PM <i class="fa fa-check"></i></span>
-                  </div>
-                  <div class="avatar">
-                    <img src="{{ asset('web/images/small-team1.jpg') }}" alt="Michelle Moreno">
-                  </div>
-                </div><!-- mess__item -->
-              </div><!-- mess__body -->
-            </div><!-- conversation-item -->
           </div><!-- conversation-box -->
         </div><!-- conversation-wrap -->
         <div class="message-reply-input">

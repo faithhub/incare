@@ -13,6 +13,8 @@ class Messages extends Model
     'message',
     'care_giver_id',
     'employer_id',
+    'sender_id',
+    'receiver_id',
   ];
 
   public function create($data)
@@ -21,14 +23,16 @@ class Messages extends Model
     $save->message    = $data['message'];
     $save->care_giver_id  = $data['care_giver_id'];
     $save->employer_id = $data['employer_id'];
+    $save->sender_id = $data['sender_id'];
+    $save->receiver_id = $data['receiver_id'];
     $save->save();
   }
   public function employer()
-    {
-        return $this->belongsTo(User::class, 'employer_id');
-    }
+  {
+    return $this->belongsTo(User::class, 'employer_id');
+  }
   public function care_giver()
-    {
-        return $this->belongsTo(User::class, 'care_giver_id');
-    }
+  {
+    return $this->belongsTo(User::class, 'care_giver_id');
+  }
 }
