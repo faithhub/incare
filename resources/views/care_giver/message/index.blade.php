@@ -25,7 +25,7 @@
                 <div class="content">
                   <h4 class="widget-title">Harvey Specter</h4>
                   <p class="text">{{$message->message}}</p>
-                  <span class="time color-text-3 font-size-12">2 days ago</span>
+                  <span class="time color-text-3 font-size-12">{{ date('D, M j, Y \a\t g:ia', strtotime($message->created_at)) }}</span>
                 </div>
               </div>
             </a>

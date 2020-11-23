@@ -28,8 +28,8 @@ class MessageController extends Controller
   public function message($id)
   {
     $data['user'] = $user = User::find($id);
-    $data['title'] = 'Message with' . $user->first_name . ' ' . $user->last_name;
-    $data['messages'] = Messages::where([['care_giver_id', Auth::user()->id], ['employer_id', $id]])->get();
+    $data['title'] = 'Message with ' . $user->first_name . ' ' . $user->last_name;
+    $data['messages'] = Messages::where([['care_giver_id', Auth::user()->id], ['employer_id', $id]])->with('employer:id,first_name,last_name,avatar,email,mobile,address')->with('care_giver:id,first_name,last_name,avatar,email,mobile,address')->get();
     return view('care_giver.message.message', $data);
   }
 

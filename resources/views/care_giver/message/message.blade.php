@@ -30,11 +30,11 @@
               <div class="mess__body">
                 <div class="mess__item">
                   <div class="avatar">
-                    <img src="{{ asset('web/images/small-team2.jpg') }}" alt="Michelle Moreno">
+                    <img src="{{ asset('uploads/profile_pictures/'.$message->employer->avatar) }}" alt="{{$message->employer->first_name}}">
                   </div>
                   <div class="content">
                     <p class="text">{{$message->message}}</p>
-                    <span class="time">8:19 AM</span>
+                    <span class="time">{{ date('D, M j, Y \a\t g:ia', strtotime($message->created_at)) }}</span>
                   </div>
                 </div><!-- mess__item -->
               </div><!-- mess__body -->
@@ -45,10 +45,10 @@
                 <div class="mess__item">
                   <div class="content">
                     <p class="text">{{$message->message}}</p>
-                    <span class="time">12:4 PM <i class="fa fa-check"></i></span>
+                    <span class="time">{{ date('D, M j, Y \a\t g:ia', strtotime($message->created_at)) }}<i class="fa fa-check"></i></span>
                   </div>
                   <div class="avatar">
-                    <img src="{{ asset('web/images/small-team1.jpg') }}" alt="Michelle Moreno">
+                    <img src="{{ asset('uploads/profile_pictures/'.Auth::user()->avatar) }}" alt="{{Auth::user()->first_name}}">
                   </div>
                 </div><!-- mess__item -->
               </div><!-- mess__body -->
