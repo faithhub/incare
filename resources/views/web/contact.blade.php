@@ -90,73 +90,109 @@
                     </div><!-- billing-title-wrap -->
                     <div class="billing-content">
                         <div class="contact-form-action">
-                            <form method="post">
+                            <form method="post" action="{{ url('contact') }}">
+                                @csrf
                                 <div class="input-box">
                                     <label class="label-text">Name</label>
                                     <div class="form-group">
                                         <span class="la la-user form-icon"></span>
-                                        <input class="form-control" type="text" name="text" placeholder="Name">
+                                        <input class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" type="text" name="name" placeholder="Name">
+                                        @error('name')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div><!-- end input-box -->
                                 <div class="input-box">
                                     <label class="label-text">Email</label>
                                     <div class="form-group">
                                         <span class="la la-envelope-o form-icon"></span>
-                                        <input class="form-control" type="email" name="text" placeholder="Email address">
+                                        <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email address">
+                                        @error('email')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div><!-- end input-box -->
                                 <div class="input-box">
                                     <label class="label-text">Phone</label>
                                     <div class="form-group">
                                         <span class="la la-phone form-icon"></span>
-                                        <input class="form-control" type="text" name="text" placeholder="Phone number">
+                                        <input class="form-control @error('mobile') is-invalid @enderror" type="text" name="mobile" placeholder="Phone number">
+                                        @error('mobile')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div><!-- end input-box -->
                                  <div class="input-box">
                                     <label class="label-text">Reason for contact</label>
                                     <div class="form-group">
-                                        <select class="reason-option-field select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="reason-option-field select2-hidden-accessible @error('reason') is-invalid @enderror" data-select2-id="1" tabindex="-1" name="reason" aria-hidden="true">
                                             <option value="" data-select2-id="3">Reason for contact</option>
-                                            <option value="0">Accessing My Account</option>
-                                            <option value="1">Account Settings</option>
-                                            <option value="2">Question About a Job</option>
-                                            <option value="3">Other</option>
-                                            <option value="4">Technical Issue</option>
-                                            <option value="5">Delete Account</option>
-                                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 185.2px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-zej3-container"><span class="select2-selection__rendered" id="select2-zej3-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Reason for contact</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            <option value="Accessing My Account">Accessing My Account</option>
+                                            <option value="Account Settings">Account Settings</option>
+                                            <option value="Question About a Job">Question About a Job</option>
+                                            <option value="Other">Other</option>
+                                            <option value="Technical Issue">Technical Issue</option>
+                                            <option value="Delete Account">Delete Account</option>
+                                        </select>
+                                        @error('reason')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div><!-- end input-box -->
                                 <div class="input-box">
                                     <label class="label-text">What is 7 + 5? Spam Protection</label>
                                     <div class="form-group">
                                         <span class="la la-sync form-icon"></span>
-                                        <input class="form-control" type="text" name="text" placeholder="I'm not a robot">
+                                        <input class="form-control @error('bot') is-invalid @enderror" type="text" name="bot" placeholder="I'm not a robot">
+                                        @error('bot')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div><!-- end input-box -->
                                 <div class="input-box">
                                     <label class="label-text">Preferred method of communication</label>
                                     <div class="form-group">
-                                        <div class="radio-option d-inline-block mr-4">
+                                        <div class="radio-option d-inline-block mr-4 @error('communicate') is-invalid @enderror">
                                             <label for="radio-6" class="radio-trigger font-weight-medium">
-                                                <input type="radio" id="radio-6" name="radio" checked="">
+                                                <input type="radio" id="radio-6" value="Email" name="communicate" checked="">
                                                 <span class="checkmark"></span>
                                                 <span class="color-text-3">Email</span>
                                             </label>
                                         </div>
-                                        <div class="radio-option d-inline-block">
+                                        <div class="radio-option d-inline-block @error('communicate') is-invalid @enderror">
                                             <label for="radio-7" class="radio-trigger font-weight-medium">
-                                                <input type="radio" id="radio-7" name="radio">
+                                                <input type="radio" id="radio-7" value="Phone" name="communicate">
                                                 <span class="checkmark"></span>
                                                 <span class="color-text-3">Phone</span>
                                             </label>
                                         </div>
                                     </div>
+                                    @error('communicate')
+                                        <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div><!-- end input-box -->
                                 <div class="input-box">
                                     <label class="label-text">Additional information</label>
                                     <div class="form-group">
                                         <span class="la la-pencil form-icon"></span>
-                                        <textarea class="message-control form-control" name="message" placeholder="Write message"></textarea>
+                                        <textarea class="message-control form-control @error('message') is-invalid @enderror" name="message" placeholder="Write message"></textarea>
+                                        @error('message')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="btn-box">

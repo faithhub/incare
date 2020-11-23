@@ -54,7 +54,7 @@ class JobController extends Controller
                 return redirect('admin/all-job');
             }
         } else {
-            return redirect('employer/manage-jobs');
+            return redirect('admin/all-job');
         }
     }
 

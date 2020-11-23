@@ -37,7 +37,7 @@
                                     <a href="{{ url('register') }}">Sign up</a>
                                 </li>
                                 <li>
-                                     <a href="employer-dashboard-post-job.html" class="theme-btn">
+                                     <a href="{{ url('employer/post-new-job') }}" class="theme-btn">
                                         <span class="la la-plus"></span>
                                         Post a Job
                                     </a>

@@ -136,6 +136,8 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </section>
+
+
 <section class="cta-area padding-top-100px padding-bottom-80px cta-area-2 text-center">
     <div class="container">
         <div class="row">
@@ -149,42 +151,42 @@
             <div class="col-lg-4 column-td-6">
                 <div class="post-card section-bg pb-5 pr-4 pl-4 pt-4">
                     <div class="post-card-content">
-                        <img src="images/search.svg" alt="" class="img-fluid">
+                        <img src="{{ asset('web/images/search.svg') }}" alt="" class="img-fluid">
                         <h2 class="widget-title mt-3">Are You Looking for a Job?</h2>
                         <p>
                             Objectively innovate empowered manufactured products whereas parallel platforms.
                         </p>
                     </div><!-- end post-card-content -->
                     <div class="btn-box mt-4 text-center">
-                        <a href="job-listing.html" class="theme-btn">Find a Job</a>
+                        <a href="{{ url('register') }}" class="theme-btn">Find a Job</a>
                     </div><!-- end btn-box -->
                 </div>
             </div><!-- end col-lg-4 -->
             <div class="col-lg-4 column-td-6">
                 <div class="post-card section-bg pb-5 pr-4 pl-4 pt-4">
                     <div class="post-card-content">
-                        <img src="images/podcast.svg" alt="" class="img-fluid">
+                        <img src="{{ asset('web/images/podcast.svg') }}" alt="" class="img-fluid">
                         <h2 class="widget-title mt-3">Employers Looking to Post a Job?</h2>
                         <p>
                             Objectively innovate empowered manufactured products whereas parallel platforms.
                         </p>
                     </div><!-- end post-card-content -->
                     <div class="btn-box mt-4 text-center">
-                        <a href="employer-dashboard-post-job.html" class="theme-btn">Post a Job</a>
+                        <a href="{{ url('register') }}" class="theme-btn">Post a Job</a>
                     </div><!-- end btn-box -->
                 </div>
             </div><!-- end col-lg-4 -->
             <div class="col-lg-4 column-td-6">
                 <div class="post-card section-bg pb-5 pr-4 pl-4 pt-4">
                     <div class="post-card-content">
-                        <img src="images/data-points.svg" alt="" class="img-fluid">
+                        <img src="{{ asset('web/images/data-points.svg') }}" alt="" class="img-fluid">
                         <h2 class="widget-title mt-3">Job Market Data</h2>
                         <p>
                             Objectively innovate empowered manufactured products whereas parallel platforms.
                         </p>
                     </div><!-- end post-card-content -->
                     <div class="btn-box mt-4 text-center">
-                        <a href="employer-dashboard-post-job.html" class="theme-btn">Get Data</a>
+                        <a href="{{ url('register') }}" class="theme-btn">Get Data</a>
                     </div><!-- end btn-box -->
                 </div>
             </div><!-- end col-lg-4 -->

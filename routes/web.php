@@ -27,8 +27,11 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about']);
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact']);
+Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contact_form']);
 Route::get('/courses', [App\Http\Controllers\HomeController::class, 'courses']);
 Route::get('/jobs', [App\Http\Controllers\HomeController::class, 'jobs']);
+Route::get('/job-details/{id}', [App\Http\Controllers\HomeController::class, 'job_details']);
+Route::match(['get', 'post'], '/search-job', [App\Http\Controllers\HomeController::class, 'search_job']);
 
 //employers
 Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], function () {
