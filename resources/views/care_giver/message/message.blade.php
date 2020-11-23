@@ -1,5 +1,5 @@
-@extends('employer.layouts.app')
-@section('user')
+@extends('care_giver.layouts.app')
+@section('care_giver')
 <div class="row">
   <div class="col">
     <div class="dashboard-message-wrapper d-flex">
@@ -25,7 +25,7 @@
               <span>Today</span>
             </div>
             @foreach($messages as $message)
-            @if($message->employer_id == '$user->id')
+            @if($message->care_giver_id == '$care_giver->id')
             <div class="conversation-item msg-reply">
               <div class="mess__body">
                 <div class="mess__item">
@@ -72,11 +72,11 @@
         </div><!-- conversation-wrap -->
         <div class="message-reply-input">
           <div class="contact-form-action">
-            <form method="post" action="{{url('employer/message')}}">
+            <form method="post" action="{{url('care-giver/message')}}">
               @csrf
               <div class="input-box d-flex align-items-center">
                 <div class="form-group flex-grow-1 mb-0">
-                  <input type="text" name="care_giver_id" value="{{$user->id}}" hidden />
+                  <input type="text" name="employer_id" value="{{$user->id}}" hidden />
                   <textarea class="message-control form-control mr-2" name="message" placeholder="Type a message" data-emojiable="true"></textarea>
                   <button type="submit" class="theme-btn submit-btn border-0">
                     <span class="la la-paper-plane"></span>

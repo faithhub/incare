@@ -57,8 +57,6 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
 //Care Giver
 Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']], function () {
   Route::get('/', [App\Http\Controllers\CareGiver\DashboardController::class, 'index'])->name('care-giver');
-  Route::get('/messages', [App\Http\Controllers\CareGiver\MessageController::class, 'index']);
-  Route::get('/message/{id}', [App\Http\Controllers\CareGiver\MessageController::class, 'message']);
   Route::get('/transactions', [App\Http\Controllers\CareGiver\TransactionController::class, 'index']);
   Route::get('/new-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'new_job']);
   Route::get('/plans', [App\Http\Controllers\CareGiver\PlanController::class, 'index']);
@@ -72,6 +70,9 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::post('/apply-job', [App\Http\Controllers\CareGiver\JobsController::class, 'apply_job']);
   Route::post('/delete-job', [App\Http\Controllers\CareGiver\JobsController::class, 'delete_job']);
   Route::post('/make-payment', [App\Http\Controllers\CareGiver\PlanController::class, 'payment']);
+  Route::get('/messages', [App\Http\Controllers\CareGiver\MessageController::class, 'index']);
+  Route::get('/message/{id}', [App\Http\Controllers\CareGiver\MessageController::class, 'message']);
+  Route::post('/message', [App\Http\Controllers\CareGiver\MessageController::class, 'sendMessage']);
 });
 
 //Admin

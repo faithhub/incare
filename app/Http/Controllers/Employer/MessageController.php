@@ -20,7 +20,6 @@ class MessageController extends Controller
   public function index()
   {
     $data['title'] = 'Messages';
-    $data['messages'] = Messages::where('employer_id', Auth::user()->id)->get();
     return view('employer.message.index', $data);
   }
 
@@ -28,6 +27,7 @@ class MessageController extends Controller
   {
     $data['user'] = $user = User::find($id);
     $data['title'] = 'Message with' . $user->first_name . ' ' . $user->last_name;
+    $data['messages'] = Messages::where([['employer_id', Auth::user()->id], ['care_giver_id', $id]])->get();
     return view('employer.message.message', $data);
   }
 
