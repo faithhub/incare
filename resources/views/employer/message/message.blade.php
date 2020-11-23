@@ -34,7 +34,7 @@
                   </div>
                   <div class="content">
                     <p class="text">{{$message->message}}</p>
-                    <span class="time">{{ date('D, M j, Y \a\t g:ia', strtotime($message->created_at)) }}</span>
+                    <span class="time">{{ $message->created_at->diffForHumans() }}</span>
                   </div>
                 </div><!-- mess__item -->
               </div><!-- mess__body -->
@@ -45,10 +45,10 @@
                 <div class="mess__item">
                   <div class="content">
                     <p class="text">{{$message->message}}</p>
-                    <span class="time">{{ date('D, M j, Y \a\t g:ia', strtotime($message->created_at)) }}<i class="fa fa-check"></i></span>
+                    <span class="time">{{$message->created_at->diffForHumans()}}<i class="fa fa-check"></i></span>
                   </div>
                   <div class="avatar">
-                    <img src="{{ asset('uploads/profile_pictures/'.Auth::user()->avatar) }}" alt="Michelle Moreno">
+                    <img src="{{ asset('uploads/profile_pictures/'.Auth::user()->avatar) }}" alt="{{Auth::user()->first_name}}">
                   </div>
                 </div><!-- mess__item -->
               </div><!-- mess__body -->

@@ -17,15 +17,16 @@
         <div class="message-inbox-item">
           <div class="mess__body">
             @foreach($messages as $message)
-            <a href="{{ url('care-giver/message', $message->employer_id) }}" class=" d-block message-inbox">
+            {{-- {{$message[0]['employer']['id']}} --}}
+            <a href="{{ url('care-giver/message', $message[0]['employer']['id']) }}" class=" d-block message-inbox">
               <div class="mess__item">
-                <div class="avatar dot-status">
-                  <img src="{{ asset('web/images/small-team1.jpg') }}" alt="Michelle Moreno">
+                <div class="avatar">
+                  <img src="{{ asset('uploads/profile_pictures/'.$message[0]['employer']['avatar']) }}" alt="{{$message[0]['employer']['first_name']}}">
                 </div>
                 <div class="content">
-                  <h4 class="widget-title">Harvey Specter</h4>
-                  <p class="text">{{$message->message}}</p>
-                  <span class="time color-text-3 font-size-12">{{ date('D, M j, Y \a\t g:ia', strtotime($message->created_at)) }}</span>
+                  <h4 class="widget-title">{{$message[0]['employer']['first_name']}} {{$message[0]['employer']['last_name']}}</h4>
+                  <p class="text">{{$message[count($message)-1]['message']}}</p>
+                  <span class="time color-text-3 font-size-12">{{ $message[0]['created_at']->diffForHumans() }}</span>
                 </div>
               </div>
             </a>
