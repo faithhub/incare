@@ -21,7 +21,7 @@
             <a href="{{ url('care-giver/message', $message[0]['employer']['id']) }}" class=" d-block message-inbox">
               <div class="mess__item">
                 <div class="avatar">
-                  <img src="{{ asset('uploads/profile_pictures/'.$message[0]['employer']['avatar']) }}" alt="{{$message[0]['employer']['first_name']}}">
+                  <img src="{{ $message[0]['employer']['avatar'] != null ? asset('uploads/profile_pictures/'.$message[0]['employer']['avatar']) : asset('web/images/avatar.png') }}" alt="{{$message[0]['employer']['first_name']}}">
                 </div>
                 <div class="content">
                   <h4 class="widget-title">{{$message[0]['employer']['first_name']}} {{$message[0]['employer']['last_name']}}</h4>
