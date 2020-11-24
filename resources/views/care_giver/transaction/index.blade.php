@@ -46,7 +46,7 @@
                                         </div><!-- end manage-candidate-wrap -->
                                     </td>
                                     <td class="font-weight-semi-bold">
-                                        #{{$transaction->amount}}
+                                        ₦{{$transaction->amount}}
                                     </td>
                                     <td>{{$transaction->plan->plan_type}}</td>
                                     <td class="text-center"><span class="badge badge-success p-1">{{$transaction->status}}</span></td>

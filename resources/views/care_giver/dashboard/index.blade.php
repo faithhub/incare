@@ -88,7 +88,7 @@
                                 <i class="la la-money"></i>
                             </div>
                             <div class="content">
-                                <p class="text">Paid <span class="color-text" style="font-weight: bolder">#{{$trans->amount}}</span> for <span class="color-text">{{$trans->plan->plan_name}}</span> On {{  date('D, M j, Y \a\t g:ia', strtotime($trans->created_at))}}, <br>with Reference Number <span class="time">{{$trans->reference}}</span></p>
+                                <p class="text">Paid <span class="color-text" style="font-weight: bolder">₦{{$trans->amount}}</span> for <span class="color-text">{{$trans->plan->plan_name}}</span> On {{  date('D, M j, Y \a\t g:ia', strtotime($trans->created_at))}}, <br>with Reference Number <span class="time">{{$trans->reference}}</span></p>
                             </div>
                         </div><!-- end mess__item -->
                     </a>                        

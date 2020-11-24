@@ -172,7 +172,7 @@
                                     <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
-                                    <th>Application</th>
+                                    {{-- <th>Application</th> --}}
                                     <th>Posted On</th>
                                     <th>Application Close On</th>
                                     <th>Action</th>
@@ -196,7 +196,7 @@
                                         </div><!-- end manage-candidate-wrap -->
                                     </td>
                                     <td><span class="badge badge-success p-1">Active</span></td>
-                                    <td>2 Application(s)</td>
+                                    {{-- <td>2 Application(s)</td> --}}
                                     <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                                     <td>

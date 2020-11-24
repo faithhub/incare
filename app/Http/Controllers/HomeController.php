@@ -64,7 +64,7 @@ class HomeController extends Controller
             return back()->withErrors($validator)->withInput();
         } else {                      
            try {
-                Mail::to('adebayooluwadara@gmail.com')->send(new MessageMail($request));
+                Mail::to(env('MAIL_FROM_ADDRESS'))->send(new MessageMail($request));
                 Session::flash('success', 'Message Sent Successfully');
                 return \back();
             } catch (\Throwable $th) {
