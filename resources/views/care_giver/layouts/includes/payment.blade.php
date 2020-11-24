@@ -1,7 +1,7 @@
 <script>
     function payWithPaystack(amount, id){
     var handler = PaystackPop.setup({
-    key: 'pk_test_93253e4094828ef15dfd864b9decb3dfceb75a8f',
+    key: '{{env('PAYSTACK_KEY')}}',
     email: "{{Auth::user()->email}}",
     amount: amount+'00',
     currency: "NGN",

@@ -11,7 +11,7 @@
             <p class="footer__desc line-height-30 mt-3">
               Collin Street West, Victor 6007, Australia. <br>
               +1 246-345-0695 <br>
-              info@Zobstar123.com
+              info@incare.com
             </p>
             <h4 class="footer__title mt-4">Connect with us</h4>
             <ul class="social-profile">
@@ -48,9 +48,9 @@
         <div class="footer-item">
           <h4 class="footer__title">General</h4>
           <ul class="list-items">
-            <li><a href="about.html">About / Press</a></li>
+            <li><a href="{{ url('anout') }}">About / Press</a></li>
             <li><a href="#">Awards</a></li>
-            <li><a href="blog-grid.html">Blog</a></li>
+            <li><a href="#">Blog</a></li>
             <li><a href="#">Research</a></li>
             <li><a href="#">Guidelines</a></li>
             <li><a href="#">Careers</a></li>

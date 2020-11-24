@@ -457,7 +457,7 @@
         </div><!-- end col-lg-12 -->
     </div><!-- end row -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj8O5LlBKBIof-MjY0TWRRwvRFgOnwwRU&callback=initAutocomplete&libraries=places&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_AUTOCOMPLETE_API_KEY')}}&callback=initAutocomplete&libraries=places&v=weekly"
       defer
     ></script>
     <script defer src="{{ asset('js/post_job.js') }}"></script>
