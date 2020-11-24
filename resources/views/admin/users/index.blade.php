@@ -39,7 +39,7 @@
                                         <td>
                                             <div class="bread-details d-flex">
                                                 <div class="bread-img flex-shrink-0">
-                                                    <a href="candidate-details.html" class="d-block">
+                                                    <a href="" class="d-block">
                                                         @if ($user->avatar != null)
                                                         <img src="{{ asset('uploads/profile_pictures/'.$user->avatar) }}" alt="">                                                            
                                                         @else
@@ -48,7 +48,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="manage-candidate-content">
-                                                    <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$user->first_name}} {{$user->last_name}}</a></h2>
+                                                    <h2 class="widget-title pb-2"><a href="" class="color-text-2">{{$user->first_name}} {{$user->last_name}}</a></h2>
                                                     <p class="font-size-15">
                                                         <span class="mr-2">{{$user->email}} </span>
                                                     </p>
@@ -56,13 +56,6 @@
                                                         <span class="mr-2"><i class="la la-map-marker mr-1"></i>{{$user->city}}, </span>
                                                         <span class="mr-2">{{$user->address}}</span>
                                                     </p>
-                                                    {{-- <p class="mt-2 font-size-15">
-                                                        @if ($user->type == 1)                                                        
-                                                        Total Job Posted:
-                                                        @elseif ($user->type == 2)
-                                                        Total Job Applied:
-                                                        @endif
-                                                    </p> --}}
                                                 </div><!-- end manage-candidate-content -->
                                             </div>
                                         </td>

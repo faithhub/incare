@@ -12,10 +12,7 @@
             <div class="side-menu-wrap">
                 <ul class="side-menu-ul">
                     <li class="{{ request()->is('employer')  ? 'page-active' : '' }}" ><a href="{{ url('employer') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
-                    <li class="{{ request()->is('employer/messages*')  ? 'page-active' : '' }}"><a href="{{ url('employer/messages') }}"><i class="la la-envelope icon-element"></i> Messages <span class="badge badge-info radius-rounded p-1">3</span></a></li>
-                    {{-- <li class="{{ request()->is('employer/transactions*')  ? 'page-active' : '' }}"><a href="{{ url('employer/transactions') }}"><i class="la la-bookmark icon-element"></i> Bookmarks</a></li> --}}
-                    {{-- <li class="{{ request()->is('employer/transactions*')  ? 'page-active' : '' }}"><a href="{{ url('employer/transactions') }}"><i class="la la-line-chart icon-element"></i>Transactions</a></li> --}}
-                    {{-- <li class="{{ request()->is('employer/applied-jobs*')  ? 'page-active' : '' }}"><a href="{{ url('employer/applied-jobs') }}"><i class="la la-bell-o icon-element"></i>Applied Jobs</a></li> --}}
+                    <li class="{{ request()->is('employer/messages*')  ? 'page-active' : '' }}"><a href="{{ url('employer/messages') }}"><i class="la la-envelope icon-element"></i> Messages </a></li>
                     <li class="{{ request()->is('employer/profile*') || request()->is('employer/change-password*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-gear icon-element"></i> Settings <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">

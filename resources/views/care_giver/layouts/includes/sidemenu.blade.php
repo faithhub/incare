@@ -12,7 +12,7 @@
             <div class="side-menu-wrap">
                 <ul class="side-menu-ul">
                     <li class="{{ request()->is('care-giver')  ? 'page-active' : '' }}" ><a href="{{ url('care-giver') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
-                    <li class="{{ request()->is('care-giver/messages*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/messages') }}"><i class="la la-envelope icon-element"></i> Messages <span class="badge badge-info radius-rounded p-1">3</span></a></li>
+                    <li class="{{ request()->is('care-giver/messages*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/messages') }}"><i class="la la-envelope icon-element"></i> Messages</a></li>
                     <li class="{{ request()->is('care-giver/plan*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/plans') }}"><i class="la la-bookmark icon-element"></i> Plans</a></li>
                     <li class="{{ request()->is('care-giver/transactions*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/transactions') }}"><i class="la la-line-chart icon-element"></i>Transactions</a></li>
                     <li class="{{ request()->is('care-giver/applied-jobs*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/applied-jobs') }}"><i class="la la-bell-o icon-element"></i>Applied Jobs</a></li>
