@@ -23,6 +23,7 @@ class CreateJobsTable extends Migration
             $table->string('amount');
             $table->string('date_end');
             $table->string('job_description');
+            $table->enum('status', ['Pending', 'Active', 'Blocked'])->default('Pending');
             $table->string('mobile');
             $table->string('city');
             $table->string('address');

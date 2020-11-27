@@ -58,7 +58,15 @@
                                     <td>#{{$job->amount}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
-                                    <td><span class="badge badge-success p-1">Active</span></td>
+                                    <td>
+                                        @if ($job->status == 'Active')
+                                        <span class="badge badge-success p-1">{{$job->status}}</span>
+                                        @elseif ($job->status == 'Blocked')
+                                        <span class="badge badge-danger p-1">{{$job->status}}</span> 
+                                        @else
+                                        <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <div class="manage-candidate-wrap">
                                             <div class="bread-action pt-0">

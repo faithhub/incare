@@ -88,6 +88,35 @@ class JobController extends Controller
         }
     }
 
+    public function update_job_status(Request $request)
+    {
+       //dd($request->all());
+        $rules = array(
+            'status' => ['required', 'max:255'],
+        );
+        $fieldNames = array(
+            'status' => 'Job Status',
+        );
+        // dd($request->all());
+        $validator = Validator::make($request->all(), $rules);
+        $validator->setAttributeNames($fieldNames);
+        if ($validator->fails()) {
+            Session::flash('warning', 'Please check the form again!');
+            return back()->withErrors($validator)->withInput();
+        } else {
+            try {
+                $job = Job::find($request->id);                
+                $job->status = $request->status;
+                $job->save();
+                $request->session()->flash('success', 'Job Status Updated Successfully');
+                return back();
+            } catch (\Throwable $th) {
+                $request->session()->flash('error', $th->getMessage());
+                return back();
+            }
+        }
+    }
+
     public function delete_cat(Request $request)
     {
         Category::find($request->id)->delete();

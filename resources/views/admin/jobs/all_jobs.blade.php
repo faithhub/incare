@@ -30,9 +30,10 @@
                                 <tr>
                                     <th>Employer Details</th>
                                     <th>Job Details</th>
-                                    <th>Amount/Hour</th>
-                                    <th>Create On</th>
-                                    <th>Application Close On</th>
+                                    {{-- <th>Amount</th> --}}
+                                    {{-- <th>Posted On</th>
+                                    <th>Close On</th> --}}
+                                    <th>Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -66,23 +67,69 @@
                                                 <h2 class="widget-title pb-2"><a class="color-text-2">{{$job->job_title}}</a></h2>
                                                 <p class="font-size-15">
                                                     <span class="mr-2"><i class="la la-meetup mr-1"></i>Category - {{$job->cat->name}}</span><br>
-                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span>
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span><br>
+                                                    <span class="mr-2"><i class="la la-money-bill mr-1"></i>Amount - ₦{{$job->amount}}</span><br>
+                                                    <span class="mr-2"><i class="la la-calendar-times mr-1"></i>Posted On - {{  date('D, M j, Y', strtotime($job->created_at))}}</span><br>
+                                                    <span class="mr-2"><i class="la la-calendar-times mr-1"></i>Application Closes On - {{  date('D, M j, Y', strtotime($job->date_end))}}</span>
                                                 </p>
                                             </div><!-- end manage-candidate-content -->
                                         </div>
                                     </td>
-                                    <td>₦{{$job->amount}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
+                                    {{-- <td>₦{{$job->amount}}</td> --}}
+                                    {{-- <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td> --}}
+                                    <th>
+                                        @if ($job->status == 'Active')
+                                        <span class="badge badge-success p-1">{{$job->status}}</span>
+                                        @elseif ($job->status == 'Blocked')
+                                        <span class="badge badge-danger p-1">{{$job->status}}</span> 
+                                        @else
+                                        <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
+                                        @endif
+
+                                    </th>
                                     <td class="text-center">
                                         <div class="manage-candidate-wrap">
                                             <div class="bread-action pt-0">
                                                 <ul class="info-list">
                                                     <li class="d-inline-block"><a href="{{ url('admin/view-job', $job->id) }}" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
+                                                    <li class="d-inline-block"><a href="#"><i class="la la-pencil" data-toggle="modal" data-target="#edit{{$job->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Remove" data-toggle="tooltip" data-placement="top" title="Edit Status"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </td>
+                                    
+                                    <!-- Modal Edit -->
+                                    <div class="modal fade" id="edit{{$job->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Update Job Status</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <form method="POST" action="{{ url('admin/job-status-update') }}">
+                                                @csrf                                                    
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="id" value="{{ $job->id }}">
+                                                    <!-- Default unchecked -->
+                                                    <input type="radio" class="" name="status" value="Active" {{$job->status == 'Active' ? 'checked' : '' }}>
+                                                    <label class="radio-option">Active</label><br>
+                                                    <input type="radio" class="" name="status" value="Pending" {{$job->status == 'Pending' ? 'checked' : '' }}>
+                                                    <label class="radio-option">Pending</label><br>
+                                                    <input type="radio" class="" name="status" value="Blocked" {{$job->status == 'Blocked' ? 'checked' : '' }}>
+                                                    <label class="radio-option">Blocked</label>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
                                 </tr>
                             @endforeach
                             </tbody>

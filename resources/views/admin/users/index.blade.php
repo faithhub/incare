@@ -50,7 +50,10 @@
                                                 <div class="manage-candidate-content">
                                                     <h2 class="widget-title pb-2"><a href="" class="color-text-2">{{$user->first_name}} {{$user->last_name}}</a></h2>
                                                     <p class="font-size-15">
-                                                        <span class="mr-2">{{$user->email}} </span>
+                                                        <span class="mr-2"><i class="la la-mail-bulk mr-1"> {{$user->email}} </i></span>
+                                                    </p>
+                                                    <p class="font-size-15">
+                                                        <span class="mr-2"><i class="la la-phone mr-1"> {{$user->mobile}}</i></span>
                                                     </p>
                                                     <p class="mt-2 font-size-15">
                                                         <span class="mr-2"><i class="la la-map-marker mr-1"></i>{{$user->city}}, </span>

@@ -90,6 +90,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::get('/transactions', [App\Http\Controllers\Admin\TransactionController::class, 'index']);
   Route::get('/job-alert', [App\Http\Controllers\Admin\JobController::class, 'job_alert']);
   Route::get('/all-job', [App\Http\Controllers\Admin\JobController::class, 'all_job']);
+  Route::post('/job-status-update', [App\Http\Controllers\Admin\JobController::class, 'update_job_status']);
   Route::post('/delete-job-sub', [App\Http\Controllers\Admin\JobController::class, 'delete_sub']);
   Route::post('/delete-job-cat', [App\Http\Controllers\Admin\JobController::class, 'delete_cat']);
   Route::match(['get', 'post'], '/job-categories', [App\Http\Controllers\Admin\JobController::class, 'category']);

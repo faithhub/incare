@@ -29,7 +29,7 @@ class JobsController extends Controller
     $data['title'] = 'New Jobs';
     $data['categories'] = Category::all();
     $data['sub_categories'] = SubCategory::all();
-    $data['jobs'] = $jobs = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
+    $data['jobs'] = $jobs = Job::where('status', 'Active')->with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
     return view('care_giver.jobs.new_job', $data);
   }
 
@@ -125,7 +125,7 @@ class JobsController extends Controller
   public function view_job($id)
   {
     if ($id) {
-      $data['job'] = $job = Job::where(['id' => $id])->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
+      $data['job'] = $job = Job::where(['id' => $id])->where('status', 'Active')->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
       $data['check'] = $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->count();
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
@@ -170,7 +170,7 @@ class JobsController extends Controller
           return back()->withErrors($validator)->withInput();
         }
         try {
-          $data['results'] = $job = Job::where('job_title', 'LIKE', "%$request->job_title%")->where('job_category', 'LIKE', "%$request->category%")->where('job_sub_category', 'LIKE', "%$request->sub_category%")->where('address', 'LIKE', "%$request->address%")->with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
+          $data['results'] = $job = Job::where('job_title', 'LIKE', "%$request->job_title%")->where('job_category', 'LIKE', "%$request->category%")->where('job_sub_category', 'LIKE', "%$request->sub_category%")->where('address', 'LIKE', "%$request->address%")->where('status', 'Active')->with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
           // dd($job);
           $data['mode'] = 'Search';
           // Session::flash('success', 'Job Updated Successfully');

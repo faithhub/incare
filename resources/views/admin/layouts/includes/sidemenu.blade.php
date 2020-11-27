@@ -12,7 +12,7 @@
             <div class="side-menu-wrap">
                 <ul class="side-menu-ul">
                     <li class="{{ request()->is('admin')  ? 'page-active' : '' }}" ><a href="{{ url('admin') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
-                    <li class="{{ request()->is('admin/users*')  ? 'page-active' : '' }}"><a href="{{ url('admin/users') }}"><i class="la la-user icon-element"></i> Users <span class="badge badge-info radius-rounded p-1">3</span></a></li>
+                    <li class="{{ request()->is('admin/users*')  ? 'page-active' : '' }}"><a href="{{ url('admin/users') }}"><i class="la la-user icon-element"></i> Users <span class="badge badge-info radius-rounded p-1"></span></a></li>
                     <li class="{{ request()->is('admin/plans*') || request()->is('admin/new-plan*') || request()->is('admin/edit-plan*')  ? 'page-active' : '' }}"><a href="{{ url('admin/plans') }}"><i class="la la-file-text-o icon-element"></i> Plans</a></li>
                     <li class="{{ request()->is('admin/transactions*')  ? 'page-active' : '' }}"><a href="{{ url('admin/transactions') }}"><i class="la la-line-chart icon-element"></i> Transactions</a></li>
 

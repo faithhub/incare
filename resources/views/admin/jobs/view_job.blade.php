@@ -83,6 +83,9 @@
                       <div class="info-list static-info">
                         <ul>
                           <li class="mb-3 d-flex align-items-center">
+                            <p><i class="la la-dashboard"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span> {{$job[0]['status']}}</p>
+                          </li>
+                          <li class="mb-3 d-flex align-items-center">
                             <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
@@ -117,6 +120,12 @@
               </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
           </div>
+          
+        @if (!empty($applies))
+          <div class="text-center mb-3">
+            <h2>No Application made  for this Job yet</h2>
+          </div>                    
+        @else 
           <div class="table-responsive">
             <table class="table" id="myTable" width="100%">
               <thead>
@@ -126,7 +135,7 @@
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody>                 
                 @foreach ($applies as $apply)
                 <tr>
                   <td>
@@ -156,10 +165,11 @@
                   <span class="badge badge-warning p-1">{{$apply->status}}</span></td>
                   @endif
                 </tr>
-                @endforeach
+                @endforeach  
               </tbody>
             </table>
-          </div>
+          </div>                            
+        @endif
         </div>
       </div><!-- end billing-content -->
     </div><!-- end billing-form-item -->
