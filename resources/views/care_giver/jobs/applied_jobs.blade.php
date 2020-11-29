@@ -56,12 +56,16 @@
                                     <td>
                                         @if ($job->status == 'Approved')
                                             <span class="badge badge-success p-1">{{$job->status}}</span>                                            
+                                        @elseif ($job->status == 'Denied')
+                                        <span class="badge badge-danger p-1">{{$job->status}}</span>
                                         @else
                                         <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
                                         @endif
                                     </td>
                                     <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->job->created_at))}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-success">Start</button>
+                                        {{  date('D, M j, Y', strtotime($job->job->created_at))}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->job->date_end))}}</td>
                                     
                                     <td class="text-center">
@@ -69,6 +73,7 @@
                                             <div class="bread-action pt-0">
                                                 <ul class="info-list">
                                                     <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
+                                                    <li class="d-inline-block"><a href="{{ url('care-giver/view-job', $job->job->id) }}"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>

@@ -132,7 +132,7 @@ class JobsController extends Controller
         return view('care_giver.jobs.view_job', $data);
       } else {
         Session::flash('error', 'No record found for Job');
-        return redirect('care_giver/new-jobs');
+        return redirect('care-giver/new-jobs');
       }
     } else {
       return redirect('care_giver/new-jobs');

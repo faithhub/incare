@@ -97,6 +97,7 @@
                                         <div class="billing-content">
                                             <div class="info-list static-info">
                                                 <ul>
+                                                    <li class="mb-3 d-flex align-items-center"><p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span> {{$job[0]['status']}}</p></li>
                                                     <li class="mb-3 d-flex align-items-center"><p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p></li>
                                                     <li class="mb-3 d-flex align-items-center"><p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Category:</span> {{$job[0]['cat']['name']}}</p></li>
                                                     <li class="mb-3 d-flex align-items-center"><p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Sub Category:</span> {{$job[0]['sub']['name']}}</p></li>
