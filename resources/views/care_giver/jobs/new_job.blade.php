@@ -173,8 +173,7 @@
                                     <th>Job Title</th>
                                     <th>Status</th>
                                     {{-- <th>Application</th> --}}
-                                    <th>Posted On</th>
-                                    <th>Application Close On</th>
+                                    <th>Amount / Hour</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -182,7 +181,7 @@
                             @foreach ($jobs as $job)                            
                                 <tr>
                                     <td>                                        
-                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 150px; height: auto;">
+                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 200px; height: 150px;">
                                     </td>
                                     <td>
                                         <div class="manage-candidate-wrap">
@@ -193,12 +192,25 @@
                                             <p>
                                                 <span>Sub Category: <b style="color: black">{{$job->sub->name}}</b></span>
                                             </p>
+                                            <p>
+                                                <span>Posted On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->created_at))}}</b></span>
+                                            </p>
+                                            <p>
+                                                <span>Closes On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->date_end))}}</b></span>
+                                            </p>
                                         </div><!-- end manage-candidate-wrap -->
                                     </td>
-                                    <td><span class="badge badge-success p-1">Active</span></td>
+                                    <td>
+                                        @if ($job->status == 'Active')
+                                            <span class="badge badge-success p-1">{{$job->status}}</span>                                            
+                                        @elseif ($job->status == 'Blocked')
+                                        <span class="badge badge-danger p-1">{{$job->status}}</span>
+                                        @else
+                                        <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
+                                        @endif
+                                    </td>
                                     {{-- <td>2 Application(s)</td> --}}
-                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
+                                    <td>₦{{$job->amount}}</td>
                                     <td>
                                         <a href="{{ url('care-giver/view-job', $job->id) }}" class="btn theme-btn">View</a>
                                     </td>

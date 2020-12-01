@@ -20,7 +20,7 @@ class MessageController extends Controller
 
   public function index()
   {
-    $data['title'] = 'My Messages';    
+    $data['title'] = 'My Messages';
     $m = Messages::where('care_giver_id', Auth::user()->id)->get();
     $data['messages'] = $post = Messages::where('care_giver_id', Auth::user()->id)->orderBy('created_at')->with('employer:id,first_name,last_name,avatar,email,mobile,address')->get()->groupBy('employer_id');
     //dd($post);

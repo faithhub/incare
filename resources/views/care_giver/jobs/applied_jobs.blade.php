@@ -30,9 +30,9 @@
                                     <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
-                                    <th>Applied On</th>
+                                    {{-- <th>Applied On</th>
                                     <th>Posted On</th>
-                                    <th>Application Close On</th>
+                                    <th>Application Close On</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,17 +40,20 @@
                             @foreach ($jobs as $job)                            
                                 <tr>
                                     <td>      
-                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->job->avatar) }}" style="width: 150px; height: auto;">
+                                        <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->job->avatar) }}" style="width: 200px; height: 150px;">
                                     </td>
-                                    <td>
+                                    <td>                                        
                                         <div class="manage-candidate-wrap">
                                             <h2 class="widget-title pb-1" style="font-size: 28px"><a href="job-details.html" class="color-text-2">{{$job->job->job_title}}</a></h2>
-                                            {{-- <p>
-                                                <span>Category: <b style="color: black">{{$job->name}}</b></span>
+                                            <p>
+                                                <span>Posted On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->created_at))}}</b></span>
                                             </p>
                                             <p>
-                                                <span>Sub Category: <b style="color: black">{{$job->name}}</b></span>
-                                            </p> --}}
+                                                <span>Closes On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->job->date_end))}}</b></span>
+                                            </p>
+                                            <p>
+                                                <span>Applied On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->job->created_at))}}</b></span>
+                                            </p>
                                         </div><!-- end manage-candidate-wrap -->
                                     </td>
                                     <td>
@@ -62,11 +65,9 @@
                                         <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
                                         @endif
                                     </td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-success">Start</button>
-                                        {{  date('D, M j, Y', strtotime($job->job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->job->date_end))}}</td>
+                                    {{-- <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->job->created_at))}}</td>
+                                    <td>{{  date('D, M j, Y', strtotime($job->job->date_end))}}</td> --}}
                                     
                                     <td class="text-center">
                                         <div class="manage-candidate-wrap">

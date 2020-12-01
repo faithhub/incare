@@ -97,7 +97,18 @@
                                         <div class="billing-content">
                                             <div class="info-list static-info">
                                                 <ul>
-                                                    <li class="mb-3 d-flex align-items-center"><p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span> {{$job[0]['status']}}</p></li>
+                                                    @if (isset($job_apply))
+                                                        <li class="mb-3 d-flex align-items-center"><p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span>
+                                                                @if ($job_apply[0]['status'] == 'Approved')
+                                                                <span class="badge badge-success p-1">{{$job_apply[0]['status']}}</span>                                            
+                                                                @elseif ($job_apply[0]['status'] == 'Denied')
+                                                                <span class="badge badge-danger p-1">{{$job_apply[0]['status']}}</span>
+                                                                @else
+                                                                <span class="badge badge-warning p-1">{{$job_apply[0]['status']}}</span>                                            
+                                                                @endif
+                                                            </p>
+                                                        </li>
+                                                    @endif
                                                     <li class="mb-3 d-flex align-items-center"><p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p></li>
                                                     <li class="mb-3 d-flex align-items-center"><p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Category:</span> {{$job[0]['cat']['name']}}</p></li>
                                                     <li class="mb-3 d-flex align-items-center"><p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Sub Category:</span> {{$job[0]['sub']['name']}}</p></li>
