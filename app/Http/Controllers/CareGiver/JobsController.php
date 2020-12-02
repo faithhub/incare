@@ -184,29 +184,36 @@ class JobsController extends Controller
     }
   }
 
-    public function applied_job()
-    {
-        $data['title'] = 'Applied Jobs';
-        $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->with('job:id,avatar,job_title,created_at,date_end')->get();
-        //dd($j);
-        return view('care_giver.jobs.applied_jobs', $data);
-    }
+  public function applied_job()
+  {
+    $data['title'] = 'Applied Jobs';
+    $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->with('job:id,avatar,job_title,created_at,date_end')->get();
+    //dd($j);
+    return view('care_giver.jobs.applied_jobs', $data);
+  }
 
-    public function delete_job(Request $request)
-    {
-        try {
-            JobApply::find($request->id)->delete();
-            $request->session()->flash('success', 'Deleted Successfully');
-            return back();
-        } catch (\Throwable $th) {
-            $request->session()->flash('error', $th->getMessage());
-            return back();
-        }
+  public function delete_job(Request $request)
+  {
+    try {
+      JobApply::find($request->id)->delete();
+      $request->session()->flash('success', 'Deleted Successfully');
+      return back();
+    } catch (\Throwable $th) {
+      $request->session()->flash('error', $th->getMessage());
+      return back();
     }
-//   public function applied_job()
-//   {
-//     $data['title'] = 'Applied Jobs';
-//     $data['jobs'] = JobApply::Where('care_giver_id', Auth::user()->id)->get();
-//     return view('care_giver.jobs.applied_jobs', $data);
-//   }
+  }
+  //   public function applied_job()
+  //   {
+  //     $data['title'] = 'Applied Jobs';
+  //     $data['jobs'] = JobApply::Where('care_giver_id', Auth::user()->id)->get();
+  //     return view('care_giver.jobs.applied_jobs', $data);
+  //   }
+  public function approved_jobs()
+  {
+    $data['title'] = 'Approved Jobs';
+    $data['jobs'] = $j = JobApply::where([['care_giver_id', Auth::user()->id], ['status', 'approved']])->with('job:id,avatar,job_title,created_at,date_end')->get();
+    //dd($j);
+    return view('care_giver.jobs.approved_jobs', $data);
+  }
 }

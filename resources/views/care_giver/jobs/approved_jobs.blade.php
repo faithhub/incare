@@ -4,12 +4,12 @@
   <div class="col-lg-12">
     <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
       <div class="section-heading">
-        <h2 class="sec__title">Applied Job</h2>
+        <h2 class="sec__title">Approved Job</h2>
       </div><!-- end section-heading -->
       <ul class="list-items d-flex align-items-center">
         <li class="active__list-item"><a href="index.html">Home</a></li>
         <li class="active__list-item"><a href="index.html">Dashboard</a></li>
-        <li>Applied Job</li>
+        <li>Approved Job</li>
       </ul>
     </div><!-- end breadcrumb-content -->
   </div><!-- end col-lg-12 -->
@@ -18,7 +18,7 @@
   <div class="col-lg-12">
     <div class="billing-form-item">
       <div class="billing-title-wrap">
-        <h3 class="widget-title pb-0">Applied Job</h3>
+        <h3 class="widget-title pb-0">Approved Job</h3>
         <div class="title-shape margin-top-10px"></div>
       </div><!-- billing-title-wrap -->
       <div class="billing-content pb-0">
