@@ -14,8 +14,8 @@
         <li class="{{ request()->is('care-giver/messages*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/messages') }}"><i class="la la-envelope icon-element"></i> Messages</a></li>
         <li class="{{ request()->is('care-giver/plan*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/plans') }}"><i class="la la-bookmark icon-element"></i> Plans</a></li>
         <li class="{{ request()->is('care-giver/transactions*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/transactions') }}"><i class="la la-line-chart icon-element"></i>Transactions</a></li>
-        {{-- <li class="{{ request()->is('care-giver/applied-jobs*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/applied-jobs') }}"><i class="la la-bell-o icon-element"></i>Applied Jobs</a></li>
-        <li class="{{ request()->is('care-giver/new-jobs*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/new-jobs') }}"><i class="la la-bell-o icon-element"></i>New Jobs</a></li> --}}
+        <li class="{{ request()->is('care-giver/withdrawals*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/withdrawals') }}"><i class="la la-money-bill icon-element"></i>Withdraw</a></li>
+        {{-- <li class="{{ request()->is('care-giver/new-jobs*')  ? 'page-active' : '' }}"><a href="{{ url('care-giver/new-jobs') }}"><i class="la la-bell-o icon-element"></i>New Jobs</a></li> --}}
         <li class="{{ request()->is('care-giver/applied-jobs*') || request()->is('care-giver/new-jobs*')  ? 'page-active' : '' }}">
           <a href="#"><i class="la la-bell-o icon-element"></i> Jobs <span class="la la-caret-down btn-toggle"></span></a>
           <ul class="dropdown-menu-item">

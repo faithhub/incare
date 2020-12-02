@@ -83,6 +83,7 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::post('/end-job', [App\Http\Controllers\CareGiver\JobsController::class, 'end_job']);
   Route::post('/delete-work-done', [App\Http\Controllers\CareGiver\JobsController::class, 'delete_work_done']);
   Route::post('/deliver-work', [App\Http\Controllers\CareGiver\JobsController::class, 'deliver_work']);
+  Route::get('/withdrawals', [App\Http\Controllers\CareGiver\Withdrawal::class, 'index']);
 });
 
 //Admin
