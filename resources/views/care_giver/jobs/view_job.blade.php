@@ -24,155 +24,147 @@
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
                 <div class="manage-job-wrap">
-                    <h3 class="widget-title font-size-30 text-black pb-1 mb-2">Start Work Now</h3>
-                    <div class="text-right">
-                        
-                        <div class="bread-action">
-                            <ul class="info-list">
-                                <li class="d-inline-block mb-0">
-                                    @if ($job[0]['status'] == 'Delivered')
-                                        <button disabled style="cursor: no-drop" class="btn btn-success mb-2">Start Work</button>                                        
-                                    @else                                        
-                                        <form method="POST" action="{{ url('care-giver/start-job') }}">
-                                            @csrf
-                                            <input type="hidden" name="employer_id" value="{{ $job[0]['employer_id'] }}">
-                                            <input type="hidden" name="job_id" value="{{ $job[0]['id'] }}">
-                                            <input type="hidden" name="amount" value="{{ $job[0]['amount'] }}">
-                                            <button type="submit" class="btn btn-success mb-2">Start Work</button>
-                                        </form>
-                                    @endif
-                                </li>
-                                <li class="d-inline-block mb-0">
-                                    @if ($job[0]['status'] == 'Delivered')
-                                        <button disabled style="cursor: no-drop" class="btn btn-success mb-2">Delivered</button>                                       
-                                    @else
-                                        <form method="POST" action="{{ url('care-giver/deliver-work') }}">
-                                            @csrf
-                                            <input type="hidden" name="job_id" value="{{ $job[0]['id'] }}"> 
-                                            <button type="submit" class="btn btn-success mb-2">Deliver Work</button>   
-                                        </form>                                        
-                                    @endif
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row mb-5">
-                        <div class="col-lg-12">
-                            @if ($job_start->count() > 0)
-                            <div class="manage-candidate-wrap d-flex align-items-center justify-content-between pb-4">
-                                <div class="bread-details d-flex">
-                                   <table class="table">
-                                       <thead>
-                                           <td>S/N</td>
-                                           <td>Time Started</td>
-                                           <td>End Wort At</td>
-                                           <td>Working Hours Used</td>
-                                           <td>Amount Worked</td>
-                                           <td>Payment Status</td>
-                                           <td>Stop Work</td>
-                                           <td>Cancel Work</td>
-                                       </thead>
-                                       <tbody>                                           
-                                            @foreach ($job_start as $start)
-                                                <tr class="text-center">
-                                                    <td>{{$sn++}}</td>
-                                                    <td>{{  date('D, M j, Y \a\t h:i:s A', strtotime($start->created_at))}}</td>
-                                                    <td>
-                                                        @if ($start->done == 'Yes')
-                                                        {{  date('D, M j, Y \a\t h:i:s A', strtotime($start->date_end))}}
-                                                        @else
-                                                            <span class="btn-sm btn-success">Running</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($start->done == 'Yes')
-                                                            {{ date('H:i:s', $start->created_at->diffInSeconds($start->date_end))}}
-                                                        @else
-                                                            <span class="btn-sm btn-success">Running</span>                                                            
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($start->done == 'Yes')
-                                                            ₦{{$start->amount_worked}}
-                                                        @else
-                                                            <span class="btn-sm btn-success">Running</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($start->done == 'Yes')
-                                                            @if ($start->paid == 'Yes')
-                                                                <span class="btn-sm btn-success">Paid</span>                                                        
-                                                            @else
-                                                                <span class="btn-sm btn-warning">Not Paid</span>
-                                                            @endif 
-                                                        @else
-                                                            <span class="btn-sm btn-success">Running</span>                                                        
-                                                        @endif                                                                                                      
-                                                    </td>
-                                                    <td>
-                                                        @if ($start->done == 'Yes')
-                                                            <button disabled style="cursor: no-drop" class="btn btn-sm btn-danger mb-1">Work Ended</button><br>                                                            
-                                                        @else
-                                                            <form method="POST" action="{{ url('care-giver/end-job') }}">
-                                                                @csrf
-                                                                <input type="hidden" name="employer_id" value="{{ $job[0]['employer_id'] }}">
-                                                                <input type="hidden" name="job_id" value="{{ $job[0]['id'] }}">
-                                                                <input type="hidden" name="amount" value="{{ $job[0]['amount'] }}">
-                                                                <input type="hidden" name="id" value="{{ $start->id }}">
-                                                                <button type="submit" class="btn btn-sm btn-danger mb-1">End Work</button><br>
-                                                            </form>                                                              
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <div class="manage-candidate-wrap">
-                                                            <div class="bread-action pt-0">
-                                                                <ul class="info-list">
-                                                                    <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete-work-history{{$start->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete Work"></i></a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>                                                    
-                                                    </td>
-                                                </tr>
-                                                
-                                            <!-- Modal Delete -->
-                                            <div class="modal fade" id="delete-work-history{{$start->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body mt-2 mb-2 text-center">
-                                                        <h3 style="color: black">Are you sure you want to delete this work history?</h3>
-                                                    <form method="POST" action="{{ url('care-giver/delete-work-done') }}">
-                                                        @csrf                                                        
-                                                        <input type="hidden" name="id" value="{{ $start->id }}">
-                                                        <button type="submit" class="btn btn-success m-2">Yes</button> 
-                                                        <button type="button" class="btn btn-dark m-2" data-dismiss="modal" aria-label="Close">No</button>
-                                                    </form>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                       </tbody>
-                                   </table>
+                    
+                    @if ($job_apply->count() > 0)
+                        @if ($job_apply[0]['status'] == 'Approved')
+                            <h3 class="widget-title font-size-30 text-black pb-1 mb-2">Start Work Now</h3>
+                            <div class="text-right">                        
+                                <div class="bread-action">
+                                    <ul class="info-list">
+                                        <li class="d-inline-block mb-0">
+                                            @if ($job[0]['status'] == 'Delivered')
+                                                <button disabled style="cursor: no-drop" class="btn btn-success mb-2">Start Work</button>                                        
+                                            @else                                        
+                                                <form method="POST" action="{{ url('care-giver/start-job') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="employer_id" value="{{ $job[0]['employer_id'] }}">
+                                                    <input type="hidden" name="job_id" value="{{ $job[0]['id'] }}">
+                                                    <input type="hidden" name="amount" value="{{ $job[0]['amount'] }}">
+                                                    <button type="submit" class="btn btn-success mb-2">Start Work</button>
+                                                </form>
+                                            @endif
+                                        </li>
+                                        <li class="d-inline-block mb-0">
+                                            @if ($job[0]['status'] == 'Delivered')
+                                                <button disabled style="cursor: no-drop" class="btn btn-success mb-2">Delivered</button>                                       
+                                            @else
+                                                <form method="POST" action="{{ url('care-giver/deliver-work') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="job_id" value="{{ $job[0]['id'] }}"> 
+                                                    <button type="submit" class="btn btn-success mb-2">Deliver Work</button>   
+                                                </form>                                        
+                                            @endif
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            @else
-                            @endif
-                        </div>
-                    </div>
-                    {{-- <div class="manage-job-header mt-3 mb-5">
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">12</span>
-                            <span class="font-weight-medium">job(s) Posted</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">8</span>
-                            <span class="font-weight-medium">Application(s)</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">6</span>
-                            <span class="font-weight-medium">Active Job(s)</span>
-                        </div>
-                    </div> --}}
+                            <div class="row mb-5">
+                                <div class="col-12">
+                                    @if ($job_start->count() > 0)
+                                    <div class="manage-candidate-wrap pb-4">
+                                        <div class="bread-details d-flex">
+                                        <div class="table-responsive">
+                                            <table class="table" width="100%">
+                                                <thead>
+                                                    <td>S/N</td>
+                                                    <td>Time Started</td>
+                                                    <td>End Wort At</td>
+                                                    <td>Working Hours Used</td>
+                                                    <td>Amount Worked</td>
+                                                    <td>Payment Status</td>
+                                                    <td>Stop Work</td>
+                                                    <td>Cancel Work</td>
+                                                </thead>
+                                                <tbody>                                           
+                                                    @foreach ($job_start as $start)
+                                                        <tr class="text-center">
+                                                            <td>{{$sn++}}</td>
+                                                            <td>{{  date('D, M j, Y \a\t h:i:s A', strtotime($start->created_at))}}</td>
+                                                            <td>
+                                                                @if ($start->done == 'Yes')
+                                                                {{  date('D, M j, Y \a\t h:i:s A', strtotime($start->date_end))}}
+                                                                @else
+                                                                    <span class="btn-sm btn-success">Running</span>
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($start->done == 'Yes')
+                                                                    {{ date('H:i:s', $start->created_at->diffInSeconds($start->date_end))}}
+                                                                @else
+                                                                    <span class="btn-sm btn-success">Running</span>                                                            
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($start->done == 'Yes')
+                                                                    ₦{{$start->amount_worked}}
+                                                                @else
+                                                                    <span class="btn-sm btn-success">Running</span>
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($start->done == 'Yes')
+                                                                    @if ($start->paid == 'Yes')
+                                                                        <span class="btn-sm btn-success">Paid</span>                                                        
+                                                                    @else
+                                                                        <span class="btn-sm btn-warning">Not Paid</span>
+                                                                    @endif 
+                                                                @else
+                                                                    <span class="btn-sm btn-success">Running</span>                                                        
+                                                                @endif                                                                                                      
+                                                            </td>
+                                                            <td>
+                                                                @if ($start->done == 'Yes')
+                                                                    <button disabled style="cursor: no-drop" class="btn btn-sm btn-danger mb-1">Work Ended</button><br>                                                            
+                                                                @else
+                                                                    <form method="POST" action="{{ url('care-giver/end-job') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" name="employer_id" value="{{ $job[0]['employer_id'] }}">
+                                                                        <input type="hidden" name="job_id" value="{{ $job[0]['id'] }}">
+                                                                        <input type="hidden" name="amount" value="{{ $job[0]['amount'] }}">
+                                                                        <input type="hidden" name="id" value="{{ $start->id }}">
+                                                                        <button type="submit" class="btn btn-sm btn-danger mb-1">End Work</button><br>
+                                                                    </form>                                                              
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                <div class="manage-candidate-wrap">
+                                                                    <div class="bread-action pt-0">
+                                                                        <ul class="info-list">
+                                                                            <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete-work-history{{$start->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete Work"></i></a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>                                                    
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    <!-- Modal Delete -->
+                                                    <div class="modal fade" id="delete-work-history{{$start->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body mt-2 mb-2 text-center">
+                                                                <h3 style="color: black">Are you sure you want to delete this work history?</h3>
+                                                            <form method="POST" action="{{ url('care-giver/delete-work-done') }}">
+                                                                @csrf                                                        
+                                                                <input type="hidden" name="id" value="{{ $start->id }}">
+                                                                <button type="submit" class="btn btn-success m-2">Yes</button> 
+                                                                <button type="button" class="btn btn-dark m-2" data-dismiss="modal" aria-label="Close">No</button>
+                                                            </form>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    @else
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+                    @endif
                     <div class="row mb-5">
                         <div class="col-lg-12 mb-2">
                             <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
@@ -196,7 +188,7 @@
                                         </li> --}}
                                         <li>
                                             @if ($check > 0)
-                                                <button type="button" disabled class="btn border-0 p-3 btn-success">Applied</button>
+                                                <button type="button" disabled class="btn border-0 p-3 btn-success" style="cursor: no-drop">Applied</button>
                                             @else
                                                 <form method="POST" action="{{ url('care-giver/apply-job') }}">
                                                     @csrf

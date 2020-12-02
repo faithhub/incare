@@ -110,21 +110,22 @@
                                             <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 200px; height: 150px;">
                                         </td>
                                         <td>
-                                            <div class="manage-candidate-wrap">
-                                                <h2 class="widget-title pb-1" style="font-size: 28px"><a href="{{ url('care-giver/view-job', $job->id) }}" class="color-text-2">{{$job->job_title}}</a></h2>
-                                                <p>
-                                                    <span>Category: <b style="color: black">{{$job->cat->name}}</b></span>
-                                                </p>
-                                                <p>
-                                                    <span>Sub Category: <b style="color: black">{{$job->sub->name}}</b></span>
-                                                </p>
-                                                <p>
-                                                    <span>Posted On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->created_at))}}</b></span>
-                                                </p>
-                                                <p>
-                                                    <span>Closes On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->date_end))}}</b></span>
-                                                </p>
-                                            </div><!-- end manage-candidate-wrap -->
+                                            <div class="bread-details d-flex">
+                                                <div class="bread-img flex-shrink-0">
+                                                    <a href="candidate-details.html" class="d-block">
+                                                        <img src="{{ asset('uploads/jobs/'.$job->avatar) }}" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="manage-candidate-content">
+                                                    <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
+                                                    <p class="font-size-15">
+                                                        <span class="mr-2"><i class="la la-meetup mr-1"></i>Category - {{$job->cat->name}}</span><br>
+                                                        <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span><br>
+                                                        <span class="mr-2"><i class="la la-meetup mr-1">>Posted On:{{  date('D, M j, Y', strtotime($job->created_at))}}</span><br>
+                                                        <span class="mr-2"><i class="la la-meetup mr-1">>Closes On:{{  date('D, M j, Y', strtotime($job->date_end))}}</span>
+                                                    </p>
+                                                </div><!-- end manage-candidate-content -->
+                                            </div>
                                         </td>
                                         <td>
                                             @if ($job->status == 'Active')
@@ -203,21 +204,16 @@
                                             <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 200px; height: 150px;">
                                         </td>
                                         <td>
-                                            <div class="manage-candidate-wrap">
-                                                <h2 class="widget-title pb-1" style="font-size: 28px"><a href="{{ url('care-giver/view-job', $job->id) }}" class="color-text-2">{{$job->job_title}}</a></h2>
-                                                <p>
-                                                    <span>Category: <b style="color: black">{{$job->cat->name}}</b></span>
+                                           
+                                            <div class="manage-candidate-content">
+                                                <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
+                                                <p class="font-size-15">
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Category - {{$job->cat->name}}</span><br>
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span><br>
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Posted On:{{  date('D, M j, Y', strtotime($job->created_at))}}</span><br>
+                                                    <span class="mr-2"><i class="la la-meetup mr-1"></i>Closes On:{{  date('D, M j, Y', strtotime($job->date_end))}}</span>
                                                 </p>
-                                                <p>
-                                                    <span>Sub Category: <b style="color: black">{{$job->sub->name}}</b></span>
-                                                </p>
-                                                <p>
-                                                    <span>Posted On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->created_at))}}</b></span>
-                                                </p>
-                                                <p>
-                                                    <span>Closes On: <b style="color: black">{{  date('D, M j, Y', strtotime($job->date_end))}}</b></span>
-                                                </p>
-                                            </div><!-- end manage-candidate-wrap -->
+                                            </div><!-- end manage-candidate-content -->
                                         </td>
                                         <td>
                                             @if ($job->status == 'Active')
