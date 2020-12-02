@@ -57,6 +57,7 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
   Route::post('/message', [App\Http\Controllers\employer\MessageController::class, 'sendMessage']);
   Route::post('/work-payment', [App\Http\Controllers\employer\JobsController::class, 'work_payment']);
   Route::get('/work-done/{id}/{user_id}', [App\Http\Controllers\employer\JobsController::class, 'work_done']);
+  Route::Post('/review', [App\Http\Controllers\employer\JobsController::class, 'sendReview']);
 });
 
 //Care Giver

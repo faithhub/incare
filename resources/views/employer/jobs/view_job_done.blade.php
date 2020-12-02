@@ -24,92 +24,107 @@
       </div><!-- billing-title-wrap -->
       <div class="billing-content pb-0">
         <div class="manage-job-wrap">
-                
-            <div class="text-right mb-3">
-                <p>
-                    <b>Work Status</b> &nbsp
-                    @if ($job[0]['status'] == 'Delivered')
-                    <span class="btn btn-sm btn-success">Delivered</span>
-                    @else
-                        
-                    @endif
-                </p>
-            </div>
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    @if ($work_done->count() > 0)
-                    <h3 class="mb-3" style="color: black; font-weight: 700">Work History done by Care Giver</h3>
-                    <div class="manage-candidate-wrap d-flex align-items-center justify-content-between pb-4">
-                        <div class="bread-details d-flex">
-                           <table class="table">
-                               <thead>
-                                   <td>S/N</td>
-                                   <td>Time Started</td>
-                                   <td>End Wort At</td>
-                                   <td>Working Hours Used</td>
-                                   <td>Amount Worked</td>
-                                   <td>Payment Status</td>
-                               </thead>
-                               <tbody>                                           
-                                    @foreach ($work_done as $start)
-                                        <tr class="text-center">
-                                            <td>{{$sn++}}</td>
-                                            <td>{{  date('D, M j, Y \a\t h:i:s A', strtotime($start->created_at))}}</td>
-                                            <td>
-                                                @if ($start->done == 'Yes')
-                                                {{  date('D, M j, Y \a\t h:i:s A', strtotime($start->date_end))}}
-                                                @else
-                                                    <span class="btn-sm btn-success">Running</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($start->done == 'Yes')
-                                                    {{ date('H:i:s', $start->created_at->diffInSeconds($start->date_end))}}
-                                                @else
-                                                    <span class="btn-sm btn-success">Running</span>                                                            
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($start->done == 'Yes')
-                                                    ₦{{$start->amount_worked}}
-                                                @else
-                                                    <span class="btn-sm btn-success">Running</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($start->done == 'Yes')
-                                                    @if ($start->paid == 'Yes')
-                                                        <span style="cursor: no-drop" class="btn-sm btn-default">Paid</span>                                                        
-                                                    @else                                                                             
-                                                        <form >
-                                                            <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$start->amount_worked}},{{$start->id}})">Pay Now</button>
-                                                        </form>
-                                                    @endif 
-                                                @else
-                                                    <span class="btn-sm btn-success">Running</span>                                                        
-                                                @endif                                                                                                      
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                               </tbody>
-                           </table>
-                        </div>
-                    </div>
-                    @else
-                    @endif
-                    
-                    <h2 class="mb-3" style="color: black; font-weight: 700">Review</h2>
-                    <form method="POST" action="{{ url('employer/review') }}">
-                        <input type="hidden" name="care_giver_id" value="">
-                        <div class="form-group">
-                            <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-success">Send</button>
-                        </div>
-                    </form>
+
+          <div class="text-right mb-3">
+            <p>
+              <b>Work Status</b> &nbsp
+              @if ($job[0]['status'] == 'Delivered')
+              <span class="btn btn-sm btn-success">Delivered</span>
+              @else
+
+              @endif
+            </p>
+          </div>
+          <div class="row mb-5">
+            <div class="col-lg-12">
+              @if ($work_done->count() > 0)
+              <h3 class="mb-3" style="color: black; font-weight: 700">Work History done by Care Giver</h3>
+              <div class="manage-candidate-wrap d-flex align-items-center justify-content-between pb-4">
+                <div class="bread-details d-flex">
+                  <table class="table">
+                    <thead>
+                      <td>S/N</td>
+                      <td>Time Started</td>
+                      <td>End Wort At</td>
+                      <td>Working Hours Used</td>
+                      <td>Amount Worked</td>
+                      <td>Payment Status</td>
+                    </thead>
+                    <tbody>
+                      @foreach ($work_done as $start)
+                      <tr class="text-center">
+                        <td>{{$sn++}}</td>
+                        <td>{{ date('D, M j, Y \a\t h:i:s A', strtotime($start->created_at))}}</td>
+                        <td>
+                          @if ($start->done == 'Yes')
+                          {{ date('D, M j, Y \a\t h:i:s A', strtotime($start->date_end))}}
+                          @else
+                          <span class="btn-sm btn-success">Running</span>
+                          @endif
+                        </td>
+                        <td>
+                          @if ($start->done == 'Yes')
+                          {{ date('H:i:s', $start->created_at->diffInSeconds($start->date_end))}}
+                          @else
+                          <span class="btn-sm btn-success">Running</span>
+                          @endif
+                        </td>
+                        <td>
+                          @if ($start->done == 'Yes')
+                          ₦{{$start->amount_worked}}
+                          @else
+                          <span class="btn-sm btn-success">Running</span>
+                          @endif
+                        </td>
+                        <td>
+                          @if ($start->done == 'Yes')
+                          @if ($start->paid == 'Yes')
+                          <span style="cursor: no-drop" class="btn-sm btn-default">Paid</span>
+                          @else
+                          <form>
+                            <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$start->amount_worked}},{{$start->id}})">Pay Now</button>
+                          </form>
+                          @endif
+                          @else
+                          <span class="btn-sm btn-success">Running</span>
+                          @endif
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
+              </div>
+              @else
+              @endif
+
+              <h2 class="mb-3" style="color: black; font-weight: 700">Review</h2>
+              <form method="POST" action="{{ url('employer/review') }}">
+                @csrf
+                <input type="hidden" name="care_giver_id" value="{{$user->id}}">
+                <input type="text" name="work_done_id" value="{{$work_done[0]->id}}" hidden>
+                <div class="form-group">
+                  <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
+                </div>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-success">Send</button>
+                </div>
+              </form>
+              @foreach ($reviews as $review)
+              <div class="media mb-4">
+                <div class="media-left media-middle">
+                  <a href="#">
+                    <img class="media-object" src="..." alt="...">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h5 class="media-heading">{{$review->id == $user->id ? $user->first_name : Auth::User()->first_name}}</h4>
+                    <p>{{$review->review}}</p>
+                </div>
+              </div>
+              @endforeach
             </div>
+          </div>
           <div class="row mb-5">
             <div class="col-lg-12 mb-2">
               <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
@@ -128,8 +143,8 @@
                 </div><!-- end bread-details -->
                 <div class="bread-action">
                   <ul class="listing-info">
-                    <li>                                                                                             
-                        {{-- <form>
+                    <li>
+                      {{-- <form>
                             <button type="button" class="btn border-0 btn-success">Pay All</button>
                         </form> --}}
                     </li>
@@ -142,7 +157,7 @@
                 <div class="job-description padding-bottom-35px">
                   <h2 class="widget-title">Description:</h2>
                   <div class="title-shape"></div>
-                  <p class="mt-3 mb-3">                    
+                  <p class="mt-3 mb-3">
                     {{$job[0]['job_description']}}
                   </p>
                 </div><!-- end job-description -->

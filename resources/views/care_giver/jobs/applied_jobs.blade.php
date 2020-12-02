@@ -96,9 +96,20 @@
                             </tbody>
                         </table>
                     </div>
+                  </div>
                 </div>
-            </div><!-- end billing-content -->
-        </div><!-- end billing-form-item -->
-    </div><!-- end col-lg-12 -->
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      </tbody>
+      </table>
+    </div>
+  </div>
+</div><!-- end billing-content -->
+</div><!-- end billing-form-item -->
+</div><!-- end col-lg-12 -->
 </div><!-- end row -->
 @endsection

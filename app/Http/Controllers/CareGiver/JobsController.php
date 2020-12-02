@@ -248,7 +248,7 @@ class JobsController extends Controller
       $work->date_end = Carbon::now();
       $work->work_time = $worked_hour;
       $work->amount_worked = $worked_hour * $work->amount;
-      $work->done = 'Yes';      
+      $work->done = 'Yes';
       $work->save();
       $request->session()->flash('success', 'Work Ended Started Successfully');
       return back();
@@ -278,12 +278,10 @@ class JobsController extends Controller
       $job->status = 'Delivered';
       $job->save();
       $request->session()->flash('success', 'Work Delivered Successfully');
-      return back();      
+      return back();
     } else {
       $request->session()->flash('warning', 'You must FINISH and END all work before you can deliver work done, please check and try again!');
       return back();
     }
-    
   }
-
 }
