@@ -55,7 +55,7 @@
                                             </div><!-- end manage-candidate-content -->
                                         </div>
                                     </td>
-                                    <td>#{{$job->amount}}</td>
+                                    <td>₦{{$job->amount}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                                     <td>
@@ -73,7 +73,7 @@
                                                 <ul class="info-list">
                                                     <li class="d-inline-block"><a href="{{ url('employer/view-job', $job->id) }}" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
                                                     <li class="d-inline-block"><a href="{{ url('employer/edit-job', $job->id) }}"><i class="la la-edit" data-toggle="tooltip" data-placement="top" title="Edit"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
+                                                    <li class="d-inline-block"><a href="₦"><i data-toggle="modal" data-target="₦delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>

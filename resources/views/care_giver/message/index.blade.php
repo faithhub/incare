@@ -1,5 +1,5 @@
-@extends('employer.layouts.app')
-@section('user')
+@extends('care_giver.layouts.app')
+@section('care_giver')
 <div class="row">
   <div class="col-12">
     <div class="dashboard-message-wrapper d-flex">
@@ -16,6 +16,7 @@
         </div><!-- message-search -->
         <div class="message-inbox-item">
           <div class="mess__body">
+            {{-- {{$messages}} --}}
             @foreach($messages as $message)
             {{-- {{$message[0]['employer']['id']}} --}}
             <a href="{{ url('care-giver/message', $message[0]['employer']['id']) }}" class=" d-block message-inbox">

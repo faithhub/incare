@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Plan;
 use App\Models\Job;
 use App\Models\JobApply;
+use App\Models\RunningJobs;
 use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -253,5 +254,33 @@ class JobsController extends Controller
         $data['title'] = 'Applied Jobs';
         // $data['jobs'] = JobApply::all();
         return view('employer.jobs.applied_jobs', $data);
+    }
+
+    public function work_done($id, $user_id)
+    {
+        $data['sn'] = 1;
+        $data['work_done'] = $work_done = RunningJobs::where('care_giver_id', $user_id)->get();
+        $data['user'] = User::find($user_id);
+        $data['job'] = Job::where('id', $id)->with('cat:id,name')->with('sub:id,name')->get();
+       return view('employer.jobs.view_job_done', $data);
+    }
+
+    public function work_payment(Request $request)
+    {
+        try {
+            //return $request->all();
+            $work = RunningJobs::find($request->running_job_id);
+            //return $work;
+            $work->paid = 'Yes';
+            $work->save();
+            $request->session()->flash('success', 'Payment successful');
+            $user = User::find($work->care_giver_id);
+            $user->wallet = $user->wallet + $request->amount;
+            $user->save();
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+            // return false;
+        }
     }
 }

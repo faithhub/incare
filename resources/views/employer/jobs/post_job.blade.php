@@ -98,7 +98,7 @@
                                 <div class="input-box">
                                     <label class="label-text">Offered Amount Per Hour</label>
                                     <div class="form-group">
-                                        <span class="la la-naira-sign form-icon">#</span>
+                                        <span class="la la-naira-sign form-icon">₦</span>
                                         <input class="form-control @error('amount') is-invalid @enderror" value="{{ $job[0]['amount'] }}" name="amount" type="number" placeholder="Amount">
                                         @error('amount')
                                             <span class="invalid-feedback mb-2" role="alert" style="display: block">
@@ -308,7 +308,7 @@
                                 <div class="input-box">
                                     <label class="label-text">Offered Amount Per Hour</label>
                                     <div class="form-group">
-                                        <span class="la la-naira-sign form-icon">#</span>
+                                        <span class="la la-naira-sign form-icon">₦</span>
                                         <input class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" name="amount" type="number" placeholder="Amount">
                                         @error('amount')
                                             <span class="invalid-feedback mb-2" role="alert" style="display: block">
@@ -441,7 +441,7 @@
                     <div>
                         <input type="checkbox" id="chb1" class="@error('terms') is-invalid @enderror" name="terms" value="terms" {{ old('terms') == 'terms' ? 'checked' : '' }}>
                         <label for="chb1">By Submitting Job You Confirm That You Accept The
-                            <a href="terms-and-condition.html" class="color-text">Terms & Conditions</a> And <a href="#" class="color-text">Privacy Policy</a>
+                            <a href="terms-and-condition.html" class="color-text">Terms & Conditions</a> And <a href="₦" class="color-text">Privacy Policy</a>
                         </label>
                         @error('terms')
                             <span class="invalid-feedback mb-2" role="alert" style="display: block">

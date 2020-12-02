@@ -1,8 +1,4 @@
-
-
-	
 	<!-- Menu -->
-	
     <header class="header-area header-desktop">
         <div class="header-menu-wrapper">
             <div class="container-fluid">
@@ -10,7 +6,7 @@
                     <div class="col-lg-12">
                         <div class="menu-full-width">
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('web/images/logo2.png') }}" alt="logo"></a>
+                                <a href="#"><img src="{{ asset('web/images/logo2.png') }}" alt="logo"></a>
                             </div><!-- end logo -->
                             <div class="logo-right-content">
                                 <div class="header-action-button d-flex align-items-center">

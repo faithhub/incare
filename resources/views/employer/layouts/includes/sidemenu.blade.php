@@ -23,7 +23,7 @@
                     <li class="{{ request()->is('employer/manage-jobs*') || request()->is('employer/manage-care-givers*') || request()->is('employer/post-new-job*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-briefcase icon-element"></i> Jobs <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">
-                            <li><a class="{{ request()->is('employer/manage-jobs*')  ? 'page-active' : '' }}" href="{{ url('employer/manage-jobs') }}">Manage Jobs</a></li>
+                            <li><a class="{{ request()->is('employer/manage-jobs*')  ? 'page-active' : '' }}" href="{{ url('employer/manage-jobs') }}">Manage My Jobs</a></li>
                             <li><a href="{{ url('employer/manage-care-givers') }}">Manage Care Givers   </a></li>
                             <li><a href="{{ url('employer/post-new-job') }}">Post New Job</a></li>
                         </ul>

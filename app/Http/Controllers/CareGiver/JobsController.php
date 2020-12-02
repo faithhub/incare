@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\JobApply;
+use App\Models\RunningJobs;
 use App\Models\SubCategory;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Support\Facades\Auth;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +24,7 @@ class JobsController extends Controller
     $this->middleware('auth');
     $this->middleware('care-giver');
     $this->apply_job = new JobApply();
+    $this->running_job = new RunningJobs();
   }
 
   public function new_job(Request $request)
@@ -125,10 +128,13 @@ class JobsController extends Controller
   public function view_job($id)
   {
     if ($id) {
-      $data['job'] = $job = Job::where(['id' => $id])->where('status', 'Active')->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
+      $data['job'] = $job = Job::where(['id' => $id])->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
       $data['check'] = $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->count();
+      $data['job_apply'] = $job_apply = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
+      $data['job_start'] = RunningJobs::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
+        $data['sn'] = 1;
         return view('care_giver.jobs.view_job', $data);
       } else {
         Session::flash('error', 'No record found for Job');
@@ -187,9 +193,17 @@ class JobsController extends Controller
   public function applied_job()
   {
     $data['title'] = 'Applied Jobs';
-    $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->with('job:id,avatar,job_title,created_at,date_end')->get();
+    $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->where('status', '<>', 'Approved')->with('job:id,avatar,job_title,amount,created_at,date_end')->get();
     //dd($j);
     return view('care_giver.jobs.applied_jobs', $data);
+  }
+
+  public function running_job()
+  {
+    $data['title'] = 'Running Jobs';
+    $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->where('status', 'Approved')->with('job:id,avatar,employer_id,job_title,amount,created_at,date_end')->get();
+    //dd($j);
+    return view('care_giver.jobs.running_job', $data);
   }
 
   public function delete_job(Request $request)
@@ -209,11 +223,64 @@ class JobsController extends Controller
   //     $data['jobs'] = JobApply::Where('care_giver_id', Auth::user()->id)->get();
   //     return view('care_giver.jobs.applied_jobs', $data);
   //   }
-  public function approved_jobs()
+  public function start_job(Request $request)
   {
-    $data['title'] = 'Approved Jobs';
-    $data['jobs'] = $j = JobApply::where([['care_giver_id', Auth::user()->id], ['status', 'approved']])->with('job:id,avatar,job_title,created_at,date_end')->get();
-    //dd($j);
-    return view('care_giver.jobs.approved_jobs', $data);
+    try {
+      //dd($request->all());
+      $this->running_job->create($request);
+      $request->session()->flash('success', 'Work Started Successfully');
+      // dd($time);
+      return back();
+    } catch (\Throwable $th) {
+      $request->session()->flash('error', $th->getMessage());
+      return back();
+    }
+  }
+
+  public function end_job(Request $request)
+  {
+    try {
+      $work = RunningJobs::find($request->id);
+      $seconds = Carbon::now()->diffInSeconds($work->date_start);
+      $hours = floatval($seconds / 3600);
+      $worked_hour = number_format($hours, 2);
+      $work->date_end = Carbon::now();
+      $work->work_time = $worked_hour;
+      $work->amount_worked = $worked_hour * $work->amount;
+      $work->done = 'Yes';
+      $work->save();
+      $request->session()->flash('success', 'Work Ended Started Successfully');
+      return back();
+    } catch (\Throwable $th) {
+      $request->session()->flash('error', $th->getMessage());
+      return back();
+    }
+  }
+
+  public function delete_work_done(Request $request)
+  {
+    try {
+      RunningJobs::find($request->id)->delete();
+      $request->session()->flash('success', 'Work History Deleted Successfully');
+      return back();
+    } catch (\Throwable $th) {
+      $request->session()->flash('error', $th->getMessage());
+      return back();
+    }
+  }
+
+  public function deliver_work(Request $request)
+  {
+    $check = RunningJobs::where(['care_giver_id' => Auth::user()->id, 'job_id' => $request->job_id, 'done' => 'No'])->count();
+    if ($check == 0) {
+      $job = Job::find($request->job_id);
+      $job->status = 'Delivered';
+      $job->save();
+      $request->session()->flash('success', 'Work Delivered Successfully');
+      return back();
+    } else {
+      $request->session()->flash('warning', 'You must FINISH and END all work before you can deliver work done, please check and try again!');
+      return back();
+    }
   }
 }
