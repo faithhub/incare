@@ -7,7 +7,7 @@
                 <h2 class="sec__title line-height-45">Plans Management</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="">Home</a></li>
                 <li class="active__list-item">Dashboard</li>
                 <li>Manage plans</li>
             </ul>
@@ -55,7 +55,7 @@
                                         <ul class="info-list">
                                             <a class="btn btn-success text-white" href="{{ url('admin/edit-plan', $plan->id) }}">Edit</a>
                                             {{-- <button class="btn btn-danger">Delete</button> --}}
-                                            {{-- <li class="d-inline-block"><a href="job-details.html"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"></i></a></li>
+                                            {{-- <li class="d-inline-block"><a href="#s"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"></i></a></li>
                                             <li class="d-inline-block"><a href="#"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove"></i></a></li> --}}
                                         </ul>
                                     </div>

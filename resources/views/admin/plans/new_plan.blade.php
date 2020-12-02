@@ -10,7 +10,7 @@
                 <h2 class="sec__title">Create a Plan</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
                 <li class="active__list-item">Dashboard</li>
                 <li>Create a Plan</li>
             </ul>
@@ -100,7 +100,7 @@
                 <h2 class="sec__title">Edit Plan</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
                 <li class="active__list-item">Dashboard</li>
                 <li>Edit Plan</li>
             </ul>

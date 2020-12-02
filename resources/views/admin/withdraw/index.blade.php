@@ -1,5 +1,5 @@
-@extends('care_giver.layouts.app')
-@section('care_giver')
+@extends('admin.layouts.app')
+@section('admin')
 
 <div class="row">
     <div class="col-lg-12">
@@ -19,12 +19,7 @@
     <div class="col-lg-12">
         <div class="billing-form-item">
             <div class="billing-title-wrap">
-                <h3 class="widget-title pb-0">My Withdrawals</h3>
-                <div class="title-shape margin-top-10px">
-                </div>
-                <div class="text-right">
-                    <a href="{{ url('care-giver/create-withdrawal') }}" class="btn btn-success">Make withdraw</a>
-                </div>
+                <h3 class="widget-title pb-0">Withdrawals</h3>
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
                 <div class="manage-job-wrap">
@@ -33,6 +28,7 @@
                             <thead>
                             <tr>
                                 <th>S/N</th>
+                                <th>Care Giver</th>
                                 <th>Bank</th>
                                 <th>Amount</th>                       
                                 <th>Status</th>                              
@@ -45,6 +41,25 @@
                                 <tr>
                                     <td>
                                         {{$sn++}}
+                                    </td>
+                                    <td>
+                                        <div class="bread-details d-flex">
+                                        <div class="bread-img flex-shrink-0">
+                                            <a href="{{ asset('uploads/profile_pictures/'.$withdraw->user->avatar) }}" class="d-block">
+                                                <img src="{{ asset('uploads/profile_pictures/'.$withdraw->user->avatar) }}" alt="{{$withdraw->user->first_name  }}">
+                                            </a>
+                                        </div>
+                                        <div class="manage-candidate-content">
+                                            <h2 class="widget-title pb-2"><a href="" class="color-text-2">{{$withdraw->user->first_name}} {{$withdraw->user->last_name}}</a></h2>
+                                            <p class="font-size-15">
+                                                <span class="mr-2"><i class="la la-envelope-o mr-1"></i><a href="mailto:{{$withdraw->user->email}}" class="color-text-3">{{$withdraw->user->email}}</a></span>
+                                                <span class="mr-2"><i class="la la-phone mr-1"></i>{{$withdraw->user->mobile}}</span>
+                                            </p>
+                                            <p class="mt-1 font-size-15">
+                                                <span class="mr-2"><i class="la la-map mr-1"></i>{{$withdraw->user->address}}</span>
+                                            </p>
+                                        </div><!-- end manage-candidate-content -->
+                                    </div>
                                     </td>
                                     <td>
                                         <div class="manage-candidate-wrap">
@@ -118,25 +133,26 @@
                                                 </div>
                                               </div>
                                             </div>
-                                          </div>
+                                        </div>
                                         
-                                    <!-- Modal Delete -->
-                                    <div class="modal fade" id="delete{{$withdraw->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body mt-2 mb-2 text-center">
-                                                <h2 style="color: black">Are you sure you want to Cancel this Withdraw?</h2>
-                                            <form method="POST" action="{{ url('care-giver/cancel-withdraw') }}">
-                                                @csrf                                                        
-                                                <input type="hidden" name="id" value="{{ $withdraw->id }}"> 
-                                                <input type="hidden" name="amount" value="{{ $withdraw->amount }}">
-                                                <button type="submit" class="btn btn-success m-2">Yes</button> 
-                                                <button type="button" class="btn btn-dark m-2" data-dismiss="modal" aria-label="Close">No</button>
-                                            </form>
+                                        <!-- Modal Delete -->
+                                        <div class="modal fade" id="delete{{$withdraw->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body mt-2 mb-2 text-center">
+                                                    <h2 style="color: black">Are you sure you want to Cancel this Withdraw?</h2>
+                                                <form method="POST" action="{{ url('admin/cancel-withdrawal') }}">
+                                                    @csrf                                                        
+                                                    <input type="hidden" name="id" value="{{ $withdraw->id }}"> 
+                                                    <input type="hidden" name="amount" value="{{ $withdraw->amount }}">
+                                                    <input type="hidden" name="care_giver_id" value="{{ $withdraw->user->id }}">
+                                                    <button type="submit" class="btn btn-success m-2">Yes</button> 
+                                                    <button type="button" class="btn btn-dark m-2" data-dismiss="modal" aria-label="Close">No</button>
+                                                </form>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
-                                        </div>
-                                    </div>
                                     </td>
                                 </tr>
                                 @endforeach

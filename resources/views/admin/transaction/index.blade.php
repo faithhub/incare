@@ -8,8 +8,8 @@
                 <h2 class="sec__title">Transactions</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
-                <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
+                <li class="active__list-item"><a href="#">Dashboard</a></li>
                 <li>Transactions</li>
             </ul>
         </div><!-- end breadcrumb-content -->
@@ -44,12 +44,12 @@
                                     <td>                                        
                                         <div class="bread-details d-flex">
                                             <div class="bread-img flex-shrink-0">
-                                                <a href="candidate-details.html" class="d-block">
+                                                <a href="#" class="d-block">
                                                     <img src="{{ asset('uploads/profile_pictures/'.$transaction->user->avatar) }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="manage-candidate-content">
-                                                <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$transaction->user->first_name}}   {{$transaction->user->last_name}}</a></h2>
+                                                <h2 class="widget-title pb-2"><a href="#" class="color-text-2">{{$transaction->user->first_name}}   {{$transaction->user->last_name}}</a></h2>
                                                 <p class="font-size-15">
                                                     <span class="mr-2"><i class="la la-envelope-o mr-1"></i><a href="{{$transaction->user->email}}" class="color-text-3">{{$transaction->user->email}}</a></span><br>
                                                     <span class="mr-2"><i class="la la-phone mr-1"></i>{{$transaction->user->mobile}}</span>

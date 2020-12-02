@@ -83,7 +83,9 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::post('/end-job', [App\Http\Controllers\CareGiver\JobsController::class, 'end_job']);
   Route::post('/delete-work-done', [App\Http\Controllers\CareGiver\JobsController::class, 'delete_work_done']);
   Route::post('/deliver-work', [App\Http\Controllers\CareGiver\JobsController::class, 'deliver_work']);
-  Route::get('/withdrawals', [App\Http\Controllers\CareGiver\Withdrawal::class, 'index']);
+  Route::get('/withdrawals', [App\Http\Controllers\CareGiver\WithdrawalController::class, 'index']);
+  Route::post('/cancel-withdraw', [App\Http\Controllers\CareGiver\WithdrawalController::class, 'cancel_withdraw']);
+  Route::match(['get', 'post'], '/create-withdrawal', [App\Http\Controllers\CareGiver\WithdrawalController::class, 'create']);
 });
 
 //Admin
@@ -111,4 +113,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::post('/profile', [App\Http\Controllers\Admin\SettingsController::class, 'update_profile']);
   Route::get('/change-password', [App\Http\Controllers\Admin\SettingsController::class, 'change_password']);
   Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'change']);
+  Route::get('/withdrawals', [App\Http\Controllers\Admin\WithdrawalController::class, 'index']);
+  Route::post('/cancel-withdrawal', [App\Http\Controllers\Admin\WithdrawalController::class, 'cancel_withdrawal']);
 });

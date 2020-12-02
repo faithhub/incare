@@ -7,8 +7,8 @@
                 <h2 class="sec__title">Job Details</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
-                <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
+                <li class="active__list-item"><a href="#">Dashboard</a></li>
                 <li>Job Details</li>
             </ul>
         </div><!-- end breadcrumb-content -->
@@ -23,8 +23,7 @@
                 <div class="title-shape margin-top-10px"></div>
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
-                <div class="manage-job-wrap">
-                    
+                <div class="manage-job-wrap">                    
                     @if ($job_apply->count() > 0)
                         @if ($job_apply[0]['status'] == 'Approved')
                             <h3 class="widget-title font-size-30 text-black pb-1 mb-2">Start Work Now</h3>

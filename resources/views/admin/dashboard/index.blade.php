@@ -7,7 +7,7 @@
                 <h2 class="sec__title line-height-45">Welcome, Admin!</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
                 <li class="active__list-item">Employers</li>
                 <li>Dashboard</li>
             </ul>
@@ -68,7 +68,9 @@
         </div>
     </div><!-- end col-lg-3 -->
 </div><!-- end row -->
-<div class="row mt-2">    
+<div class="row mt-2">
+    <div class="col-12">
+        
     <div class="billing-content pb-0">
         <div class="manage-job-wrap">
             <div class="table-responsive">
@@ -137,5 +139,6 @@
             </div>
         </div>
     </div><!-- end billing-content -->
+    </div>
 </div><!-- end row -->
 @endsection

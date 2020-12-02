@@ -15,6 +15,12 @@ class CreateWithdrawalsTable extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
+            $table->string('care_giver_id');
+            $table->string('amount');
+            $table->string('account_number');
+            $table->string('account_name');
+            $table->string('bank');
+            $table->enum('status', ['Pending', 'Approved', 'Cancel'])->default('Pending');
             $table->timestamps();
         });
     }

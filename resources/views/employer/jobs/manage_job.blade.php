@@ -7,8 +7,8 @@
                 <h2 class="sec__title">Manage My Jobs</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
-                <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
+                <li class="active__list-item"><a href="#">Dashboard</a></li>
                 <li>Manage My Jobs</li>
             </ul>
         </div><!-- end breadcrumb-content -->
@@ -42,12 +42,12 @@
                                     <td>
                                         <div class="bread-details d-flex">
                                             <div class="bread-img flex-shrink-0">
-                                                <a href="candidate-details.html" class="d-block">
+                                                <a href="#" class="d-block">
                                                     <img src="{{ asset('uploads/jobs/'.$job->avatar) }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="manage-candidate-content">
-                                                <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$job->job_title}}</a></h2>
+                                                <h2 class="widget-title pb-2"><a href="#" class="color-text-2">{{$job->job_title}}</a></h2>
                                                 <p class="font-size-15">
                                                     <span class="mr-2"><i class="la la-meetup mr-1"></i>Category - {{$job->cat->name}}</span><br>
                                                     <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span>
@@ -55,7 +55,7 @@
                                             </div><!-- end manage-candidate-content -->
                                         </div>
                                     </td>
-                                    <td>₦{{$job->amount}}</td>
+                                    <td><span class="text-success">₦{{$job->amount}}</span></td>
                                     <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
                                     <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                                     <td>
@@ -63,6 +63,8 @@
                                         <span class="badge badge-success p-1">{{$job->status}}</span>
                                         @elseif ($job->status == 'Blocked')
                                         <span class="badge badge-danger p-1">{{$job->status}}</span> 
+                                        @elseif ($job->status == 'Delivered')
+                                            <span class="badge badge-success p-1">{{$job->status}}</span> 
                                         @else
                                         <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
                                         @endif
@@ -73,7 +75,7 @@
                                                 <ul class="info-list">
                                                     <li class="d-inline-block"><a href="{{ url('employer/view-job', $job->id) }}" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
                                                     <li class="d-inline-block"><a href="{{ url('employer/edit-job', $job->id) }}"><i class="la la-edit" data-toggle="tooltip" data-placement="top" title="Edit"></i></a></li>
-                                                    <li class="d-inline-block"><a href="₦"><i data-toggle="modal" data-target="₦delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
+                                                    <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>

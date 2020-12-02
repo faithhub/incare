@@ -8,7 +8,7 @@
                 <h2 class="sec__title">Edit Job</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
                 <li class="active__list-item">Dashboard</li>
                 <li>Edit Job</li>
             </ul>
@@ -219,7 +219,7 @@
                 <h2 class="sec__title">Post a Job</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
                 <li class="active__list-item">Dashboard</li>
                 <li>Post a Job</li>
             </ul>
@@ -400,34 +400,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-6">
-                                <div class="input-box">
-                                    <label class="label-text">Latitude</label>
-                                    <div class="form-group">
-                                        <span class="la la-map form-icon"></span>
-                                        <input class="form-control  @error('lat') is-invalid @enderror" value="{{ old('lat') }}" type="text" name="lat" placeholder="9.081999">
-                                        @error('lat')
-                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="input-box">
-                                    <label class="label-text">Longitude</label>
-                                    <div class="form-group">
-                                        <span class="la la-map form-icon"></span>
-                                        <input class="form-control  @error('lag') is-invalid @enderror" value="{{ old('lag') }}" type="text" name="lag" placeholder="4.081999">
-                                        @error('lag')
-                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div><!-- end row -->
                     </div><!-- end contact-form-action -->
                 </div><!-- end billing-content -->

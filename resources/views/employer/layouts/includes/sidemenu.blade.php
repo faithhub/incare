@@ -12,7 +12,7 @@
             <div class="side-menu-wrap">
                 <ul class="side-menu-ul">
                     <li class="{{ request()->is('employer')  ? 'page-active' : '' }}" ><a href="{{ url('employer') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
-                    <li class="{{ request()->is('employer/transactions')  ? 'page-active' : '' }}" ><a href="{{ url('employer/transactions') }}"><i class="la la-money icon-element"></i> Transactions</a></li>
+                    {{-- <li class="{{ request()->is('employer/transactions')  ? 'page-active' : '' }}" ><a href="{{ url('employer/transactions') }}"><i class="la la-money icon-element"></i> Transactions</a></li> --}}
                     <li class="{{ request()->is('employer/messages*')  ? 'page-active' : '' }}"><a href="{{ url('employer/messages') }}"><i class="la la-envelope icon-element"></i> Messages </a></li>
                     <li class="{{ request()->is('employer/profile*') || request()->is('employer/change-password*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-gear icon-element"></i> Settings <span class="la la-caret-down btn-toggle"></span></a>

@@ -7,7 +7,7 @@
                 <h2 class="sec__title line-height-45">Make Payment</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
                 <li class="active__list-item">Dashboard</li>
                 <li>Make Payment</li>
             </ul>

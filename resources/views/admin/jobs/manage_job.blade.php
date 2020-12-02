@@ -7,8 +7,8 @@
                 <h2 class="sec__title">Manage Jobs</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
-                <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
+                <li class="active__list-item"><a href="#">Dashboard</a></li>
                 <li>Manage Jobs</li>
             </ul>
         </div><!-- end breadcrumb-content -->
@@ -54,7 +54,7 @@
                                 <tr>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">Land Development Marketer</a></h2>
+                                            <h2 class="widget-title pb-1"><a href="#" class="color-text-2">Land Development Marketer</a></h2>
                                             <p>
                                                 <span><i class="la la-clock-o font-size-16"></i> Last Update: Jan 21, 2020 </span>
                                             </p>
@@ -79,7 +79,7 @@
                                 <tr>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">Regional Sales Manager South</a></h2>
+                                            <h2 class="widget-title pb-1"><a href="#" class="color-text-2">Regional Sales Manager South</a></h2>
                                             <p>
                                                 <span><i class="la la-clock-o font-size-16"></i> Last Update: Jan 21, 2020 </span>
                                             </p>
@@ -104,7 +104,7 @@
                                 <tr>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">Restaurant Team Member - Crew</a></h2>
+                                            <h2 class="widget-title pb-1"><a href="#" class="color-text-2">Restaurant Team Member - Crew</a></h2>
                                             <p>
                                                 <span><i class="la la-clock-o font-size-16"></i> Last Update: Jan 21, 2020 </span>
                                             </p>
@@ -129,7 +129,7 @@
                                 <tr>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">Land Development Marketer</a></h2>
+                                            <h2 class="widget-title pb-1"><a href="#" class="color-text-2">Land Development Marketer</a></h2>
                                             <p>
                                                 <span><i class="la la-clock-o font-size-16"></i> Last Update: Jan 21, 2020 </span>
                                             </p>
@@ -154,7 +154,7 @@
                                 <tr>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">Node.js Developer</a></h2>
+                                            <h2 class="widget-title pb-1"><a href="#" class="color-text-2">Node.js Developer</a></h2>
                                             <p>
                                                 <span><i class="la la-clock-o font-size-16"></i> Last Update: Jan 21, 2020 </span>
                                             </p>
@@ -179,7 +179,7 @@
                                 <tr>
                                     <td>
                                         <div class="manage-candidate-wrap">
-                                            <h2 class="widget-title pb-1"><a href="job-details.html" class="color-text-2">Graphic Design</a></h2>
+                                            <h2 class="widget-title pb-1"><a href="#" class="color-text-2">Graphic Design</a></h2>
                                             <p>
                                                 <span><i class="la la-clock-o font-size-16"></i> Last Update: Jan 21, 2020 </span>
                                             </p>

@@ -7,8 +7,8 @@
         <h2 class="sec__title">Job Details</h2>
       </div><!-- end section-heading -->
       <ul class="list-items d-flex align-items-center">
-        <li class="active__list-item"><a href="index.html">Home</a></li>
-        <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+        <li class="active__list-item"><a href="#">Home</a></li>
+        <li class="active__list-item"><a href="#">Dashboard</a></li>
         <li>Job Details</li>
       </ul>
     </div><!-- end breadcrumb-content -->
@@ -89,6 +89,17 @@
                       <div class="info-list static-info">
                         <ul>
                           <li class="mb-3 d-flex align-items-center">
+                            <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:
+                              @if ($job[0]['status'] == 'Approved' || $job[0]['status'] == 'Delivered')
+                                <span class="btn btn-sm btn-success"> {{$job[0]['status']}}</span>                                  
+                              @elseif ($job[0]['status'] == 'Blocked')
+                                <span class="btn btn-sm btn-danger"> {{$job[0]['status']}}</span>
+                              @elseif ($job[0]['status'] == 'Pending')
+                                <span class="btn btn-sm btn-warning"> {{$job[0]['status']}}</span>                                  
+                              @endif
+                            </p>
+                          </li>
+                          <li class="mb-3 d-flex align-items-center">
                             <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
@@ -123,6 +134,8 @@
               </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
           </div>
+          @if ($applies->count() > 0)
+                
           <div class="table-responsive">
             <table class="table" id="myTable" width="100%">
               <thead>
@@ -140,12 +153,12 @@
                   <td>
                     <div class="bread-details d-flex">
                       <div class="bread-img flex-shrink-0">
-                        <a href="candidate-details.html" class="d-block">
+                        <a href="#" class="d-block">
                           <img src="{{ asset('uploads/profile_pictures/'.$apply->user->avatar) }}" alt="">
                         </a>
                       </div>
                       <div class="manage-candidate-content">
-                        <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$apply->user->first_name}} {{$apply->user->last_name}}</a></h2>
+                        <h2 class="widget-title pb-2"><a href="#" class="color-text-2">{{$apply->user->first_name}} {{$apply->user->last_name}}</a></h2>
                         <p class="font-size-15">
                           <span class="mr-2"><i class="la la-envelope-o mr-1"></i><a href="{{$apply->user->email}}" class="color-text-3">{{$apply->user->email}}</a></span>
                           <span class="mr-2"><i class="la la-phone mr-1"></i>{{$apply->user->mobile}}</span>
@@ -192,6 +205,11 @@
               </tbody>
             </table>
           </div>
+          @else
+              <div class="text-center mb-3">
+                <h3 style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No Application Made for this Job yet</h3>
+              </div>
+          @endif
         </div>
       </div><!-- end billing-content -->
     </div><!-- end billing-form-item -->
