@@ -135,6 +135,7 @@ class JobsController extends Controller
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
         $data['sn'] = 1;
+        //dd($job_apply);
         return view('care_giver.jobs.view_job', $data);
       } else {
         Session::flash('error', 'No record found for Job');

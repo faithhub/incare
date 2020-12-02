@@ -79,7 +79,7 @@
                                             <td>
                                                 @if ($start->done == 'Yes')
                                                     @if ($start->paid == 'Yes')
-                                                        <span style="cursor: no-drop" class="btn-sm btn-success">Paid</span>                                                        
+                                                        <span style="cursor: no-drop" class="btn-sm btn-default">Paid</span>                                                        
                                                     @else                                                                             
                                                         <form >
                                                             <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$start->amount_worked}},{{$start->id}})">Pay Now</button>

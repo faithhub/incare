@@ -28,11 +28,14 @@
                                                                 <h4 class="widget-title font-size-16">
                                                                     <a href="#">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
                                                                 </h4>
-                                                                <span class="email">{{Auth::user()->email}}</span>
+                                                                <span class="email">{{Auth::user()->email}}</span><br>
                                                             </div>
                                                         </div><!-- end mess__title -->
                                                         <div class="mess__body">
                                                             <ul class="list-items">
+                                                                <li class="mb-0">                                                                
+                                                                    <span class="text-success">₦{{Auth::user()->wallet}}</span>
+                                                                </li>
                                                                 <li class="mb-0">
                                                                     <a href="{{ url('care-giver/profile') }}" class="d-block">
                                                                         <i class="la la-user"></i> Profile
