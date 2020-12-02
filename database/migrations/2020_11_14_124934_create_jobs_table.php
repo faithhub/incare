@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateJobsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations.  
      *
      * @return void
      */
@@ -23,7 +23,7 @@ class CreateJobsTable extends Migration
             $table->string('amount');
             $table->string('date_end');
             $table->string('job_description');
-            $table->enum('status', ['Pending', 'Active', 'Blocked'])->default('Pending');
+            $table->enum('status', ['Pending', 'Active', 'Blocked', 'Delivered'])->default('Pending');
             $table->string('mobile');
             $table->string('city');
             $table->string('address');

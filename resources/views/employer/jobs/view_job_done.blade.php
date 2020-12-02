@@ -19,25 +19,97 @@
   <div class="col-lg-12">
     <div class="billing-form-item">
       <div class="billing-title-wrap">
-        <h3 class="widget-title pb-0">Job Details</h3>
+        <h3 class="widget-title pb-0">Job Details Done By {{$user->first_name}} {{$user->last_name}}</h3>
         <div class="title-shape margin-top-10px"></div>
       </div><!-- billing-title-wrap -->
       <div class="billing-content pb-0">
         <div class="manage-job-wrap">
-          {{-- <div class="manage-job-header mt-3 mb-5">
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">12</span>
-                            <span class="font-weight-medium">job(s) Posted</span>
+                
+            <div class="text-right mb-3">
+                <p>
+                    <b>Work Status</b> &nbsp
+                    @if ($job[0]['status'] == 'Delivered')
+                    <span class="btn btn-sm btn-success">Delivered</span>
+                    @else
+                        
+                    @endif
+                </p>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    @if ($work_done->count() > 0)
+                    <h3 class="mb-3" style="color: black; font-weight: 700">Work History done by Care Giver</h3>
+                    <div class="manage-candidate-wrap d-flex align-items-center justify-content-between pb-4">
+                        <div class="bread-details d-flex">
+                           <table class="table">
+                               <thead>
+                                   <td>S/N</td>
+                                   <td>Time Started</td>
+                                   <td>End Wort At</td>
+                                   <td>Working Hours Used</td>
+                                   <td>Amount Worked</td>
+                                   <td>Payment Status</td>
+                               </thead>
+                               <tbody>                                           
+                                    @foreach ($work_done as $start)
+                                        <tr class="text-center">
+                                            <td>{{$sn++}}</td>
+                                            <td>{{  date('D, M j, Y \a\t h:i:s A', strtotime($start->created_at))}}</td>
+                                            <td>
+                                                @if ($start->done == 'Yes')
+                                                {{  date('D, M j, Y \a\t h:i:s A', strtotime($start->date_end))}}
+                                                @else
+                                                    <span class="btn-sm btn-success">Running</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($start->done == 'Yes')
+                                                    {{ date('H:i:s', $start->created_at->diffInSeconds($start->date_end))}}
+                                                @else
+                                                    <span class="btn-sm btn-success">Running</span>                                                            
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($start->done == 'Yes')
+                                                    ₦{{$start->amount_worked}}
+                                                @else
+                                                    <span class="btn-sm btn-success">Running</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($start->done == 'Yes')
+                                                    @if ($start->paid == 'Yes')
+                                                        <span style="cursor: no-drop" class="btn-sm btn-success">Paid</span>                                                        
+                                                    @else                                                                             
+                                                        <form >
+                                                            <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$start->amount_worked}},{{$start->id}})">Pay Now</button>
+                                                        </form>
+                                                    @endif 
+                                                @else
+                                                    <span class="btn-sm btn-success">Running</span>                                                        
+                                                @endif                                                                                                      
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                               </tbody>
+                           </table>
                         </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">8</span>
-                            <span class="font-weight-medium">Application(s)</span>
+                    </div>
+                    @else
+                    @endif
+                    
+                    <h2 class="mb-3" style="color: black; font-weight: 700">Review</h2>
+                    <form method="POST" action="{{ url('employer/review') }}">
+                        <input type="hidden" name="care_giver_id" value="">
+                        <div class="form-group">
+                            <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
                         </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">6</span>
-                            <span class="font-weight-medium">Active Job(s)</span>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success">Send</button>
                         </div>
-                    </div> --}}
+                    </form>
+                </div>
+            </div>
           <div class="row mb-5">
             <div class="col-lg-12 mb-2">
               <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
@@ -56,12 +128,11 @@
                 </div><!-- end bread-details -->
                 <div class="bread-action">
                   <ul class="listing-info">
-                    {{-- <li>
-                                            <button type="button" class="theme-btn mr-1"><i class="la la-heart-o font-size-16"></i> Save</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="theme-btn border-0">Apply Now</button>
-                                        </li> --}}
+                    <li>                                                                                             
+                        {{-- <form>
+                            <button type="button" class="btn border-0 btn-success">Pay All</button>
+                        </form> --}}
+                    </li>
                   </ul>
                 </div><!-- end bread-action -->
               </div><!-- end breadcrumb-content -->
@@ -123,78 +194,11 @@
               </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
           </div>
-          <div class="table-responsive">
-            <table class="table" id="myTable" width="100%">
-              <thead>
-                <tr>
-                  <th>Care Giver Name</th>
-                  <th>Applied On</th>
-                  <th>Status</th>
-                  <th class="text-center">Action</th>
-                  <th>View</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($applies as $apply)
-                <tr>
-                  <td>
-                    <div class="bread-details d-flex">
-                      <div class="bread-img flex-shrink-0">
-                        <a href="candidate-details.html" class="d-block">
-                          <img src="{{ asset('uploads/profile_pictures/'.$apply->user->avatar) }}" alt="">
-                        </a>
-                      </div>
-                      <div class="manage-candidate-content">
-                        <h2 class="widget-title pb-2"><a href="candidate-details.html" class="color-text-2">{{$apply->user->first_name}} {{$apply->user->last_name}}</a></h2>
-                        <p class="font-size-15">
-                          <span class="mr-2"><i class="la la-envelope-o mr-1"></i><a href="{{$apply->user->email}}" class="color-text-3">{{$apply->user->email}}</a></span>
-                          <span class="mr-2"><i class="la la-phone mr-1"></i>{{$apply->user->mobile}}</span>
-                        </p>
-                        <p class="mt-1 font-size-15">
-                          <span class="mr-2"><i class="la la-map mr-1"></i>{{$apply->user->address}}</span>
-                        </p>
-                      </div><!-- end manage-candidate-content -->
-                    </div>
-                  </td>
-                  <td>{{ date('D, M j, Y', strtotime($apply->created_at))}}</td>
-                  <td>
-                    @if ($apply->status == "Approved")
-                    <span class="badge badge-success p-1">{{$apply->status}}</span></td>
-                  @else
-                  <span class="badge badge-warning p-1">{{$apply->status}}</span></td>
-                  @endif
-                  <td class="text-center">
-                    <div class="manage-candidate-wrap">
-                      <div class="bread-action pt-0">
-                        <ul class="info-list">
-                          <li class="d-inline-block"><a href="{{ url('employer/message', $apply->user->id) }}"><i class="la la-envelope" data-toggle="tooltip" data-placement="top" title="Message"></i></a></li>
-                          @if ($apply->status == "Pending" || $apply->status == "Denied")
-                          <li class="d-inline-block"><a href="{{ url('employer/approve-job', $apply->id) }}"><i class="la la-cloud-download" data-toggle="tooltip" data-placement="top" title="Approve"></i></a></li>
-                          @endif
-                          @if ($apply->status == "Approved")
-                          <li class="d-inline-block"><a href="{{ url('employer/deny-job', $apply->id) }}"><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Deny"></i></a></li>
-                          @endif
-                        </ul>
-                      </div>
-                    </div>
-                  </td>
-                  <td>                    
-                    {{-- <form method="POST" action="{{ url('employer/work-done') }}">
-                      @csrf
-                      <input type="hidden" name="job_id" value="{{$job[0]['id']}}">
-                      <input type="hidden" name="care_giver_id" value="{{$apply->user->id}}">
-                     <button type="submit" class="btn btn-success">View</button>
-                    </form> --}}
-                    <a href="{{ url('employer/work-done'.'/'.$job[0]['id'].'/'.$apply->user->id) }}" class="btn btn-success">View</a>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
         </div>
       </div><!-- end billing-content -->
     </div><!-- end billing-form-item -->
   </div><!-- end col-lg-12 -->
 </div><!-- end row -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
 @endsection
+@include('employer.layouts.includes.payment')

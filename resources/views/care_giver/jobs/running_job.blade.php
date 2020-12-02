@@ -4,12 +4,12 @@
   <div class="col-lg-12">
     <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
       <div class="section-heading">
-        <h2 class="sec__title">Applied Job</h2>
+        <h2 class="sec__title">Running Jobs </h2>
       </div><!-- end section-heading -->
       <ul class="list-items d-flex align-items-center">
         <li class="active__list-item"><a href="index.html">Home</a></li>
         <li class="active__list-item"><a href="index.html">Dashboard</a></li>
-        <li>Applied Job</li>
+        <li>Running Jobs    </li>
       </ul>
     </div><!-- end breadcrumb-content -->
   </div><!-- end col-lg-12 -->
@@ -18,7 +18,7 @@
     <div class="col-lg-12">
         <div class="billing-form-item">
             <div class="billing-title-wrap">
-                <h3 class="widget-title pb-0">Applied Job</h3>
+                <h3 class="widget-title pb-0">Running Jobs  </h3>
                 <div class="title-shape margin-top-10px"></div>
             </div><!-- billing-title-wrap -->
             <div class="billing-content pb-0">
@@ -30,6 +30,7 @@
                                     <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
+                                    {{-- <th>Job Action</th> --}}
                                     <th>Amount / Hour</th>
                                     <th>Action</th>
                                 </tr>
@@ -63,16 +64,14 @@
                                         <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
                                         @endif
                                     </td>
-                                    <td><span class="text-success">₦{{$job->job->amount}}</span></td>
-                                    {{-- <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->job->created_at))}}</td>
-                                    <td>{{  date('D, M j, Y', strtotime($job->job->date_end))}}</td> --}}
-                                    
+                                    {{-- <th>
+                                    </th> --}}
+                                    <td><span class="text-success">₦{{$job->job->amount}}</span></td>                                    
                                     <td class="text-center">
                                         <div class="manage-candidate-wrap">
                                             <div class="bread-action pt-0">
                                                 <ul class="info-list">
-                                                    <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li>
+                                                    {{-- <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li> --}}
                                                     <li class="d-inline-block"><a href="{{ url('care-giver/view-job', $job->job->id) }}"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
                                                 </ul>
                                             </div>
@@ -105,4 +104,21 @@
         </div><!-- end billing-form-item -->
     </div><!-- end col-lg-12 -->
 </div><!-- end row -->
+<script>
+    var timerVar = setInterval(countTimer, 1000);
+    var totalSeconds = 0;
+    function countTimer() {
+           ++totalSeconds;
+           var hour = Math.floor(totalSeconds /3600);
+           var minute = Math.floor((totalSeconds - hour*3600)/60);
+           var seconds = totalSeconds - (hour*3600 + minute*60);
+           if(hour < 10)
+             hour = "0"+hour;
+           if(minute < 10)
+             minute = "0"+minute;
+           if(seconds < 10)
+             seconds = "0"+seconds;
+           document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+        }
+</script>
 @endsection

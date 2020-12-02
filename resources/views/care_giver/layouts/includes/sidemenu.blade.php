@@ -22,7 +22,7 @@
                         <ul class="dropdown-menu-item">
                             <li><a href="{{ url('care-giver/new-jobs') }}">New Jobs</a></li>
                             <li><a href="{{ url('care-giver/applied-jobs') }}">Applied Jobs</a></li>
-                            <li><a href="{{ url('care-giver/change-password') }}">Running Jobs</a></li>
+                            <li><a href="{{ url('care-giver/running-jobs') }}">Running Jobs</a></li>
                             <li><a href="{{ url('care-giver/change-password') }}">Done Jobs</a></li>
                         </ul>
                     </li>

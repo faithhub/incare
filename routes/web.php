@@ -55,6 +55,8 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
   Route::get('/messages', [App\Http\Controllers\employer\MessageController::class, 'index']);
   Route::get('/message/{id}', [App\Http\Controllers\employer\MessageController::class, 'message']);
   Route::post('/message', [App\Http\Controllers\employer\MessageController::class, 'sendMessage']);
+  Route::post('/work-payment', [App\Http\Controllers\employer\JobsController::class, 'work_payment']);
+  Route::get('/work-done/{id}/{user_id}', [App\Http\Controllers\employer\JobsController::class, 'work_done']);
 });
 
 //Care Giver
@@ -64,6 +66,7 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::get('/new-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'new_job']);
   Route::get('/plans', [App\Http\Controllers\CareGiver\PlanController::class, 'index']);
   Route::get('/applied-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'applied_job']);
+  Route::get('/running-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'running_job']);
   Route::get('/profile', [App\Http\Controllers\CareGiver\SettingsController::class, 'profile']);
   Route::post('/profile', [App\Http\Controllers\CareGiver\SettingsController::class, 'update_profile']);
   Route::get('/change-password', [App\Http\Controllers\CareGiver\SettingsController::class, 'change_password']);
@@ -76,6 +79,10 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::get('/messages', [App\Http\Controllers\CareGiver\MessageController::class, 'index']);
   Route::get('/message/{id}', [App\Http\Controllers\CareGiver\MessageController::class, 'message']);
   Route::post('/message', [App\Http\Controllers\CareGiver\MessageController::class, 'sendMessage']);
+  Route::post('/start-job', [App\Http\Controllers\CareGiver\JobsController::class, 'start_job']);
+  Route::post('/end-job', [App\Http\Controllers\CareGiver\JobsController::class, 'end_job']);
+  Route::post('/delete-work-done', [App\Http\Controllers\CareGiver\JobsController::class, 'delete_work_done']);
+  Route::post('/deliver-work', [App\Http\Controllers\CareGiver\JobsController::class, 'deliver_work']);
 });
 
 //Admin

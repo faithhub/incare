@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
       $table->string('mobile')->nullable();
       $table->string('city')->nullable();
       $table->string('address')->nullable();
+      $table->string('wallet')->nullable();
       $table->string('type');
       $table->enum('status', ['Active', 'Blocked'])->default('Active');
       $table->enum('plan', ['0', '1'])->default('0');
