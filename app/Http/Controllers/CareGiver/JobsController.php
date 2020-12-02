@@ -130,11 +130,12 @@ class JobsController extends Controller
     if ($id) {
       $data['job'] = $job = Job::where(['id' => $id])->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
       $data['check'] = $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->count();
-      $data['job_apply'] = $job_apply = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get  ();
+      $data['job_apply'] = $job_apply = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       $data['job_start'] = RunningJobs::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
         $data['sn'] = 1;
+        //dd($job_apply);
         return view('care_giver.jobs.view_job', $data);
       } else {
         Session::flash('error', 'No record found for Job');

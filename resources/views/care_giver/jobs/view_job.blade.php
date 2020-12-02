@@ -155,7 +155,6 @@
                                    </table>
                                 </div>
                             </div>
-                                {{-- {{$start}}                              --}}
                             @else
                             @endif
                         </div>
@@ -233,7 +232,7 @@
                                         <div class="billing-content">
                                             <div class="info-list static-info">
                                                 <ul>
-                                                    @if (isset($job_apply))
+                                                    @if ($job_apply->count() > 0)
                                                         <li class="mb-3 d-flex align-items-center"><p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span>
                                                                 @if ($job_apply[0]['status'] == 'Approved')
                                                                 <span class="badge badge-success p-1">{{$job_apply[0]['status']}}</span>                                            
