@@ -115,6 +115,8 @@
                   Reviews
                 </div>
                 <div class="card-body">
+                  @if($reviews->count() > 0)
+                  @else
                   <form method="POST" action="{{ url('employer/review') }}">
                     @csrf
                     <input type="hidden" name="care_giver_id" value="{{$user->id}}">
@@ -126,6 +128,7 @@
                       <button type="submit" class="btn btn-success">Send</button>
                     </div>
                   </form>
+                  @endif
                   @foreach ($reviews as $review)
                   @if($review->employer_id == Auth::User()->id)
                   <div class="media mb-4">
