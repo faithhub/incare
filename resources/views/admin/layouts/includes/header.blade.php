@@ -58,6 +58,11 @@
                                                                     </a>
                                                                 </li>
                                                                 <li class="mb-0">
+                                                                    <a href="{{ url('admin/withdrawals') }}" class="d-block">
+                                                                        <i class="la la-money-bill"></i> Withdrawals
+                                                                    </a>
+                                                                </li>
+                                                                <li class="mb-0">
                                                                     <a href="{{ url('admin/transactions') }}" class="d-block">
                                                                         <i class="la la-money"></i> Transactions
                                                                     </a>
