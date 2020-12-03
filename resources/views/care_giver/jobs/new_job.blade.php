@@ -235,8 +235,8 @@
                             </table>
                         </div>
                     @else
-                        <div class="text-center mb-4">
-                            <h2 class="text-black" style="color: black">No New Job yet, Check back later</h2>
+                        <div class="text-center mb-4 mt-3">
+                            <h2 class="text-black" style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No New Job yet, Check back later</h2>
                         </div>
                     @endif
                     @endif

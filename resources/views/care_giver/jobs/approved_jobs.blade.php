@@ -7,8 +7,8 @@
         <h2 class="sec__title">Approved Job</h2>
       </div><!-- end section-heading -->
       <ul class="list-items d-flex align-items-center">
-        <li class="active__list-item"><a href="index.html">Home</a></li>
-        <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+        <li class="active__list-item"><a href="#">Home</a></li>
+        <li class="active__list-item"><a href="#">Dashboard</a></li>
         <li>Approved Job</li>
       </ul>
     </div><!-- end breadcrumb-content -->
@@ -44,7 +44,7 @@
                   </td>
                   <td>
                     <div class="manage-candidate-wrap">
-                      <h2 class="widget-title pb-1" style="font-size: 28px"><a href="job-details.html" class="color-text-2">{{$job->job->job_title}}</a></h2>
+                      <h2 class="widget-title pb-1" style="font-size: 28px"><a href="#" class="color-text-2">{{$job->job->job_title}}</a></h2>
                       {{-- <p>
                                                 <span>Category: <b style="color: black">{{$job->name}}</b></span>
                       </p>

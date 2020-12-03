@@ -4,12 +4,12 @@
   <div class="col-lg-12">
     <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
       <div class="section-heading">
-        <h2 class="sec__title">Running Jobs </h2>
+        <h2 class="sec__title">Rnning Job</h2>
       </div><!-- end section-heading -->
       <ul class="list-items d-flex align-items-center">
         <li class="active__list-item"><a href="#">Home</a></li>
         <li class="active__list-item"><a href="#">Dashboard</a></li>
-        <li>Running Jobs    </li>
+        <li>Rnning Job</li>
       </ul>
     </div><!-- end breadcrumb-content -->
   </div><!-- end col-lg-12 -->
@@ -18,9 +18,14 @@
     <div class="col-lg-12">
         <div class="billing-form-item">
             <div class="billing-title-wrap">
-                <h3 class="widget-title pb-0">Running Jobs  </h3>
+                <h3 class="widget-title pb-0">Rnning Job</h3>
                 <div class="title-shape margin-top-10px"></div>
             </div><!-- billing-title-wrap -->
+            @if ($jobs->count() == 0)
+                <div class="text-center mb-3 mt-2">
+                    <h2 style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No Approved Job yet</h2>
+                </div>                
+            @else
             <div class="billing-content pb-0">
                 <div class="manage-job-wrap">                    
                     <div class="table-responsive">
@@ -30,7 +35,6 @@
                                     <th>Job Picture</th>
                                     <th>Job Title</th>
                                     <th>Status</th>
-                                    {{-- <th>Job Action</th> --}}
                                     <th>Amount / Hour</th>
                                     <th>Action</th>
                                 </tr>
@@ -64,61 +68,26 @@
                                         <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
                                         @endif
                                     </td>
-                                    {{-- <th>
-                                    </th> --}}
-                                    <td><span class="text-success">₦{{$job->job->amount}}</span></td>                                    
+                                    <td><span class="text-success"><b>₦{{$job->job->amount}}</b></span></td>                                    
                                     <td class="text-center">
                                         <div class="manage-candidate-wrap">
                                             <div class="bread-action pt-0">
                                                 <ul class="info-list">
-                                                    {{-- <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete{{$job->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Remove"></i></a></li> --}}
                                                     <li class="d-inline-block"><a href="{{ url('care-giver/view-job', $job->job->id) }}"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                
-                                <!-- Modal Delete -->
-                                <div class="modal fade" id="delete{{$job->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body mt-2 mb-2 text-center">
-                                            <h2 style="color: black">Are you sure you want to delete?</h2>
-                                        <form method="POST" action="{{ url('care-giver/delete-job') }}">
-                                            @csrf                                                        
-                                            <input type="hidden" name="id" value="{{ $job->id }}">
-                                            <button type="submit" class="btn btn-success m-2">Yes</button> 
-                                            <button type="button" class="btn btn-dark m-2" data-dismiss="modal" aria-label="Close">No</button>
-                                        </form>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
+                  </div>
                 </div>
-            </div><!-- end billing-content -->
-        </div><!-- end billing-form-item -->
-    </div><!-- end col-lg-12 -->
-</div><!-- end row -->
-<script>
-    var timerVar = setInterval(countTimer, 1000);
-    var totalSeconds = 0;
-    function countTimer() {
-           ++totalSeconds;
-           var hour = Math.floor(totalSeconds /3600);
-           var minute = Math.floor((totalSeconds - hour*3600)/60);
-           var seconds = totalSeconds - (hour*3600 + minute*60);
-           if(hour < 10)
-             hour = "0"+hour;
-           if(minute < 10)
-             minute = "0"+minute;
-           if(seconds < 10)
-             seconds = "0"+seconds;
-           document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
-        }
-</script>
+            </div>
+            @endif
+        </div>
+    </div>
+</div><!-- end billing-content -->
 @endsection
