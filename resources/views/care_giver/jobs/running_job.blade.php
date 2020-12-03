@@ -23,7 +23,7 @@
             </div><!-- billing-title-wrap -->
             @if ($jobs->count() == 0)
                 <div class="text-center mb-3 mt-2">
-                    <h2 style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No Approved Job yet</h2>
+                    <h2 style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No Running Job yet</h2>
                 </div>                
             @else
             <div class="billing-content pb-0">

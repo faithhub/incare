@@ -96,7 +96,7 @@
                             <table class="table" id="myTable" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Job Picture</th>
+                                        {{-- <th>Job Picture</th> --}}
                                         <th>Job Title</th>
                                         <th>Status</th>
                                         <th>Amount / Hour</th>
@@ -106,9 +106,9 @@
                                 <tbody>
                                 @foreach ($results as $job)                                
                                     <tr>
-                                        <td>                                        
+                                        {{-- <td>                                        
                                             <img class="img-fluid" alt="" src="{{ asset('uploads/jobs/'.$job->avatar) }}" style="width: 200px; height: 150px;">
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <div class="bread-details d-flex">
                                                 <div class="bread-img flex-shrink-0">
@@ -121,8 +121,8 @@
                                                     <p class="font-size-15">
                                                         <span class="mr-2"><i class="la la-meetup mr-1"></i>Category - {{$job->cat->name}}</span><br>
                                                         <span class="mr-2"><i class="la la-meetup mr-1"></i>Sub Category - {{$job->sub->name}}</span><br>
-                                                        <span class="mr-2"><i class="la la-meetup mr-1">>Posted On:{{  date('D, M j, Y', strtotime($job->created_at))}}</span><br>
-                                                        <span class="mr-2"><i class="la la-meetup mr-1">>Closes On:{{  date('D, M j, Y', strtotime($job->date_end))}}</span>
+                                                        <span class="mr-2"><i class="la la-meetup mr-1"></i>Posted On:{{  date('D, M j, Y', strtotime($job->created_at))}}</span><br>
+                                                        <span class="mr-2"><i class="la la-meetup mr-1"></i>Closes On:{{  date('D, M j, Y', strtotime($job->date_end))}}</span>
                                                     </p>
                                                 </div><!-- end manage-candidate-content -->
                                             </div>
@@ -137,7 +137,7 @@
                                             @endif
                                         </td>
                                         {{-- <td>2 Application(s)</td> --}}
-                                        <td><span class="text-success">₦{{$job->amount}}</span></td>
+                                        <td><span class="text-success"><b>₦{{$job->amount}}</b></span></td>
                                         <td>
                                             <a href="{{ url('care-giver/view-job', $job->id) }}" class="btn theme-btn">View</a>
                                         </td>

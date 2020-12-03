@@ -39,7 +39,7 @@
             <div class="col-lg-12">
               @if ($work_done->count() > 0)
               <h3 class="mb-3" style="color: black; font-weight: 700">Work History done by Care Giver</h3>
-              <div class="manage-candidate-wrap d-flex align-items-center justify-content-between pb-4">
+              <div class="manage-candidate-wrap pb-4">
                 <div class="bread-details d-flex">
                   <table class="table">
                     <thead>

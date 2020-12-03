@@ -252,6 +252,7 @@
                             </div><!-- end sidebar -->
                         </div><!-- end col-lg-4 -->
                     </div>
+                </div>
             </div><!-- end billing-content -->
         </div><!-- end billing-form-item -->
     </div><!-- end col-lg-12 -->
