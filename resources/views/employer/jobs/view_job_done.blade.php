@@ -98,8 +98,8 @@
               @else
               @endif
 
-              <h2 class="mb-3" style="color: black; font-weight: 700">Review</h2>
-              <form method="POST" action="{{ url('employer/review') }}">
+              <!-- <h2 class="mb-3" style="color: black; font-weight: 700">Review</h2> -->
+              <!-- <form method="POST" action="{{ url('employer/review') }}">
                 @csrf
                 <input type="hidden" name="care_giver_id" value="{{$user->id}}">
                 <input type="text" name="work_done_id" value="{{$work_done[0]->id}}" hidden>
@@ -109,20 +109,54 @@
                 <div class="text-right">
                   <button type="submit" class="btn btn-success">Send</button>
                 </div>
-              </form>
-              @foreach ($reviews as $review)
-              <div class="media mb-4">
-                <div class="media-left media-middle">
-                  <a href="#">
-                    <img class="media-object" src="..." alt="...">
-                  </a>
+              </form> -->
+              <div class="card mt-4">
+                <div class="card-header">
+                  Reviews
                 </div>
-                <div class="media-body">
-                  <h5 class="media-heading">{{$review->id == $user->id ? $user->first_name : Auth::User()->first_name}}</h4>
-                    <p>{{$review->review}}</p>
+                <div class="card-body">
+                  <form method="POST" action="{{ url('employer/review') }}">
+                    @csrf
+                    <input type="hidden" name="care_giver_id" value="{{$user->id}}">
+                    <input type="text" name="work_done_id" value="{{$work_done[0]->id}}" hidden>
+                    <div class="form-group">
+                      <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="text-right">
+                      <button type="submit" class="btn btn-success">Send</button>
+                    </div>
+                  </form>
+                  @foreach ($reviews as $review)
+                  @if($review->employer_id == Auth::User()->id)
+                  <div class="media mb-4">
+                    <div class="media-left media-middle">
+                      <a href="#">
+                        <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ Auth::User()->avatar != null ? asset('uploads/profile_pictures/'.Auth::User()->avatar) : asset('web/images/avatar.png') }}" alt="{{Auth::User()->first_name}}">
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h5 class="media-heading">{{Auth::User()->first_name}} {{Auth::User()->last_name}}</h5>
+                      <p>{{$review->review}}</p>
+                      <small><i>{{ $review->created_at->diffForHumans() }}</i></small>
+                    </div>
+                  </div>
+                  @else
+                  <div class="media mb-4">
+                    <div class="media-left media-middle">
+                      <a href="#">
+                        <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name}}" alt="{{$user->first_name}}">
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h5 class="media-heading">{{$user->first_name}} {{$user->last_name}} </h5>
+                      <p>{{$review->review}}</p>
+                      <small><i>{{ $review->created_at->diffForHumans() }}</i></small>
+                    </div>
+                  </div>
+                  @endif
+                  @endforeach
                 </div>
               </div>
-              @endforeach
             </div>
           </div>
           <div class="row mb-5">
