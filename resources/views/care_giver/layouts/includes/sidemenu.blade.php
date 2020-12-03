@@ -22,7 +22,7 @@
             <li><a href="{{ url('care-giver/new-jobs') }}">New Jobs</a></li>
             <li><a href="{{ url('care-giver/applied-jobs') }}">Applied Jobs</a></li>
             <li><a href="{{ url('care-giver/running-jobs') }}">Running Jobs</a></li>
-            <li><a href="{{ url('care-giver/change-password') }}">Done Jobs</a></li>
+            <li><a href="{{ url('care-giver/done-jobs') }}">Done Jobs</a></li>
           </ul>
         </li>
         <li class="{{ request()->is('care-giver/profile*') || request()->is('care-giver/change-password*')  ? 'page-active' : '' }}">

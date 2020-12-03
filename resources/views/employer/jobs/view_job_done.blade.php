@@ -71,20 +71,20 @@
                         </td>
                         <td>
                           @if ($start->done == 'Yes')
-                          ₦{{$start->amount_worked}}
+                          <span class="text-success"><b>₦{{$start->amount_worked}}</b></span>
                           @else
                           <span class="btn-sm btn-success">Running</span>
                           @endif
                         </td>
                         <td>
                           @if ($start->done == 'Yes')
-                          @if ($start->paid == 'Yes')
-                          <span style="cursor: no-drop" class="btn-sm btn-default">Paid</span>
-                          @else
-                          <form>
-                            <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$start->amount_worked}},{{$start->id}})">Pay Now</button>
-                          </form>
-                          @endif
+                            @if ($start->paid == 'Yes')
+                            <span style="cursor: no-drop" class="btn-sm btn-default">Paid</span>
+                            @else
+                            <form>
+                                <button type="button" class="btn btn-success text-white" onclick="payWithPaystack({{$start->amount_worked}},{{$start->id}})">Pay Now</button>
+                            </form>
+                            @endif
                           @else
                           <span class="btn-sm btn-success">Running</span>
                           @endif
@@ -97,19 +97,7 @@
               </div>
               @else
               @endif
-
-              <!-- <h2 class="mb-3" style="color: black; font-weight: 700">Review</h2> -->
-              <!-- <form method="POST" action="{{ url('employer/review') }}">
                 @csrf
-                <input type="hidden" name="care_giver_id" value="{{$user->id}}">
-                <input type="text" name="work_done_id" value="{{$work_done[0]->id}}" hidden>
-                <div class="form-group">
-                  <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
-                </div>
-                <div class="text-right">
-                  <button type="submit" class="btn btn-success">Send</button>
-                </div>
-              </form> -->
               <div class="card mt-4">
                 <div class="card-header">
                   Reviews

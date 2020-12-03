@@ -95,7 +95,7 @@
                                                             </td>
                                                             <td>
                                                                 @if ($start->done == 'Yes')
-                                                                    ₦{{$start->amount_worked}}
+                                                                    <span class="text-success"><b>₦{{$start->amount_worked}}</b></span>
                                                                 @else
                                                                     <span class="btn-sm btn-success">Running</span>
                                                                 @endif
@@ -129,7 +129,9 @@
                                                                 <div class="manage-candidate-wrap">
                                                                     <div class="bread-action pt-0">
                                                                         <ul class="info-list">
-                                                                            <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete-work-history{{$start->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete Work"></i></a></li>
+                                                                            @if ($start->paid != 'Yes')
+                                                                                <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete-work-history{{$start->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete Work"></i></a></li>                                                                                
+                                                                            @endif
                                                                         </ul>
                                                                     </div>
                                                                 </div>                                                    

@@ -207,6 +207,13 @@ class JobsController extends Controller
     return view('care_giver.jobs.running_job', $data);
   }
 
+  public function done_job()
+  {
+    $data['title'] = 'Done Jobs';
+    $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->where('status', 'Approved')->with('job:id,avatar,employer_id,job_title,amount,created_at,date_end')->get();
+    return view('care_giver.jobs.running_job', $data);
+  }
+
   public function delete_job(Request $request)
   {
     try {
