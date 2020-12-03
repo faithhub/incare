@@ -68,6 +68,7 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::get('/plans', [App\Http\Controllers\CareGiver\PlanController::class, 'index']);
   Route::get('/applied-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'applied_job']);
   Route::get('/running-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'running_job']);
+  Route::get('/done-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'done_job']);
   Route::get('/profile', [App\Http\Controllers\CareGiver\SettingsController::class, 'profile']);
   Route::post('/profile', [App\Http\Controllers\CareGiver\SettingsController::class, 'update_profile']);
   Route::get('/change-password', [App\Http\Controllers\CareGiver\SettingsController::class, 'change_password']);

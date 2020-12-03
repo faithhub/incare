@@ -4,12 +4,12 @@
   <div class="col-lg-12">
     <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
       <div class="section-heading">
-        <h2 class="sec__title">Rnning Job</h2>
+        <h2 class="sec__title">Running Job</h2>
       </div><!-- end section-heading -->
       <ul class="list-items d-flex align-items-center">
         <li class="active__list-item"><a href="#">Home</a></li>
         <li class="active__list-item"><a href="#">Dashboard</a></li>
-        <li>Rnning Job</li>
+        <li>Running Job</li>
       </ul>
     </div><!-- end breadcrumb-content -->
   </div><!-- end col-lg-12 -->
@@ -18,7 +18,7 @@
     <div class="col-lg-12">
         <div class="billing-form-item">
             <div class="billing-title-wrap">
-                <h3 class="widget-title pb-0">Rnning Job</h3>
+                <h3 class="widget-title pb-0">Running Job</h3>
                 <div class="title-shape margin-top-10px"></div>
             </div><!-- billing-title-wrap -->
             @if ($jobs->count() == 0)
