@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\JobApply;
+use App\Models\Reviews;
 use App\Models\RunningJobs;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -132,6 +133,9 @@ class JobsController extends Controller
       $data['check'] = $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->count();
       $data['job_apply'] = $job_apply = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       $data['job_start'] = RunningJobs::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
+      $data['work_done'] = $work_done = RunningJobs::where('care_giver_id', Auth::User()->id)->get();
+      $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->id)->get();
+      $data['user'] = User::find($job[0]->employer_id);
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
         $data['sn'] = 1;
