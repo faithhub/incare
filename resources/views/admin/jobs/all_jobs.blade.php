@@ -83,6 +83,8 @@
                                         <span class="badge badge-success p-1">{{$job->status}}</span>
                                         @elseif ($job->status == 'Blocked')
                                         <span class="badge badge-danger p-1">{{$job->status}}</span> 
+                                        @elseif ($job->status == 'Delivered')
+                                        <span class="badge badge-success p-1">{{$job->status}}</span>
                                         @else
                                         <span class="badge badge-warning p-1">{{$job->status}}</span>                                            
                                         @endif
@@ -93,7 +95,9 @@
                                             <div class="bread-action pt-0">
                                                 <ul class="info-list">
                                                     <li class="d-inline-block"><a href="{{ url('admin/view-job', $job->id) }}" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
-                                                    <li class="d-inline-block"><a href="#"><i class="la la-pencil" data-toggle="modal" data-target="#edit{{$job->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Remove" data-toggle="tooltip" data-placement="top" title="Edit Status"></i></a></li>
+                                                    @if ($job->status != 'Delivered')
+                                                    <li class="d-inline-block"><a href="#"><i class="la la-pencil" data-toggle="modal" data-target="#edit{{$job->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Remove" data-toggle="tooltip" data-placement="top" title="Edit Status"></i></a></li>                                                        
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>

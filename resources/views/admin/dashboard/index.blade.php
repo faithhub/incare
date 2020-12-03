@@ -120,7 +120,9 @@
                                     </div><!-- end manage-candidate-content -->
                                 </div>
                             </td>
-                            <td>₦{{$job->amount}}</td>
+                            <td>
+                                <span class="text-success">₦{{$job->amount}}</span>
+                            </td>
                             <td>{{  date('D, M j, Y', strtotime($job->created_at))}}</td>
                             <td>{{  date('D, M j, Y', strtotime($job->date_end))}}</td>
                             <td class="text-center">

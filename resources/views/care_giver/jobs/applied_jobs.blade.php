@@ -21,6 +21,11 @@
                 <h3 class="widget-title pb-0">Applied Job</h3>
                 <div class="title-shape margin-top-10px"></div>
             </div><!-- billing-title-wrap -->
+            @if ($jobs->count() == 0)
+                <div class="text-center mb-3 mt-2">
+                    <h2 style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No Approved Job yet</h2>
+                </div>                
+            @else
             <div class="billing-content pb-0">
                 <div class="manage-job-wrap">                    
                     <div class="table-responsive">
@@ -98,18 +103,9 @@
                     </div>
                   </div>
                 </div>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
+            </div>
+            @endif
         </div>
-      </div>
-      </tbody>
-      </table>
     </div>
-  </div>
 </div><!-- end billing-content -->
-</div><!-- end billing-form-item -->
-</div><!-- end col-lg-12 -->
-</div><!-- end row -->
 @endsection

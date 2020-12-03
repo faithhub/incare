@@ -83,7 +83,15 @@
                       <div class="info-list static-info">
                         <ul>
                           <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-dashboard"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span> {{$job[0]['status']}}</p>
+                            <p><i class="la la-dashboard"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span>
+                              @if ($job[0]['status'] == 'Approved' || $job[0]['status'] == 'Delivered')
+                                <span class="btn btn-sm btn-success"> {{$job[0]['status']}}</span>                                  
+                              @elseif ($job[0]['status'] == 'Blocked')
+                                <span class="btn btn-sm btn-danger"> {{$job[0]['status']}}</span>
+                              @elseif ($job[0]['status'] == 'Pending')
+                                <span class="btn btn-sm btn-warning"> {{$job[0]['status']}}</span>                                  
+                              @endif
+                            </p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
                             <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p>
@@ -104,7 +112,7 @@
                             <p><i class="la la-phone"></i> <span class="color-text-2 font-weight-medium mr-1">Mobile:</span> {{$job[0]['mobile']}}</p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> ₦{{$job[0]['amount']}}</p>
+                            <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> <b class="text-success">₦{{$job[0]['amount']}}</b></p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
                             <p><i class="la la-calendar"></i> <span class="color-text-2 font-weight-medium mr-1">Posted Date:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['created_at']))}}</p>
@@ -123,7 +131,7 @@
           
         @if (!empty($applies))
           <div class="text-center mb-3">
-            <h2>No Application made  for this Job yet</h2>
+            <h2 style="color: black; font-family: Georgia, 'Times New Roman', Times, serif">No Application made  for this Job yet</h2>
           </div>                    
         @else 
           <div class="table-responsive">
