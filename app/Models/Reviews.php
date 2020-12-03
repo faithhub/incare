@@ -12,6 +12,7 @@ class Reviews extends Model
   protected $fillable = [
     'review',
     'care_giver_id',
+    'sender_id',
     'employer_id',
     'work_done_id',
   ];
@@ -23,6 +24,7 @@ class Reviews extends Model
     $save->care_giver_id = $data['care_giver_id'];
     $save->employer_id = $data['employer_id'];
     $save->work_done_id = $data['work_done_id'];
+    $save->sender_id = $data['sender_id'];
     $save->save();
   }
 }

@@ -18,6 +18,7 @@ class CreateReviewsTable extends Migration
       $table->text('review');
       $table->string('care_giver_id');
       $table->string('employer_id');
+      $table->string('sender_id');
       $table->string('work_done_id');
       $table->timestamps();
     });

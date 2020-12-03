@@ -24,20 +24,6 @@
       </div><!-- billing-title-wrap -->
       <div class="billing-content pb-0">
         <div class="manage-job-wrap">
-          {{-- <div class="manage-job-header mt-3 mb-5">
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">12</span>
-                            <span class="font-weight-medium">job(s) Posted</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">8</span>
-                            <span class="font-weight-medium">Application(s)</span>
-                        </div>
-                        <div class="manage-job-count">
-                            <span class="font-weight-medium color-text-2 mr-1">6</span>
-                            <span class="font-weight-medium">Active Job(s)</span>
-                        </div>
-                    </div> --}}
           <div class="row mb-5">
             <div class="col-lg-12 mb-2">
               <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
@@ -56,12 +42,6 @@
                 </div><!-- end bread-details -->
                 <div class="bread-action">
                   <ul class="listing-info">
-                    {{-- <li>
-                                            <button type="button" class="theme-btn mr-1"><i class="la la-heart-o font-size-16"></i> Save</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="theme-btn border-0">Apply Now</button>
-                                        </li> --}}
                   </ul>
                 </div><!-- end bread-action -->
               </div><!-- end breadcrumb-content -->
@@ -118,7 +98,7 @@
                             <p><i class="la la-phone"></i> <span class="color-text-2 font-weight-medium mr-1">Mobile:</span> {{$job[0]['mobile']}}</p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> ₦{{$job[0]['amount']}}</p>
+                            <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> <span class="text-success"><b>₦{{$job[0]['amount']}}</b></span></p>
                           </li>
                           <li class="mb-3 d-flex align-items-center">
                             <p><i class="la la-calendar"></i> <span class="color-text-2 font-weight-medium mr-1">Posted Date:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['created_at']))}}</p>
@@ -134,8 +114,7 @@
               </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
           </div>
-          @if ($applies->count() > 0)
-                
+          @if ($applies->count() > 0)                
           <div class="table-responsive">
             <table class="table" id="myTable" width="100%">
               <thead>

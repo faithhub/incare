@@ -26,6 +26,7 @@ class JobsController extends Controller
     $this->middleware('care-giver');
     $this->apply_job = new JobApply();
     $this->running_job = new RunningJobs();
+    $this->create_review = new Reviews();
   }
 
   public function new_job(Request $request)
@@ -134,7 +135,8 @@ class JobsController extends Controller
       $data['job_apply'] = $job_apply = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       $data['job_start'] = RunningJobs::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       $data['work_done'] = $work_done = RunningJobs::where('care_giver_id', Auth::User()->id)->get();
-      $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->id)->get();
+      $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->job_id)->get();
+      $data['sender_status'] = $sender_status = Reviews::where([['work_done_id', $work_done[0]->job_id], ['sender_id', Auth::user()->id]])->get();
       $data['user'] = User::find($job[0]->employer_id);
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
@@ -147,6 +149,32 @@ class JobsController extends Controller
       }
     } else {
       return redirect('care_giver/new-jobs');
+    }
+  }
+
+  public function sendReview(Request $request)
+  {
+    // dd($request->all());
+    if ($request->review != null) {
+      $data = array(
+        'employer_id' => $request->employer_id,
+        'sender_id' => Auth::User()->id,
+        'care_giver_id' => Auth::User()->id,
+        'review' => $request->review,
+        'work_done_id' => $request->work_done_id,
+      );
+      $paidCount = RunningJobs::where([['id', $request->work_done_id], ['paid', 'No']])->count();
+      if ($paidCount > 0) {
+        Session::flash('warning', 'you have to finish transacting before you can review, please pay up all arears.');
+        return back();
+      } else {
+        $this->create_review->create($data);
+        Session::flash('success', 'Review Posted Sucessfully');
+        return back();
+      }
+    } else {
+      Session::flash('warning', 'review cannot be empty');
+      return back();
     }
   }
 
@@ -211,6 +239,14 @@ class JobsController extends Controller
     return view('care_giver.jobs.running_job', $data);
   }
 
+  public function done_job()
+  {
+    $data['title'] = 'Done Jobs';
+    $data['jobs'] = $j = JobApply::where('care_giver_id', Auth::user()->id)->where('status', 'Approved')->with('job:id,avatar,employer_id,job_title,status,amount,created_at,date_end')->get();
+    //dd($j);
+    return view('care_giver.jobs.done', $data);
+  }
+
   public function delete_job(Request $request)
   {
     try {
@@ -222,19 +258,12 @@ class JobsController extends Controller
       return back();
     }
   }
-  //   public function applied_job()
-  //   {
-  //     $data['title'] = 'Applied Jobs';
-  //     $data['jobs'] = JobApply::Where('care_giver_id', Auth::user()->id)->get();
-  //     return view('care_giver.jobs.applied_jobs', $data);
-  //   }
+
   public function start_job(Request $request)
   {
     try {
-      //dd($request->all());
       $this->running_job->create($request);
       $request->session()->flash('success', 'Work Started Successfully');
-      // dd($time);
       return back();
     } catch (\Throwable $th) {
       $request->session()->flash('error', $th->getMessage());

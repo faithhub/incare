@@ -68,6 +68,7 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::get('/plans', [App\Http\Controllers\CareGiver\PlanController::class, 'index']);
   Route::get('/applied-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'applied_job']);
   Route::get('/running-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'running_job']);
+  Route::get('/done-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'done_job']);
   Route::get('/profile', [App\Http\Controllers\CareGiver\SettingsController::class, 'profile']);
   Route::post('/profile', [App\Http\Controllers\CareGiver\SettingsController::class, 'update_profile']);
   Route::get('/change-password', [App\Http\Controllers\CareGiver\SettingsController::class, 'change_password']);
@@ -87,6 +88,7 @@ Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']],
   Route::get('/withdrawals', [App\Http\Controllers\CareGiver\WithdrawalController::class, 'index']);
   Route::post('/cancel-withdraw', [App\Http\Controllers\CareGiver\WithdrawalController::class, 'cancel_withdraw']);
   Route::match(['get', 'post'], '/create-withdrawal', [App\Http\Controllers\CareGiver\WithdrawalController::class, 'create']);
+  Route::Post('/review', [App\Http\Controllers\CareGiver\JobsController::class, 'sendReview']);
 });
 
 //Admin

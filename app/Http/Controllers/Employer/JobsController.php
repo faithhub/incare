@@ -262,9 +262,10 @@ class JobsController extends Controller
   {
     $data['sn'] = 1;
     $data['work_done'] = $work_done = RunningJobs::where('care_giver_id', $user_id)->get();
-    $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->id)->get();
+    $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->job_id)->get();
     $data['user'] = User::find($user_id);
     $data['job'] = Job::where('id', $id)->with('cat:id,name')->with('sub:id,name')->get();
+    $data['sender_status'] = $sender_status = Reviews::where([['work_done_id', $work_done[0]->job_id], ['sender_id', Auth::user()->id]])->get();
     return view('employer.jobs.view_job_done', $data);
   }
 
@@ -274,6 +275,7 @@ class JobsController extends Controller
     if ($request->review != null) {
       $data = array(
         'employer_id' => Auth::user()->id,
+        'sender_id' => Auth::user()->id,
         'care_giver_id' => $request->care_giver_id,
         'review' => $request->review,
         'work_done_id' => $request->work_done_id,

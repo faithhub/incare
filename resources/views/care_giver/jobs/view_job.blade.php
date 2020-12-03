@@ -95,7 +95,7 @@
                           </td>
                           <td>
                             @if ($start->done == 'Yes')
-                            ₦{{$start->amount_worked}}
+                            <span class="text-success"><b>₦{{$start->amount_worked}}</b></span>
                             @else
                             <span class="btn-sm btn-success">Running</span>
                             @endif
@@ -129,7 +129,9 @@
                             <div class="manage-candidate-wrap">
                               <div class="bread-action pt-0">
                                 <ul class="info-list">
+                                  @if ($start->paid != 'Yes')
                                   <li class="d-inline-block"><a href="#"><i data-toggle="modal" data-target="#delete-work-history{{$start->id}}" class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete Work"></i></a></li>
+                                  @endif
                                 </ul>
                               </div>
                             </div>
@@ -160,31 +162,27 @@
               </div>
               @else
               @endif
-            </div>
-          </div>
-          @endif
-          @endif
-          <div class="card mt-4">
-            <div class="card-header">
-              Reviews
-            </div>
-            <div class="card-body">
-              @if($reviews->count() > 0)
-              @else
-              <form method="POST" action="{{ url('care_giver/review') }}">
-                @csrf
-                <input type="text" name="employer_id" value="{{$user->id}}" hidden>
-                <input type="text" name="job" value="{{$job[0]->id}}" hidden>
-                <div class="form-group">
-                  <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
+              <div class="card mt-4">
+                <div class="card-header">
+                  Reviews
                 </div>
-                <div class="text-right">
-                  <button type="submit" class="btn btn-success">Send</button>
-                </div>
-              </form>
-              @endif
-              <!-- @foreach ($reviews as $review)
-                  @if($review->employer_id == Auth::User()->id)
+                <div class="card-body">
+                  @if($reviews->count() > 0 ? ($sender_status->count() > 0) : false)
+                  @else
+                  <form method="POST" action="{{ url('care-giver/review') }}">
+                    @csrf
+                    <input type="text" name="employer_id" value="{{$user->id}}" hidden>
+                    <input type="text" name="work_done_id" value="{{$job[0]->id}}" hidden>
+                    <div class="form-group">
+                      <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="text-right">
+                      <button type="submit" class="btn btn-success">Send</button>
+                    </div>
+                  </form>
+                  @endif
+                  @foreach ($reviews as $review)
+                  @if($review->sender_id == Auth::User()->id)
                   <div class="media mb-4">
                     <div class="media-left media-middle">
                       <a href="#">
@@ -211,119 +209,122 @@
                     </div>
                   </div>
                   @endif
-                  @endforeach -->
+                  @endforeach
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col-lg-12 mb-2">
-              <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
-                <div class="bread-details d-flex">
-                  <div class="bread-img flex-shrink-0">
-                    <img src="{{ asset('uploads/jobs/'.$job[0]['avatar']) }}" alt="">
-                  </div>
-                  <div class="job-detail-content">
-                    <h2 class="widget-title font-size-30 text-black pb-1">{{$job[0]['job_title']}}</h2>
-                    <p class="font-size-16 mt-1 text-black">
-                      <span class="mr-2 mb-2 d-inline-block"><i class="la la-briefcase mr-1"></i>Category: {{$job[0]['cat']['name']}}</span>
-                      <br>
-                      <span class="mr-2 mb-2 d-inline-block"><i class="la la-briefcase mr-1"></i>Sub Category: {{$job[0]['sub']['name']}}</span>
-                    </p>
-                  </div><!-- end job-detail-content -->
-                </div><!-- end bread-details -->
-                <div class="bread-action">
-                  <ul class="listing-info">
-                    {{-- <li>
+            @endif
+            @endif
+            <div class="row mb-5 mt-5">
+              <div class="col-lg-12 mb-2">
+                <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
+                  <div class="bread-details d-flex">
+                    <div class="bread-img flex-shrink-0">
+                      <img src="{{ asset('uploads/jobs/'.$job[0]['avatar']) }}" alt="">
+                    </div>
+                    <div class="job-detail-content">
+                      <h2 class="widget-title font-size-30 text-black pb-1">{{$job[0]['job_title']}}</h2>
+                      <p class="font-size-16 mt-1 text-black">
+                        <span class="mr-2 mb-2 d-inline-block"><i class="la la-briefcase mr-1"></i>Category: {{$job[0]['cat']['name']}}</span>
+                        <br>
+                        <span class="mr-2 mb-2 d-inline-block"><i class="la la-briefcase mr-1"></i>Sub Category: {{$job[0]['sub']['name']}}</span>
+                      </p>
+                    </div><!-- end job-detail-content -->
+                  </div><!-- end bread-details -->
+                  <div class="bread-action">
+                    <ul class="listing-info">
+                      {{-- <li>
                                             <button type="button" class="theme-btn mr-1"><i class="la la-heart-o font-size-16"></i> Save</button>
                                         </li> --}}
-                    <li>
-                      @if ($check > 0)
-                      <button type="button" disabled class="btn border-0 p-3 btn-success" style="cursor: no-drop">Applied</button>
-                      @else
-                      <form method="POST" action="{{ url('care-giver/apply-job') }}">
-                        @csrf
-                        <input type="hidden" name="id" value="{{$job[0]['id']}}">
-                        <button type="submit" class="btn border-0 p-3 btn-success">Apply Now</button>
-                      </form>
-                      @endif
+                      <li>
+                        @if ($check > 0)
+                        <button type="button" disabled class="btn border-0 p-3 btn-success" style="cursor: no-drop">Applied</button>
+                        @else
+                        <form method="POST" action="{{ url('care-giver/apply-job') }}">
+                          @csrf
+                          <input type="hidden" name="id" value="{{$job[0]['id']}}">
+                          <button type="submit" class="btn border-0 p-3 btn-success">Apply Now</button>
+                        </form>
+                        @endif
 
-                    </li>
-                  </ul>
-                </div><!-- end bread-action -->
-              </div><!-- end breadcrumb-content -->
-            </div>
-            <div class="col-lg-7">
-              <div class="single-job-wrap">
-                <div class="job-description padding-bottom-35px">
-                  <h2 class="widget-title">Description:</h2>
-                  <div class="title-shape"></div>
-                  <p class="mt-3 mb-3">
-                    {{$job[0]['job_description']}}
-                  </p>
-                </div><!-- end job-description -->
-              </div><!-- end single-job-wrap -->
-            </div><!-- end col-lg-8 -->
-            <div class="col-lg-5">
-              <div class="sidebar mt-0">
-                <div class="sidebar-widget">
-                  <div class="billing-form-item mb-0">
-                    <div class="billing-title-wrap">
-                      <h3 class="widget-title">Job Details</h3>
-                      <div class="title-shape"></div>
-                    </div><!-- billing-title-wrap -->
-                    <div class="billing-content">
-                      <div class="info-list static-info">
-                        <ul>
-                          @if ($job_apply->count() > 0)
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span>
-                              @if ($job_apply[0]['status'] == 'Approved')
-                              <span class="badge badge-success p-1">{{$job_apply[0]['status']}}</span>
-                              @elseif ($job_apply[0]['status'] == 'Denied')
-                              <span class="badge badge-danger p-1">{{$job_apply[0]['status']}}</span>
-                              @else
-                              <span class="badge badge-warning p-1">{{$job_apply[0]['status']}}</span>
-                              @endif
-                            </p>
-                          </li>
-                          @endif
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Category:</span> {{$job[0]['cat']['name']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Sub Category:</span> {{$job[0]['sub']['name']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-map-marker"></i> <span class="color-text-2 font-weight-medium mr-1">City:</span> {{$job[0]['city']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-map-marker"></i> <span class="color-text-2 font-weight-medium mr-1">Location:</span> {{$job[0]['address']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-phone"></i> <span class="color-text-2 font-weight-medium mr-1">Mobile:</span> {{$job[0]['mobile']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> ₦{{$job[0]['amount']}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-calendar"></i> <span class="color-text-2 font-weight-medium mr-1">Posted Date:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['created_at']))}}</p>
-                          </li>
-                          <li class="mb-3 d-flex align-items-center">
-                            <p><i class="la la-bullhorn"></i> <span class="color-text-2 font-weight-medium mr-1">Application Ends On:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['date_end']))}}</p>
-                          </li>
-                        </ul>
+                      </li>
+                    </ul>
+                  </div><!-- end bread-action -->
+                </div><!-- end breadcrumb-content -->
+              </div>
+              <div class="col-lg-7">
+                <div class="single-job-wrap">
+                  <div class="job-description padding-bottom-35px">
+                    <h2 class="widget-title">Description:</h2>
+                    <div class="title-shape"></div>
+                    <p class="mt-3 mb-3">
+                      {{$job[0]['job_description']}}
+                    </p>
+                  </div><!-- end job-description -->
+                </div><!-- end single-job-wrap -->
+              </div><!-- end col-lg-8 -->
+              <div class="col-lg-5">
+                <div class="sidebar mt-0">
+                  <div class="sidebar-widget">
+                    <div class="billing-form-item mb-0">
+                      <div class="billing-title-wrap">
+                        <h3 class="widget-title">Job Details</h3>
+                        <div class="title-shape"></div>
+                      </div><!-- billing-title-wrap -->
+                      <div class="billing-content">
+                        <div class="info-list static-info">
+                          <ul>
+                            @if ($job_apply->count() > 0)
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Status:</span>
+                                @if ($job_apply[0]['status'] == 'Approved')
+                                <span class="badge badge-success p-1">{{$job_apply[0]['status']}}</span>
+                                @elseif ($job_apply[0]['status'] == 'Denied')
+                                <span class="badge badge-danger p-1">{{$job_apply[0]['status']}}</span>
+                                @else
+                                <span class="badge badge-warning p-1">{{$job_apply[0]['status']}}</span>
+                                @endif
+                              </p>
+                            </li>
+                            @endif
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-tint"></i> <span class="color-text-2 font-weight-medium mr-1">Job Title:</span> {{$job[0]['job_title']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Category:</span> {{$job[0]['cat']['name']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-briefcase"></i> <span class="color-text-2 font-weight-medium mr-1">Job Sub Category:</span> {{$job[0]['sub']['name']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-map-marker"></i> <span class="color-text-2 font-weight-medium mr-1">City:</span> {{$job[0]['city']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-map-marker"></i> <span class="color-text-2 font-weight-medium mr-1">Location:</span> {{$job[0]['address']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-phone"></i> <span class="color-text-2 font-weight-medium mr-1">Mobile:</span> {{$job[0]['mobile']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> ₦{{$job[0]['amount']}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-calendar"></i> <span class="color-text-2 font-weight-medium mr-1">Posted Date:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['created_at']))}}</p>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                              <p><i class="la la-bullhorn"></i> <span class="color-text-2 font-weight-medium mr-1">Application Ends On:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['date_end']))}}</p>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div><!-- end sidebar-widget -->
-              </div><!-- end sidebar -->
-            </div><!-- end col-lg-4 -->
+                  </div><!-- end sidebar-widget -->
+                </div><!-- end sidebar -->
+              </div><!-- end col-lg-4 -->
+            </div>
           </div>
-        </div>
-      </div><!-- end billing-content -->
-    </div><!-- end billing-form-item -->
-  </div><!-- end col-lg-12 -->
-</div><!-- end row -->
-@endsection
+        </div><!-- end billing-content -->
+      </div><!-- end billing-form-item -->
+    </div><!-- end col-lg-12 -->
+  </div><!-- end row -->
+  @endsection
