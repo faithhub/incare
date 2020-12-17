@@ -133,7 +133,7 @@
                     <div class="bread-details d-flex">
                       <div class="bread-img flex-shrink-0">
                         <a href="#" class="d-block">
-                          <img src="{{ asset('uploads/profile_pictures/'.$apply->user->avatar) }}" alt="">
+                          <img src="{{ $apply->user->avatar != null ? asset('uploads/profile_pictures/'.$apply->user->avatar) : asset('web/images/avatar.png') }}" alt="">
                         </a>
                       </div>
                       <div class="manage-candidate-content">

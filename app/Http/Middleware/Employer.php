@@ -23,7 +23,7 @@ class employer
             return $next($request);
         }elseif(Auth::user()->type == '2')
         {
-            return redirect('/care-giver');
+            return redirect('/care-giver/job-feeds');
         }elseif(Auth::user()->type == '3')
         {
             return redirect('/admin');

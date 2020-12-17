@@ -162,57 +162,59 @@
               </div>
               @else
               @endif
+            @if(isset($reviews) && $reviews != null)
               <div class="card mt-4">
                 <div class="card-header">
                   Reviews
                 </div>
                 <div class="card-body">
-                  @if($reviews->count() > 0 ? ($sender_status->count() > 0) : false)
-                  @else
-                  <form method="POST" action="{{ url('care-giver/review') }}">
-                    @csrf
-                    <input type="text" name="employer_id" value="{{$user->id}}" hidden>
-                    <input type="text" name="work_done_id" value="{{$job[0]->id}}" hidden>
-                    <div class="form-group">
-                      <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
-                    </div>
-                    <div class="text-right">
-                      <button type="submit" class="btn btn-success">Send</button>
-                    </div>
-                  </form>
-                  @endif
-                  @foreach ($reviews as $review)
-                  @if($review->sender_id == Auth::User()->id)
-                  <div class="media mb-4">
-                    <div class="media-left media-middle">
-                      <a href="#">
-                        <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ Auth::User()->avatar != null ? asset('uploads/profile_pictures/'.Auth::User()->avatar) : asset('web/images/avatar.png') }}" alt="{{Auth::User()->first_name}}">
-                      </a>
-                    </div>
-                    <div class="media-body">
-                      <h5 class="media-heading">{{Auth::User()->first_name}} {{Auth::User()->last_name}}</h5>
-                      <p>{{$review->review}}</p>
-                      <small><i>{{ $review->created_at->diffForHumans() }}</i></small>
-                    </div>
-                  </div>
-                  @else
-                  <div class="media mb-4">
-                    <div class="media-left media-middle">
-                      <a href="#">
-                        <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name}}" alt="{{$user->first_name}}">
-                      </a>
-                    </div>
-                    <div class="media-body">
-                      <h5 class="media-heading">{{$user->first_name}} {{$user->last_name}} </h5>
-                      <p>{{$review->review}}</p>
-                      <small><i>{{ $review->created_at->diffForHumans() }}</i></small>
-                    </div>
-                  </div>
-                  @endif
-                  @endforeach
+                      @if($reviews->count() > 0 ? ($sender_status->count() > 0) : false)
+                      @else
+                      <form method="POST" action="{{ url('care-giver/review') }}">
+                        @csrf
+                        <input type="text" name="employer_id" value="{{$user->id}}">
+                        <input type="text" name="work_done_id" value="{{$job[0]->id}}">
+                        <div class="form-group">
+                          <textarea name="review" id="" class="form-control" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="text-right">
+                          <button type="submit" class="btn btn-success">Send</button>
+                        </div>
+                      </form>
+                      @endif
+                      @foreach ($reviews as $review)
+                      @if($review->sender_id == Auth::User()->id)
+                      <div class="media mb-4">
+                        <div class="media-left media-middle">
+                          <a href="#">
+                            <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ Auth::User()->avatar != null ? asset('uploads/profile_pictures/'.Auth::User()->avatar) : asset('web/images/avatar.png') }}" alt="{{Auth::User()->first_name}}">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h5 class="media-heading">{{Auth::User()->first_name}} {{Auth::User()->last_name}}</h5>
+                          <p>{{$review->review}}</p>
+                          <small><i>{{ $review->created_at->diffForHumans() }}</i></small>
+                        </div>
+                      </div>
+                      @else
+                      <div class="media mb-4">
+                        <div class="media-left media-middle">
+                          <a href="#">
+                            <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name}}" alt="{{$user->first_name}}">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h5 class="media-heading">{{$user->first_name}} {{$user->last_name}} </h5>
+                          <p>{{$review->review}}</p>
+                          <small><i>{{ $review->created_at->diffForHumans() }}</i></small>
+                        </div>
+                      </div>
+                      @endif
+                      @endforeach
                 </div>
               </div>
             </div>
+            @endif
             @endif
             @endif
             <div class="row mb-5 mt-5">
@@ -327,4 +329,5 @@
       </div><!-- end billing-form-item -->
     </div><!-- end col-lg-12 -->
   </div><!-- end row -->
+</div>
   @endsection

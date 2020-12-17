@@ -10,10 +10,14 @@
           <div class="mess__item justify-content-between align-items-center">
             <div class="d-flex">
               <div class="avatar">
-                <img src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name}}">
+                <a href="{{ url('employer/care-giver', $user->id) }}">
+                  <img src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name}}">
+                </a>
               </div>
               <div class="content">
-                <h4 class="widget-title font-size-15 mb-0">{{$user->first_name}} {{$user->last_name}}</h4>
+                <a href="{{ url('employer/care-giver', $user->id) }}">
+                  <h4 class="widget-title font-size-15 mb-0">{{$user->first_name}} {{$user->last_name}}</h4>
+                </a>
                 <span class="time color-text font-size-14">Online</span>
               </div>
             </div>
@@ -30,7 +34,9 @@
               <div class="mess__body">
                 <div class="mess__item">
                   <div class="avatar">
-                    <img src="{{ $message->care_giver->avatar != null ? asset('uploads/profile_pictures/'.$message->care_giver->avatar) : asset('web/images/avatar.png') }}" alt="{{$message->care_giver->first_name}}">
+                    <a href="{{ url('employer/care-giver', $user->id) }}">
+                      <img src="{{ $message->care_giver->avatar != null ? asset('uploads/profile_pictures/'.$message->care_giver->avatar) : asset('web/images/avatar.png') }}" alt="{{$message->care_giver->first_name}}">
+                    </a>
                   </div>
                   <div class="content">
                     <p class="text">{{$message->message}}</p>

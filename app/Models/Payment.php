@@ -25,6 +25,7 @@ class Payment extends Model
   {
     $save            = new self();
     $save->plan_id   = $data->plan_id;
+    $save->job_id    = $data->job_id;
     $save->user_id   = Auth::user()->id;
     $save->amount    = $data->amount;
     $save->status    = $data->status;
@@ -38,6 +39,10 @@ class Payment extends Model
   public function plan()
   {
     return $this->belongsTo(Plan::class, 'plan_id');
+  }
+  public function job()
+  {
+    return $this->belongsTo(Plan::class, 'job_id');
   }
 
   public function user()

@@ -36,7 +36,7 @@ class JobController extends Controller
     public function all_job()
     {
         $data['title'] = 'Jobs Alert';
-        $data['jobs'] = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile')->get();
+        $data['jobs'] = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile')->orderBy('id', 'DESC')->get();
         return view('admin.jobs.all_jobs', $data);
     }
 

@@ -35,8 +35,11 @@ Route::match(['get', 'post'], '/search-job', [App\Http\Controllers\HomeControlle
 
 //employers
 Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], function () {
-  Route::get('/', [App\Http\Controllers\employer\DashboardController::class, 'index'])->name('employer');
+  Route::get('/dashboard', [App\Http\Controllers\employer\DashboardController::class, 'index']);
+  Route::get('/switch', [App\Http\Controllers\employer\DashboardController::class, 'switch']);
   Route::get('/manage-jobs', [App\Http\Controllers\employer\JobsController::class, 'manage_jobs']);
+  Route::get('/', [App\Http\Controllers\employer\JobsController::class, 'job_feeds']);
+  Route::get('/job-feeds', [App\Http\Controllers\employer\JobsController::class, 'job_feeds'])->name('employer');
   Route::get('/manage-care-givers', [App\Http\Controllers\employer\JobsController::class, 'manage_care_giver']);
   Route::get('/post-new-job', [App\Http\Controllers\employer\JobsController::class, 'post_job']);
   Route::get('/get-sub-cat/{id}', [App\Http\Controllers\employer\JobsController::class, 'get_sub_cat']);
@@ -58,11 +61,15 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth', 'employer']], fun
   Route::post('/work-payment', [App\Http\Controllers\employer\JobsController::class, 'work_payment']);
   Route::get('/work-done/{id}/{user_id}', [App\Http\Controllers\employer\JobsController::class, 'work_done']);
   Route::Post('/review', [App\Http\Controllers\employer\JobsController::class, 'sendReview']);
+  Route::get('/care-giver/{id}', [App\Http\Controllers\employer\JobsController::class, 'care_giver']);
 });
 
 //Care Giver
 Route::group(['prefix' => 'care-giver', 'middleware' => ['auth', 'care-giver']], function () {
-  Route::get('/', [App\Http\Controllers\CareGiver\DashboardController::class, 'index'])->name('care-giver');
+  Route::get('/dashboard', [App\Http\Controllers\CareGiver\DashboardController::class, 'index']);
+  Route::get('/', [App\Http\Controllers\CareGiver\JobsController::class, 'job_feeds']);
+  Route::get('/job-feeds', [App\Http\Controllers\CareGiver\JobsController::class, 'job_feeds'])->name('care-giver');
+  Route::get('/switch', [App\Http\Controllers\CareGiver\DashboardController::class, 'switch']);
   Route::get('/transactions', [App\Http\Controllers\CareGiver\TransactionController::class, 'index']);
   Route::get('/new-jobs', [App\Http\Controllers\CareGiver\JobsController::class, 'new_job']);
   Route::get('/plans', [App\Http\Controllers\CareGiver\PlanController::class, 'index']);
@@ -118,4 +125,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'change']);
   Route::get('/withdrawals', [App\Http\Controllers\Admin\WithdrawalController::class, 'index']);
   Route::post('/cancel-withdrawal', [App\Http\Controllers\Admin\WithdrawalController::class, 'cancel_withdrawal']);
+  Route::get('/user-profile/{id}', [App\Http\Controllers\Admin\UserController::class, 'user']);
+  Route::get('/delete-user/{id}', [App\Http\Controllers\Admin\UserController::class, 'delete']);
+  Route::get('/block-user/{id}', [App\Http\Controllers\Admin\UserController::class, 'block']);
+  Route::get('/unblock-user/{id}', [App\Http\Controllers\Admin\UserController::class, 'unblock']);
 });

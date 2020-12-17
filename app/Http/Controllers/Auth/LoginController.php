@@ -46,11 +46,11 @@ class LoginController extends Controller
         $role = Auth::user()->type;
         switch ($role) {
             case '1':
-                return '/employer';
+                return '/employer/job-feeds';
                 break;
 
             case '2':
-                return '/care-giver';
+                return '/care-giver/job-feeds';
                 break;
 
             case '3':

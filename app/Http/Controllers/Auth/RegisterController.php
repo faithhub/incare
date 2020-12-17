@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RegistrationMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,7 +48,8 @@ class RegisterController extends Controller
     public function redirectTo()
     {
         Session::flash('success', 'Successfully Registered');
-        return '/logout';
+        Auth::logout();
+        return '/login';
         // $role = Auth::user()->type;
         // switch ($role) {
         //     case '1':
@@ -93,6 +96,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data['email']);
+        Mail::to($data['email'])->send(new RegistrationMail($data));
         Session::flash('success', 'Registered Successfully');
         $user =  User::create([
             'first_name' => $data['first_name'],
@@ -100,9 +105,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
+            'wallet' => 0,
             'plan_end_date' => Carbon::now()->addMonth(1),
         ]);
         // dd($user->id);
+        //return redirect('login');
         return $user;
     }
 }

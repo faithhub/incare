@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index()
     {
         $data['title'] = 'Admin Dashboard';
-        $data['jobss'] = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile')->skip(0)->take(10)->get();
+        $data['jobss'] = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile')->skip(0)->take(5)->get();
         $data['jobs'] = $job = Job::with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name,avatar,email,mobile')->get();
         $data['job_count'] = $job->count();
         $data['trans_count'] = Payment::all()->count();

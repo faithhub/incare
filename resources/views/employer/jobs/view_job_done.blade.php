@@ -133,7 +133,7 @@
                   </div>
                   @else
                   <div class="media mb-4">
-                    <div class="media-left media-middle">
+                    <div class="media-right media-middle">
                       <a href="#">
                         <img class="media-object mr-3" style="width: auto; height: 50px;" src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name}}" alt="{{$user->first_name}}">
                       </a>

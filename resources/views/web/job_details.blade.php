@@ -108,7 +108,7 @@
                                     <p><i class="la la-phone"></i> <span class="color-text-2 font-weight-medium mr-1">Mobile:</span> {{$job[0]['mobile']}}</p>
                                     </li>
                                     <li class="mb-3 d-flex align-items-center">
-                                    <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> #{{$job[0]['amount']}}</p>
+                                    <p><i class="la la-users"></i> <span class="color-text-2 font-weight-medium mr-1">Offered Amount Per Hour:</span> ₦{{$job[0]['amount']}}</p>
                                     </li>
                                     <li class="mb-3 d-flex align-items-center">
                                     <p><i class="la la-calendar"></i> <span class="color-text-2 font-weight-medium mr-1">Posted Date:</span> {{ date('D, M j, Y \a\t g:ia', strtotime($job[0]['created_at']))}}</p>

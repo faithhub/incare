@@ -34,11 +34,11 @@
                                     <div class="bread-details d-flex">
                                         <div class="bread-img flex-shrink-0">
                                             <a href="#" class="d-block">
-                                                <img src="{{ asset('uploads/profile_pictures/'.$user->avatar) }}" alt="{{$user->first_name  }}">
+                                                <img src="{{ $user->avatar != null ? asset('uploads/profile_pictures/'.$user->avatar) : asset('web/images/avatar.png') }}" alt="{{$user->first_name  }}" class="img-fluid" style="max-height: 100px">
                                             </a>
                                         </div>
                                         <div class="manage-candidate-content">
-                                            <h2 class="widget-title pb-2"><a href="#" class="color-text-2">{{$user->first_name}} {{$user->last_name}}</a></h2>
+                                            <h2 class="widget-title pb-2"><a href="{{url('employer/care-giver', $user->id)}}" class="color-text-2">{{$user->first_name}} {{$user->last_name}}</a></h2>
                                             <p class="font-size-15">
                                                 <span class="mr-2"><i class="la la-envelope-o mr-1"></i><a href="mailto:{{$user->email}}" class="color-text-3">{{$user->email}}</a></span>
                                                 <span class="mr-2"><i class="la la-phone mr-1"></i>{{$user->mobile}}</span>
@@ -54,6 +54,7 @@
                                         <div class="bread-action pt-0">
                                             <ul class="info-list">
                                                 <li class="d-inline-block"><a href="{{ url('employer/message', $user->id) }}" ><i class="la la-envelope" data-toggle="tooltip" data-placement="top" title="Message"></i></a></li>
+                                                <li class="d-inline-block"><a href="{{ url('employer/care-giver', $user->id) }}" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>

@@ -228,7 +228,7 @@
                                                 <button class="theme-btn border-0" type="submit">Create Account</button>
                                             </div>                                            
                                             <div class="col-lg-12">
-                                                <p>Don't have an account? <a href="{{ url('register') }}" class="color-text"> Create Account</a></p>
+                                                <p>Already have an account? <a href="{{ url('login') }}" class="color-text"> Login Here</a></p>
                                             </div><!-- end col-lg-12 -->
                                         </form>
                                     </div><!-- end contact-form-action -->

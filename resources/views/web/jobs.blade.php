@@ -102,7 +102,7 @@
                               <span class="mr-2"><i class="la la-building-o color-text-2"></i> {{$job->cat->name}} - {{$job->sub->name}}</span>
                               <span class="mr-2"><i class="la la-map-marker color-text-2"></i> {{$job->address}}</span>
                               <span class="mr-2"><i class="la la-clock-o color-text-2"></i> </span>
-                              <span>#{{$job->amount}}/hr</span>
+                              <span>₦{{$job->amount}}/hr</span>
                             </p>
                           </div>
                         </div>

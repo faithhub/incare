@@ -34,6 +34,13 @@ class JobsController extends Controller
     return view('employer.jobs.manage_job', $data);
   }
 
+  public function job_feeds()
+  {
+    $data['title'] = 'Job Feeds';
+    $data['jobs'] = Job::where('status', 'Active')->where('employer_id', '!=', Auth::user()->id)->with('cat:id,name')->with('sub:id,name')->orderBy('id', 'DESC')->get();
+    return view('employer.jobs.job_feeds', $data);
+  }
+
   public function manage_care_giver()
   {
     $data['title'] = 'Manage Care Givers';
@@ -200,6 +207,7 @@ class JobsController extends Controller
         }
       }
     } else {
+      //dd($request->all());
       $rules = array(
         'avatar' => 'required|image|mimes:jpg,jpeg,png|max:5000',
         'job_title' => ['required', 'max:255'],
@@ -311,6 +319,18 @@ class JobsController extends Controller
     } catch (\Throwable $th) {
       return $th->getMessage();
       // return false;
+    }
+  }
+
+  public function care_giver($id)
+  {
+    try {
+      $data['user'] = User::find($id);
+      $data['reviews'] = $r = Reviews::where('care_giver_id', $id)->with('employer:id,avatar,first_name,last_name')->get();
+      return view('employer.jobs.care_giver', $data);
+    } catch (\Throwable $th) {
+      Session::flash('error', $th->getMessage());
+      return back();
     }
   }
 }

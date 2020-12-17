@@ -33,7 +33,12 @@
                             </div>
                           </div><!-- end mess__title -->
                           <div class="mess__body">
-                            <ul class="list-items">
+                            <ul class="list-items">                              
+                              <li class="mb-0">
+                                <a href="{{ url('employer/switch') }}" class="d-block">
+                                  <i class="la la-user"></i> Switch to Care-Giver
+                                </a>
+                              </li>
                               <li class="mb-0">
                                 <a href="{{ url('employer/profile') }}" class="d-block">
                                   <i class="la la-user"></i> Profile

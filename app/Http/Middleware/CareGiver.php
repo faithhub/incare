@@ -25,7 +25,7 @@ class CareGiver
             return $next($request);
         }elseif(Auth::user()->type == '1')
         {
-            return redirect('/employer');
+            return redirect('/employer/job-feeds');
         }elseif(Auth::user()->type == '3')
         {
             return redirect('/admin');

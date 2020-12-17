@@ -21,3 +21,4 @@
     <link rel="stylesheet" href="{{ asset('web/css/jquery.filer-dragdropbox-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">

@@ -34,8 +34,15 @@ class JobsController extends Controller
     $data['title'] = 'New Jobs';
     $data['categories'] = Category::all();
     $data['sub_categories'] = SubCategory::all();
-    $data['jobs'] = $jobs = Job::where('status', 'Active')->with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
+    $data['jobs'] = $jobs = Job::where('status', 'Active')->where('employer_id', '!=', Auth::user()->id)->with('cat:id,name')->with('sub:id,name')->with('user:id,first_name,last_name')->get();
     return view('care_giver.jobs.new_job', $data);
+  }
+
+  public function job_feeds()
+  {
+    $data['title'] = 'Job Feeds';
+    $data['jobs'] = Job::where('status', 'Active')->where('employer_id', '!=', Auth::user()->id)->with('cat:id,name')->with('sub:id,name')->orderBy('id', 'DESC')->get();
+    return view('care_giver.jobs.job_feeds', $data);
   }
 
   public function apply_job(Request $request)
@@ -133,10 +140,18 @@ class JobsController extends Controller
       $data['job'] = $job = Job::where(['id' => $id])->with('user:id,first_name,last_name')->with('cat:id,name')->with('sub:id,name')->get();
       $data['check'] = $check = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->count();
       $data['job_apply'] = $job_apply = JobApply::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
+      //dd($job_apply);
       $data['job_start'] = RunningJobs::where(['care_giver_id' => Auth::user()->id, 'job_id' => $id])->get();
       $data['work_done'] = $work_done = RunningJobs::where('care_giver_id', Auth::User()->id)->get();
-      $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->job_id)->get();
-      $data['sender_status'] = $sender_status = Reviews::where([['work_done_id', $work_done[0]->job_id], ['sender_id', Auth::user()->id]])->get();
+      //dd($work_done);
+      if ($work_done->count() > 0) {
+        $data['reviews'] = $reviews = Reviews::where('work_done_id', $work_done[0]->job_id)->get();
+        $data['sender_status'] = $sender_status = Reviews::where([['work_done_id', $work_done[0]->job_id], ['sender_id', Auth::user()->id]])->get();
+      } else {
+        $data['reviews'] = '';
+        $data['sender_status'] = '';
+      }
+
       $data['user'] = User::find($job[0]->employer_id);
       if ($job->count() > 0) {
         $data['title'] = 'View Job Details';
@@ -163,14 +178,21 @@ class JobsController extends Controller
         'review' => $request->review,
         'work_done_id' => $request->work_done_id,
       );
-      $paidCount = RunningJobs::where([['id', $request->work_done_id], ['paid', 'No']])->count();
+      $paidCount = RunningJobs::where(['job_id' => $request->work_done_id, 'paid' => 'No'])->count();
+      //dd($paidCount);
       if ($paidCount > 0) {
-        Session::flash('warning', 'you have to finish transacting before you can review, please pay up all arears.');
+        //dd($paidCount);
+        Session::flash('warning', 'Employer have to complate transacting before you can submit your review, please check back later.');
         return back();
       } else {
-        $this->create_review->create($data);
-        Session::flash('success', 'Review Posted Sucessfully');
-        return back();
+        try {          
+          $this->create_review->create($data);
+          Session::flash('success', 'Review Posted Sucessfully');
+          return back();
+        } catch (\Throwable $th) {
+          Session::flash('error', $th->getMessage());
+          return back();
+        }
       }
     } else {
       Session::flash('warning', 'review cannot be empty');

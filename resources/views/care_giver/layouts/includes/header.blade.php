@@ -7,11 +7,24 @@
 	          <div class="menu-full-width">
 	            <div class="logo">
 	              <a href="#"><img src="{{ asset('web/images/logo2.png') }}" alt="logo"></a>
-	            </div><!-- end logo -->
+				</div><!-- end logo -->
 	            <div class="logo-right-content">
 	              <div class="header-action-button d-flex align-items-center">
 	                <div class="user-action-wrap">
-	                  <div class="notification-item">
+						<div class="notification-item mr-3">
+							<div class="dropdown">
+								<button class="notification-btn dropdown-toggle mr-3" type="button" id="notificationDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">									
+									<span class="text-success pr-3" style="font-weight: 700">₦{{Auth::user()->wallet}}</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+						
+			<div class="logo-right-content">
+				<div class="header-action-button d-flex align-items-center">
+					<div class="user-action-wrap">
+						<div class="notification-item">
 	                    <div class="dropdown">
 	                      <button class="notification-btn dot-status online-status dropdown-toggle" type="button" id="userDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                        <img src="{{Auth::user()->avatar != null ? asset('uploads/profile_pictures/'.Auth::user()->avatar) : asset('web/images/avatar.png')}}" alt="{{Auth::user()->first_name}}">
@@ -35,6 +48,11 @@
 	                            <ul class="list-items">
 	                              <li class="mb-0">
 	                                <span class="text-success">₦{{Auth::user()->wallet}}</span>
+								  </li>
+								  <li class="mb-0">
+	                                <a href="{{ url('care-giver/switch') }}" class="d-block">
+	                                  <i class="la la-user"></i> Switch to Employer
+	                                </a>
 	                              </li>
 	                              <li class="mb-0">
 	                                <a href="{{ url('care-giver/profile') }}" class="d-block">

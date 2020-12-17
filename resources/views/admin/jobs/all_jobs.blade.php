@@ -44,7 +44,7 @@
                                         <div class="bread-details d-flex">
                                             <div class="bread-img flex-shrink-0">
                                                 <a class="d-block">
-                                                    <img src="{{ asset('uploads/profile_pictures/'.$job->user->avatar) }}" alt="" style="max-width: auto; height: 100px;">
+                                                    <img src="{{$job->user->avatar != null ? asset('uploads/profile_pictures/'.$job->user->avatar) : asset('web/images/avatar.png') }}" alt="" style="max-width: auto; height: 100px;">
                                                 </a>
                                             </div>
                                             <div class="manage-candidate-content">

@@ -1,5 +1,5 @@
 <div class="flash-container">
-	@if(Session::has('message'))
+	{{-- @if(Session::has('message'))
 	  <div class="alert {{ Session::get('alert-class') }} text-center" style="margin-bottom:10px;" role="alert">
 	    {{ Session::get('message') }}
 	    <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
@@ -32,7 +32,7 @@
 	        {{ session('error') }}
 	        <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
 	    </div>
-	@endif
+	@endif --}}
 </div>
 <script
   src="https://code.jquery.com/jquery-3.5.1.js"

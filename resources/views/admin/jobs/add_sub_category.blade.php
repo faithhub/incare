@@ -7,8 +7,8 @@
                 <h2 class="sec__title">Add Job Sub Category</h2>
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
-                <li class="active__list-item"><a href="index.html">Home</a></li>
-                <li class="active__list-item"><a href="index.html">Dashboard</a></li>
+                <li class="active__list-item"><a href="#">Home</a></li>
+                <li class="active__list-item"><a href="#">Dashboard</a></li>
                 <li>Add Job Sub Category</li>
             </ul>
         </div><!-- end breadcrumb-content -->

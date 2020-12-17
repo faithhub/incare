@@ -1,5 +1,36 @@
 @extends('employer.layouts.app')
 @section('user')
+<style>
+    .slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
 @if (isset($mode) && $mode == 'Edit')    
 <div class="row">
     <div class="col-lg-12">
@@ -244,7 +275,7 @@
                                     <label class="label-text">Job image</label>
                                     <div class="form-group">
                                         <div class="">
-                                            <input type="file" name="avatar" class="form-control-file">
+                                            <input type="file" name="avatar" accept="image/*" class="form-control-file">
                                             @error('avatar')
                                                 <span class="invalid-feedback mb-2" role="alert" style="display: block">
                                                     <strong>{{ $message }}</strong>
@@ -286,7 +317,7 @@
                                     </div>
                                 </div>
                             </div><!-- end col-lg-4 -->
-                            <div class="col-lg-4 column-lg-full">
+                            <div class="col-lg-6 column-lg-full">
                                 <div class="input-box">
                                     <label class="label-text">Job Sub Category</label>
                                     <div class="form-group">
@@ -304,27 +335,27 @@
                                     </div><!-- end form-group -->
                                 </div>
                             </div><!-- end col-lg-4 -->
-                            <div class="col-lg-4 column-lg-full">
-                                <div class="input-box">
-                                    <label class="label-text">Offered Amount Per Hour</label>
-                                    <div class="form-group">
-                                        <span class="la la-naira-sign form-icon">₦</span>
-                                        <input class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" name="amount" type="number" placeholder="Amount">
-                                        @error('amount')
-                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div><!-- end col-lg-4 -->
-                            <div class="col-lg-4 column-lg-full">
+                            <div class="col-lg-6 column-lg-full">
                                 <div class="input-box">
                                     <label class="label-text">Application Deadline Date</label>
                                     <div class="form-group">
                                         <span class="la la-calendar form-icon"></span>
                                         <input class="date-range form-control @error('date_end') is-invalid @enderror" value="{{ old('date_end') }}" type="date" name="date_end" value="2/25/2020">
                                         @error('date_end')
+                                            <span class="invalid-feedback mb-2" role="alert" style="display: block">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div><!-- end col-lg-4 -->                            
+                            <div class="col-lg-12 column-lg-full">
+                                <div class="input-box">
+                                    <label class="label-text">Offered Amount Per Hour &nbsp;&nbsp;<span id="result" class="la la-naira-sign form-icon text-success" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px">₦<b></b></span>
+                                    </label>
+                                    <div class="form-group">
+                                        <input class="@error('amount') is-invalid @enderror slider" value="{{ old('amount') }}" name="amount" id="customRange" type="range" min="500" max="50000">
+                                        @error('amount')
                                             <span class="invalid-feedback mb-2" role="alert" style="display: block">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -432,7 +463,21 @@
       src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_AUTOCOMPLETE_API_KEY')}}&callback=initAutocomplete&libraries=places&v=weekly"
       defer
     ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script defer src="{{ asset('js/post_job.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            // Read value on page load
+            $("#result b").html($("#customRange").val());
+    
+            // Read value on change
+            $("#customRange").change(function(){
+                $("#result b").html($(this).val());
+            });
+        });        
+    </script> 
 </form> 
 @endif
 
